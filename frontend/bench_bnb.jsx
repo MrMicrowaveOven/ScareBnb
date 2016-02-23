@@ -7,7 +7,7 @@ var BenchStore = require('./stores/bench');
 
 document.addEventListener("DOMContentLoaded", function() {
   ReactDOM.render(
-    <Index/>,
+    React.createElement('div', {}, 'Coming soon'),
     document.getElementById("content")
   );
 });
