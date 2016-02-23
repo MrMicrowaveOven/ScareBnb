@@ -6,7 +6,9 @@ var BenchStore = require('../stores/bench');
 var ApiUtil = require('../util/api_util');
 
 var Index = React.createClass({
-  getInitialState: function() { return {benches: BenchStore.all()}; },
+  getInitialState: function() {
+    return {benches: BenchStore.all()};
+  },
 
   render: function() {
     return(<div/>);
