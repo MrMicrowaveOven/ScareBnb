@@ -5,13 +5,15 @@ var ApiActions = require('../actions/api_actions');
 var BenchStore = require('../stores/bench');
 var ApiUtil = require('../util/api_util');
 
-var Index = React.createClass({
+var Map = React.createClass({
   getInitialState: function() {
     return {benches: BenchStore.all()};
   },
 
   render: function() {
-    return(<div/>);
+    return(
+      <div className='map' ref='map'/>
+    );
   },
 
   componentDidMount: function() {
@@ -22,4 +24,4 @@ var Index = React.createClass({
 
 });
 
-module.exports = Index;
+module.exports = Map;

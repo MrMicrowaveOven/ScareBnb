@@ -9,13 +9,23 @@ var Index = React.createClass({
   getInitialState: function() { return {benches: BenchStore.all()}; },
 
   render: function() {
-    return(<div/>);
+    var self = this;
+    return(
+      {
+        // self.state.benches.map(function(bench) {
+        //   return <li key={bench.id}>{bench.description}</li>;
+        // })
+      }
+    );
+  },
+
+  onChange: function() {
+    this.setState({benches: BenchStore.all()});
   },
 
   componentDidMount: function() {
-    BenchStore.addListener(
-      this.setState({benches: BenchStore.all()})
-    );
+    BenchStore.addListener(this.onChange);
+    ApiUtil.fetchBenches();
   }
 
 });
