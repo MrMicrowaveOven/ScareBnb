@@ -10,12 +10,11 @@ var Index = React.createClass({
 
   render: function() {
     var self = this;
+    var benches = self.state.benches.map(function(bench) {
+      return (<li key={bench.id}>{bench.description}</li>);
+    });
     return(
-      {
-        // self.state.benches.map(function(bench) {
-        //   return <li key={bench.id}>{bench.description}</li>;
-        // })
-      }
+      <ul id="bench_list">{benches}</ul>
     );
   },
 
