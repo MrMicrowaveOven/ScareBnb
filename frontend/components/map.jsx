@@ -8,14 +8,15 @@ var ApiUtil = require('../util/api_util');
 var Map = React.createClass({
   getInitialState: function() {
     //markerIndex is a means of indexing all markers for benches in the store.
+    //benchId = markerIndex key
+    //It also keeps track of markers that were on the screen before onChange.
     this.markerIndex = {};
-    //We add to oldMarkers when a marker comes on the screen.
-    //On change, we'll see if it should still be on the screen.
-    //If not, delete it and remove from oldMarkers
-    this.oldMarkers = [];
 
+    //Used to update the markerIndex
+    this.newMarkerIndex = {};
     //benches is the benches in the store, markers are the markers on the map.
-    return {benches: BenchStore.all(), markers: []};
+    //We'll set state with
+    return {benches: BenchStore.all(), markers: this.markerIndex};
   },
 
   render: function() {
@@ -24,75 +25,90 @@ var Map = React.createClass({
     );
   },
 
+  //Called when the Store changes
   onChange: function(){
     var self = this;
 
-    self.markers = BenchStore.all().map(function(bench) {
-      self.addMarker(bench);
-    });
-
     self.markerUpdate();
-    Map.theMap = this;
-    self.setState({benches: BenchStore.all(), markers: self.oldMarkers});
+    Map.theMap = self;
+    this.refreshBandM();
   },
 
+  //reRender
+  refreshBandM: function(){
+    this.setState({benches: BenchStore.all(),
+      markers: this.allMarkersInIndex()});
+  },
+
+  //Adds a marker to the map
   addMarker: function(bench) {
     var self = this;
-    var mark = new google.maps.Marker(
+    var marker = new google.maps.Marker(
       {
         position: {lat: bench.lat, lng: bench.lng},
         map: self.map,
         title: bench.description
       }
     );
-    self.markerIndex[bench.id] = mark;
-    return mark;
+    // debugger;
+    self.newMarkerIndex[bench.id] = marker;
+    return marker;
   },
 
+  //Removes marker from map
   removeMarker: function(marker) {
+    var benchId = this.findBenchIdByMarker(marker);
+    delete this.markerIndex[benchId];
     marker.setMap(null);
     marker = null;
   },
 
+
   markerUpdate: function() {
     var self = this;
-    var benchesInStore = BenchStore.all();
-    var markersOnMap = this.markers;
-    var markerIndex = self.markerIndex;
 
-    //Adds all markers in markerIndex to self.oldMarkers
-    Object.keys(markerIndex).forEach(function(key) {
-      self.oldMarkers.push(markerIndex[key]);
-    });
-
-    //Adds a marker for every 
-    benchesInStore.forEach(function(bench) {
-      if (markerIndex[bench.id] === undefined) {
-        self.addMarker(bench);
-      }
-    });
-
-    var newOldList = [];
-    self.oldMarkers.forEach(function(marker) {
-      // debugger;
-      if (self.findBenchByMarker(marker) === -1) {
-        self.removeMarker(marker);
+    //If there's a bench in the store that isn't in the markerIndex,
+    //create a marker for it.
+    BenchStore.all().forEach(function(bench) {
+      if (self.markerIndex[bench.id] === undefined) {
+        self.newMarkerIndex[bench.id] = self.addMarker(bench);
       } else {
-        newOldList.push(marker);
+        self.newMarkerIndex[bench.id] = self.markerIndex[bench.id];
+        delete self.markerIndex[bench.id];
       }
     });
-    self.oldMarkers = newOldList;
-    // debugger;
+
+    //
+    self.removeOldMarkers();
+
+    self.markerIndex = self.newMarkerIndex;
+    self.newMarkerIndex = {};
+
+    this.refreshBandM();
   },
 
-  findBenchByMarker: function(marker) {
+  removeOldMarkers: function() {
+    var self = this;
+    Object.keys(self.markerIndex).forEach(function(markerId) {
+      self.removeMarker(self.markerIndex[markerId]);
+    });
+  },
+
+  allMarkersInIndex: function() {
+    var arr = [];
+    for(var marker in this.markerIndex) {
+      arr.push(this.markerIndex[marker]);
+    }
+    return arr;
+  },
+
+  findBenchIdByMarker: function(marker) {
     var markerIndex = this.markerIndex;
     // debugger;
-    for(var bench in markerIndex) {
-      if(markerIndex.hasOwnProperty(bench)) {
-        if(markerIndex[bench] === marker) {
-          // debugger;
-          return bench;
+    for(var benchId in markerIndex) {
+      if(markerIndex.hasOwnProperty(benchId)) {
+        if(markerIndex[benchId] === marker) {
+          return benchId;
         }
       }
     }
