@@ -24,6 +24,6 @@ BenchStore.__onDispatch = function (payload) {
 
 
 
-// window.BenchStore = BenchStore;
+ // window.BenchStore = BenchStore;
 
 module.exports = BenchStore;

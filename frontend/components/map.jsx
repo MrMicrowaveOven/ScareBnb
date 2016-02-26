@@ -29,6 +29,19 @@ var Map = React.createClass({
     this.setState({benches: BenchStore.all()});
   },
 
+  onIdle: function() {
+
+    var boundaries = this.map.getBounds();
+    var northEast = boundaries.getNorthEast();
+    var southWest = boundaries.getSouthWest();
+    this.bounds = {northEast: {
+      lat: northEast.lat(), lng: northEast.lng()
+    }, southWest: {
+      lat: southWest.lat(), lng: southWest.lng()
+    }};
+    ApiUtil.fetchBenches(this.bounds);
+  },
+
   componentDidMount: function(){
     BenchStore.addListener(this.onChange);
     var mapDOMNode = this.refs.map;
@@ -37,6 +50,7 @@ var Map = React.createClass({
       zoom: 13
     };
     this.map = new google.maps.Map(mapDOMNode, mapOptions);
+    this.map.addListener('idle', this.onIdle);
   }
 
 
