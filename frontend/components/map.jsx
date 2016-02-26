@@ -6,7 +6,17 @@ var BenchStore = require('../stores/bench');
 var ApiUtil = require('../util/api_util');
 
 var Map = React.createClass({
-  getInitialState: function() { return {benches: BenchStore.all()}; },
+  getInitialState: function() {
+    //markerIndex is a means of indexing all markers for benches in the store.
+    this.markerIndex = {};
+    //We add to oldMarkers when a marker comes on the screen.
+    //On change, we'll see if it should still be on the screen.
+    //If not, delete it and remove from oldMarkers
+    this.oldMarkers = [];
+
+    //benches is the benches in the store, markers are the markers on the map.
+    return {benches: BenchStore.all(), markers: []};
+  },
 
   render: function() {
     return(
@@ -16,52 +26,65 @@ var Map = React.createClass({
 
   onChange: function(){
     var self = this;
-
-    self.markerIndex = {};
-    self.markers = BenchStore.all().map(function(bench) {
-      var mark = new google.maps.Marker(
-        {
-          position: {lat: bench.lat, lng: bench.lng},
-          map: self.map,
-          title: bench.description
-        }
-      );
-      self.markerIndex[bench.id] = mark;
-      return mark;
-    });
+    // debugger;
+    // self.markers = BenchStore.all().map(function(bench) {
+    //   var mark = new google.maps.Marker(
+    //     {
+    //       position: {lat: bench.lat, lng: bench.lng},
+    //       map: self.map,
+    //       title: bench.description
+    //     }
+    //   );
+    //   self.markerIndex[bench.id] = mark;
+    //   return mark;
+    // });
+    // debugger;
     self.markerUpdate();
     Map.theMap = this;
-    self.setState({benches: BenchStore.all()});
+    self.setState({benches: BenchStore.all(), markers: self.oldMarkers});
   },
 
   markerUpdate: function() {
+
     var self = this;
     var benchesInStore = BenchStore.all();
     var markersOnMap = this.markers;
-    var markerIndex = this.markerIndex;
-    var needToRemove = [];
-    if (benchesInStore.length !== markersOnMap.length) {
 
-      benchesInStore.forEach(function(bench) {
-        if (markerIndex[bench.id] === undefined) {
-          self.addMarker(bench);
-        }
-      });
+    var markerIndex = self.markerIndex;
 
-      markersOnMap.forEach(function(marker) {
-        if (self.findBenchByMarker(marker) === -1) {
-          self.removeMarker(marker);
-        }
-      });
 
-    }
+    Object.keys(markerIndex).forEach(function(key) {
+      // debugger;
+      self.oldMarkers.push(markerIndex[key]);
+    });
+    // debugger;
+
+    benchesInStore.forEach(function(bench) {
+      if (markerIndex[bench.id] === undefined) {
+        self.addMarker(bench);
+      }
+    });
+    // debugger;
+    var newOldList = [];
+    self.oldMarkers.forEach(function(marker) {
+      // debugger;
+      if (self.findBenchByMarker(marker) === -1) {
+        self.removeMarker(marker);
+      } else {
+        newOldList.push(marker);
+      }
+    });
+    self.oldMarkers = newOldList;
+    debugger;
   },
 
   findBenchByMarker: function(marker) {
     var markerIndex = this.markerIndex;
-    for( var bench in markerIndex ) {
-      if( markerIndex.hasOwnProperty( bench ) ) {
-        if( markerIndex[ bench ] === marker ) {
+    // debugger;
+    for(var bench in markerIndex) {
+      if(markerIndex.hasOwnProperty(bench)) {
+        if(markerIndex[bench] === marker) {
+          // debugger;
           return bench;
         }
       }
