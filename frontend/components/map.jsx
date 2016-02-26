@@ -26,45 +26,52 @@ var Map = React.createClass({
 
   onChange: function(){
     var self = this;
-    // debugger;
-    // self.markers = BenchStore.all().map(function(bench) {
-    //   var mark = new google.maps.Marker(
-    //     {
-    //       position: {lat: bench.lat, lng: bench.lng},
-    //       map: self.map,
-    //       title: bench.description
-    //     }
-    //   );
-    //   self.markerIndex[bench.id] = mark;
-    //   return mark;
-    // });
-    // debugger;
+
+    self.markers = BenchStore.all().map(function(bench) {
+      self.addMarker(bench);
+    });
+
     self.markerUpdate();
     Map.theMap = this;
     self.setState({benches: BenchStore.all(), markers: self.oldMarkers});
   },
 
-  markerUpdate: function() {
+  addMarker: function(bench) {
+    var self = this;
+    var mark = new google.maps.Marker(
+      {
+        position: {lat: bench.lat, lng: bench.lng},
+        map: self.map,
+        title: bench.description
+      }
+    );
+    self.markerIndex[bench.id] = mark;
+    return mark;
+  },
 
+  removeMarker: function(marker) {
+    marker.setMap(null);
+    marker = null;
+  },
+
+  markerUpdate: function() {
     var self = this;
     var benchesInStore = BenchStore.all();
     var markersOnMap = this.markers;
-
     var markerIndex = self.markerIndex;
 
-
+    //Adds all markers in markerIndex to self.oldMarkers
     Object.keys(markerIndex).forEach(function(key) {
-      // debugger;
       self.oldMarkers.push(markerIndex[key]);
     });
-    // debugger;
 
+    //Adds a marker for every 
     benchesInStore.forEach(function(bench) {
       if (markerIndex[bench.id] === undefined) {
         self.addMarker(bench);
       }
     });
-    // debugger;
+
     var newOldList = [];
     self.oldMarkers.forEach(function(marker) {
       // debugger;
@@ -75,7 +82,7 @@ var Map = React.createClass({
       }
     });
     self.oldMarkers = newOldList;
-    debugger;
+    // debugger;
   },
 
   findBenchByMarker: function(marker) {
@@ -92,22 +99,6 @@ var Map = React.createClass({
     return -1;
   },
 
-  addMarker: function(bench) {
-    var self = this;
-    var mark = new google.maps.Marker(
-      {
-        position: {lat: bench.lat, lng: bench.lng},
-        map: self.map,
-        title: bench.description
-      }
-    );
-    self.markerIndex[bench.id] = mark;
-  },
-
-  removeMarker: function(marker) {
-    marker.setMap(null);
-    marker = null;
-  },
 
 
   onIdle: function() {
@@ -129,6 +120,7 @@ var Map = React.createClass({
       center: {lat: 37.7758, lng: -122.435},
       zoom: 13
     };
+
     this.map = new google.maps.Map(mapDOMNode, mapOptions);
     this.map.addListener('idle', this.onIdle);
   }

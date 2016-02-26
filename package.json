@@ -17,11 +17,11 @@
     "babel-loader": "^6.2.3",
     "babel-preset-react": "^6.5.0",
     "flux": "^2.1.1",
-    "history": "1.13.x",
+    "history": "^1.17.0",
     "react": "^0.14.7",
     "react-addons-linked-state-mixin": "^0.14.2",
     "react-dom": "^0.14.7",
-    "react-router": "^1.0.2",
+    "react-router": "^1.0.3",
     "webpack": "^1.12.13"
   },
   "devDependencies": {}
