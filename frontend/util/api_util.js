@@ -3,7 +3,6 @@ var ApiActions = require('../actions/api_actions');
 
 var ApiUtil = {
   fetchBenches: function(bounds) {
-    // debugger;
     $.ajax({
       url: "/api/benches",
       method: 'GET',
