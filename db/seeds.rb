@@ -5,5 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-myBurr = Bench.create({lat: 37.7, lng: -122.43, description: "Burritos and shit."})
-mySBurr = Bench.create({lat: 37.6, lng: -122.44, description: "Burritos and crap."})
+myBurr = Bench.create({lat: 37.7, lng: -122.43, description: "Burritos and shit.", seating: 3})
+mySBurr = Bench.create({lat: 37.6, lng: -122.44, description: "Burritos and crap.", seating: 5})

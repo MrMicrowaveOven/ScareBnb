@@ -13,7 +13,9 @@ var ApiUtil = {
         ApiActions.receiveAll(benchObjects);
       }
     });
-  }
+  },
+
+  // createBench: function()
 };
 
 // window.ApiUtil = ApiUtil;
