@@ -1,14 +1,14 @@
 # == Route Map
 #
 #      Prefix Verb URI Pattern            Controller#Action
-# api_benches GET  /api/benches(.:format) api/benches#index {:format=>:json}
-#             POST /api/benches(.:format) api/benches#create {:format=>:json}
+# api_locations GET  /api/locations(.:format) api/locations#index {:format=>:json}
+#             POST /api/locations(.:format) api/locations#create {:format=>:json}
 #
 
 Rails.application.routes.draw do
   root to: 'static_pages#root'
 
   namespace :api, defaults: {format: :json} do
-    resources :benches, only: [:index, :create, :new]
+    resources :locations, only: [:index, :create, :new]
   end
 end

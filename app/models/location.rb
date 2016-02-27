@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: benches
+# Table name: locations
 #
 #  id          :integer          not null, primary key
 #  description :string           not null
@@ -10,7 +10,7 @@
 #  updated_at  :datetime         not null
 #
 
-class Bench < ActiveRecord::Base
+class Location < ActiveRecord::Base
   validates :description, :lat, :lng, presence: true
 
   def self.in_bounds(bounds)
@@ -22,16 +22,16 @@ class Bench < ActiveRecord::Base
     leftb = bounds["southWest"]["lng"].to_f
     topb = bounds["northEast"]["lat"].to_f
     bottomb = bounds["southWest"]["lat"].to_f
-    benches_in_bound = []
+    locations_in_bound = []
 
-    benches = Bench.all
-    benches.each do |bench|
-      if bench.lat < topb && bench.lat > bottomb && bench.lng > leftb && bench.lng < rightb
-        benches_in_bound << bench
+    locations = Location.all
+    locations.each do |location|
+      if location.lat < topb && location.lat > bottomb && location.lng > leftb && location.lng < rightb
+        locations_in_bound << location
       end
     end
 
-    return benches_in_bound
+    return locations_in_bound
   end
 
 end

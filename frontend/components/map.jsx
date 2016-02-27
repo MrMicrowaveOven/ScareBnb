@@ -2,21 +2,21 @@ var React = require('react');
 
 var History = require('react-router').History;
 var ApiActions = require('../actions/api_actions');
-var BenchStore = require('../stores/bench');
+var LocationStore = require('../stores/location');
 var ApiUtil = require('../util/api_util');
 
 var Map = React.createClass({
   getInitialState: function() {
-    //markerIndex is a means of indexing all markers for benches in the store.
-    //benchId = markerIndex key
+    //markerIndex is a means of indexing all markers for locations in the store.
+    //locationId = markerIndex key
     //It also keeps track of markers that were on the screen before onChange.
     this.markerIndex = {};
 
     //Used to update the markerIndex
     this.newMarkerIndex = {};
-    //benches is the benches in the store, markers are the markers on the map.
+    //locations is the locations in the store, markers are the markers on the map.
     //We'll set state with
-    return {benches: BenchStore.all(), markers: this.markerIndex};
+    return {locations: LocationStore.all(), markers: this.markerIndex};
   },
 
   render: function() {
@@ -36,29 +36,29 @@ var Map = React.createClass({
 
   //reRender
   refreshBandM: function(){
-    this.setState({benches: BenchStore.all(),
+    this.setState({locations: LocationStore.all(),
       markers: this.allMarkersInIndex()});
   },
 
   //Adds a marker to the map
-  addMarker: function(bench) {
+  addMarker: function(location) {
     var self = this;
     var marker = new google.maps.Marker(
       {
-        position: {lat: bench.lat, lng: bench.lng},
+        position: {lat: location.lat, lng: location.lng},
         map: self.map,
-        title: bench.description
+        title: location.description
       }
     );
     // debugger;
-    self.newMarkerIndex[bench.id] = marker;
+    self.newMarkerIndex[location.id] = marker;
     return marker;
   },
 
   //Removes marker from map
   removeMarker: function(marker) {
-    var benchId = this.findBenchIdByMarker(marker);
-    delete this.markerIndex[benchId];
+    var locationId = this.findLocationIdByMarker(marker);
+    delete this.markerIndex[locationId];
     marker.setMap(null);
     marker = null;
   },
@@ -67,14 +67,14 @@ var Map = React.createClass({
   markerUpdate: function() {
     var self = this;
 
-    //If there's a bench in the store that isn't in the markerIndex,
+    //If there's a location in the store that isn't in the markerIndex,
     //create a marker for it.
-    BenchStore.all().forEach(function(bench) {
-      if (self.markerIndex[bench.id] === undefined) {
-        self.newMarkerIndex[bench.id] = self.addMarker(bench);
+    LocationStore.all().forEach(function(location) {
+      if (self.markerIndex[location.id] === undefined) {
+        self.newMarkerIndex[location.id] = self.addMarker(location);
       } else {
-        self.newMarkerIndex[bench.id] = self.markerIndex[bench.id];
-        delete self.markerIndex[bench.id];
+        self.newMarkerIndex[location.id] = self.markerIndex[location.id];
+        delete self.markerIndex[location.id];
       }
     });
 
@@ -102,13 +102,13 @@ var Map = React.createClass({
     return arr;
   },
 
-  findBenchIdByMarker: function(marker) {
+  findLocationIdByMarker: function(marker) {
     var markerIndex = this.markerIndex;
     // debugger;
-    for(var benchId in markerIndex) {
-      if(markerIndex.hasOwnProperty(benchId)) {
-        if(markerIndex[benchId] === marker) {
-          return benchId;
+    for(var locationId in markerIndex) {
+      if(markerIndex.hasOwnProperty(locationId)) {
+        if(markerIndex[locationId] === marker) {
+          return locationId;
         }
       }
     }
@@ -126,11 +126,11 @@ var Map = React.createClass({
     }, southWest: {
       lat: southWest.lat(), lng: southWest.lng()
     }};
-    ApiUtil.fetchBenches(this.bounds);
+    ApiUtil.fetchLocations(this.bounds);
   },
 
   componentDidMount: function(){
-    BenchStore.addListener(this.onChange);
+    LocationStore.addListener(this.onChange);
     var mapDOMNode = this.refs.map;
     var mapOptions = {
       center: {lat: 37.7758, lng: -122.435},

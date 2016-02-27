@@ -2,20 +2,20 @@ var ApiActions = require('../actions/api_actions');
 
 
 var ApiUtil = {
-  fetchBenches: function(bounds) {
+  fetchLocations: function(bounds) {
     $.ajax({
-      url: "/api/benches",
+      url: "/api/locations",
       method: 'GET',
       // dataType: "json",
       data: {"bounds": bounds},
-      success: function(benchObjects){
+      success: function(locationObjects){
         // debugger;
-        ApiActions.receiveAll(benchObjects);
+        ApiActions.receiveAll(locationObjects);
       }
     });
   },
 
-  // createBench: function()
+  // createLocation: function()
 };
 
 // window.ApiUtil = ApiUtil;

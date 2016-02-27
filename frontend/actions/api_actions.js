@@ -1,10 +1,10 @@
 var AppDispatcher = require('../dispatcher/dispatcher');
-var BenchConstants = require('../constants/bench_constants');
+var LocationConstants = require('../constants/location_constants');
 var ApiActions = {
-  receiveAll: function(benches){
+  receiveAll: function(locations){
     AppDispatcher.dispatch({
-      actionType: BenchConstants.BENCHES_RECEIVED,
-      benches: benches
+      actionType: LocationConstants.LOCATIONS_RECEIVED,
+      locations: locations
     });
   }
 };

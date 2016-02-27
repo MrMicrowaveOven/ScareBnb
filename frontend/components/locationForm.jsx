@@ -2,10 +2,10 @@ var React = require('react');
 
 var History = require('react-router').History;
 var ApiActions = require('../actions/api_actions');
-var BenchStore = require('../stores/bench');
+var LocationStore = require('../stores/location');
 var ApiUtil = require('../util/api_util');
 
-var BenchForm = React.createClass({
+var LocationForm = React.createClass({
   getInitialState: function() {
     return {
       lat: 38,
@@ -37,4 +37,4 @@ var BenchForm = React.createClass({
 
 });
 
-module.exports = BenchForm;
+module.exports = LocationForm;
