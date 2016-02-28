@@ -5,5 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-myBurr = Location.create({lat: 37.7, lng: -122.43, description: "Burritos and shit.", seating: 3})
-mySBurr = Location.create({lat: 37.6, lng: -122.44, description: "Burritos and crap.", seating: 5})
+loc1 = Location.create({lat: 37.4, lng: -122.46, description: "Burritos and shit.", seating: 3})
+loc2 = Location.create({lat: 37.5, lng: -122.44, description: "Burritos and crap.", seating: 5})
+loc3 = Location.create({lat: 37.7, lng: -122.43, description: "Burritos and stuff.", seating: 3})
+loc4 = Location.create({lat: 37.6, lng: -122.44, description: "Burritos and things.", seating: 5})
+loc5 = Location.create({lat: 37.8, lng: -122.43, description: "Burritos and junk.", seating: 3})

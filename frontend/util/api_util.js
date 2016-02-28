@@ -9,13 +9,21 @@ var ApiUtil = {
       // dataType: "json",
       data: {"bounds": bounds},
       success: function(locationObjects){
-        // debugger;
         ApiActions.receiveAll(locationObjects);
       }
     });
   },
 
-  // createLocation: function()
+  createLocation: function(locationParams) {
+    $.ajax({
+      url: "/api/locations",
+      method: 'POST',
+      data: {"locationParams": locationParams},
+      success: function(locationInfo){
+        ApiActions.receiveAll(locationInfo);
+      }
+    });
+  }
 };
 
 // window.ApiUtil = ApiUtil;

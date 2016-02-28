@@ -7,6 +7,14 @@ var ApiActions = {
       locations: locations
     });
   }
+
+  // createLocation: function(locationInfo){
+  //   AppDispatcher.dispatch({
+  //     actionType: LocationConstants.NEW_LOCATION_RECEIVED,
+  //     location
+  //   })
+  // }
+
 };
 
 module.exports = ApiActions;
