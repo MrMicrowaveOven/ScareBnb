@@ -1,5 +1,7 @@
 var LocationConstants = {
   LOCATIONS_RECEIVED: "LOCATIONS_RECEIVED",
+  NEW_LOCATION_RECEIVED: "NEW_LOCATION_RECEIVED",
+  LOCATION_RECEIVED: "LOCATION_RECEIVED"
 };
 
 module.exports = LocationConstants;

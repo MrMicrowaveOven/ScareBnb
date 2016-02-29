@@ -4,6 +4,11 @@ class Api::LocationsController < ApplicationController
     render json: @locations
   end
 
+  def show
+    @location = Location.find(params[:id])
+    render json: @location
+  end
+
   def create
     # debugger;
     @location = Location.new(location_params)

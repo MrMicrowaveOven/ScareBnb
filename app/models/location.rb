@@ -8,10 +8,13 @@
 #  lng         :float            not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  occupancy   :integer          not null
 #
 
 class Location < ActiveRecord::Base
   validates :description, :lat, :lng, presence: true
+
+  
 
   def self.in_bounds(bounds)
     # {
@@ -33,5 +36,7 @@ class Location < ActiveRecord::Base
 
     return locations_in_bound
   end
+
+
 
 end

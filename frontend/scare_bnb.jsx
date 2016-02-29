@@ -12,6 +12,7 @@ var LocationStore = require('./stores/location');
 var Search = require('./components/search');
 var LocationForm = require('./components/locationForm');
 var NavBar = require('./components/nav_bar');
+var Show = require('./components/show');
 
 var App = React.createClass({
     render: function(){
@@ -27,9 +28,11 @@ var App = React.createClass({
 
 var routes = (
   <Route path="/" component={App}>
-    <IndexRedirect to="/search"/>
-    <Route path="/search" component={Search}/>
-    <Route path="/locations/new" component={LocationForm}/>
+    <IndexRedirect to="search"/>
+    <Route path="search" component={Search}>
+      <Route path="/search/:location_id" component={Show}/>
+    </Route>
+    <Route path="locations/new" component={LocationForm}/>
   </Route>
 );
 

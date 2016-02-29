@@ -13,6 +13,7 @@ var Search = React.createClass({
       <div>
         <Map/>
         <Index/>
+        {this.props.children}
       </div>
     );
   }

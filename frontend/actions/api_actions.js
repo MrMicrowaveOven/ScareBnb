@@ -13,6 +13,13 @@ var ApiActions = {
       actionType: LocationConstants.NEW_LOCATION_RECEIVED,
       location: location
     });
+  },
+
+  receiveLocation: function(location){
+    AppDispatcher.dispatch({
+      actionType: LocationConstants.LOCATION_RECEIVED,
+      location: location
+    });
   }
 
 };

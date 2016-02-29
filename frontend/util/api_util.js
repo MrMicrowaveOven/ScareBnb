@@ -14,6 +14,17 @@ var ApiUtil = {
     });
   },
 
+  showLocation: function(id) {
+    // debugger;
+    $.ajax({
+      url: "/api/locations/" + id,
+      method: 'GET',
+      success: function(location){
+        ApiActions.receiveLocation(location);
+      }
+    });
+  },
+
   createLocation: function(locationParams) {
     $.ajax({
       url: "/api/locations",
