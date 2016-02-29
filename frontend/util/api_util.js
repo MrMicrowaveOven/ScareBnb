@@ -18,9 +18,13 @@ var ApiUtil = {
     $.ajax({
       url: "/api/locations",
       method: 'POST',
-      data: {"locationParams": locationParams},
+      data: {"location": locationParams},
       success: function(locationInfo){
-        ApiActions.receiveAll(locationInfo);
+        // debugger;
+        ApiActions.createLocation(locationInfo);
+      },
+      failure: function(errorMessage){
+
       }
     });
   }

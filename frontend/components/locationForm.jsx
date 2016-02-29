@@ -7,73 +7,79 @@ var LocationStore = require('../stores/location');
 var ApiUtil = require('../util/api_util');
 
 var LocationForm = React.createClass({
+
   mixins: [LinkedStateMixin],
+
   getInitialState: function() {
     return {
       lat: 38,
       lng: -122,
       description: null,
-      seating: 1
+      occupancy: 1
     };
   },
 
   render: function() {
-    debugger;
     return(
       <div>
-        <form className="LocationForm" onSubmit={this.submitForm}>
+        <h2 className="Add a location">Post your location!</h2>
+        <form className="LocationForm" onSubmit={this.submitLocation}>
 
-          <label>Latitude<input type="float" className="locationlat"
-            value={this.state.lat} onChange={this.handleChangelat}
-            valueLink={this.linkState("lat")}/>
+          <label>Latitude
+            <input type="text" className="locationlat"
+              valueLink={this.linkState("lat")}
+            />
           </label>
 
-          <label>Longitude<input type="float" className="locationlng"
-            value={this.state.lng} onChange={this.handleChangelng}
-            valueLink={this.linkState("lng")}/>
+          <label>Longitude
+            <input type="text" className="locationlng"
+              valueLink={this.linkState("lng")}
+            />
           </label>
 
-          <label>Description<input type="text" className="locationdescription"
-            value={this.state.description} onChange={this.handleChangedescription}
-            valueLink={this.linkState("description")}/>
+          <label>Description
+            <input type="text" className="locationdescription"
+              valueLink={this.linkState("description")}
+            />
           </label>
 
-          <button type="submit" className="CreateLocation">
-            Post Location!
-          </button>
+          <label>How many people can stay at this location?
+            <select name="Max Occupancy" valueLink={this.linkState("occupancy")}>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </label>
+
+          <input type="submit" className="CreateLocation"
+            value="Post Location!" onClick={this.submitLocation}
+          />
 
         </form>
       </div>
     );
   },
 
-  handleChangelng: function(event) {
-    this.setState({
-      lng: event.target.value
+  oneThroughTen: function() {
+    var oTT = [1,2,3,4,5,6,7,8,9,10];
+    var list = oTT.map(function(num) {
+      return(
+        <option value="{num}">{num}</option>
+      );
     });
+    return list;
   },
 
-  handleChangelat: function(event) {
-    this.setState({
-      lat: event.target.value
-    });
-  },
-
-  handleChangedescription: function(event) {
-    this.setState({
-      description: event.target.value
-    });
-  },
-
-  submitForm: function(event) {
+  submitLocation: function(event) {
     event.preventDefault();
-
-    // this.refs.LocationForm.getFormData();
-    ApiUtil.CreateLocation({
-      lat: this.refs.locationlat.getDOMNode().value,
-      lng: this.refs.locationlng.getDOMNode().value,
-      description: this.refs.locationdescription.getDOMNode().value
+    ApiUtil.createLocation({
+      lat: this.state.lat,
+      lng: this.state.lng,
+      description: this.state.description,
+      occupancy: this.state.occupancy
     });
+
   },
 
   componentDidMount: function() {

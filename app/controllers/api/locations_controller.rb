@@ -5,15 +5,18 @@ class Api::LocationsController < ApplicationController
   end
 
   def create
+    # debugger;
     @location = Location.new(location_params)
-    if @locaton.save
-      redirect_to :index
+    if @location.save
+      # debugger;
+      render json: @location
     else
-      render :new
+      # debugger;
+      render json: {error: "Invalid parameters"}
     end
   end
 
   def location_params
-    params.require(:location).permit(:description, :lat, :lng)
+    params.require(:location).permit(:description, :lat, :lng, :occupancy)
   end
 end

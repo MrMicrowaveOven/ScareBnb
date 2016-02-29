@@ -6,14 +6,14 @@ var ApiActions = {
       actionType: LocationConstants.LOCATIONS_RECEIVED,
       locations: locations
     });
-  }
+  },
 
-  // createLocation: function(locationInfo){
-  //   AppDispatcher.dispatch({
-  //     actionType: LocationConstants.NEW_LOCATION_RECEIVED,
-  //     location
-  //   })
-  // }
+  createLocation: function(locationInfo){
+    AppDispatcher.dispatch({
+      actionType: LocationConstants.NEW_LOCATION_RECEIVED,
+      location: location
+    });
+  }
 
 };
 

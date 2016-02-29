@@ -11,7 +11,7 @@ var Index = React.createClass({
   render: function() {
     var self = this;
     var locations = self.state.locations.map(function(location) {
-      return (<li key={location.id}>{location.description} Seating for {location.seating} </li>);
+      return (<li key={location.id}>{location.description} Room for {location.occupancy} people.</li>);
     });
     return(
       <ul id="location_list">{locations}</ul>

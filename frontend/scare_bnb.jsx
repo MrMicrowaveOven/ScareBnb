@@ -11,11 +11,13 @@ var Index = require('./components/index');
 var LocationStore = require('./stores/location');
 var Search = require('./components/search');
 var LocationForm = require('./components/locationForm');
+var NavBar = require('./components/nav_bar');
 
 var App = React.createClass({
     render: function(){
       return (
           <div>
+            <div><NavBar/></div>
             <header><h1>Location BnB</h1></header>
             {this.props.children}
           </div>
@@ -25,7 +27,7 @@ var App = React.createClass({
 
 var routes = (
   <Route path="/" component={App}>
-    <IndexRedirect to="/search"></IndexRedirect>
+    <IndexRedirect to="/search"/>
     <Route path="/search" component={Search}/>
     <Route path="/locations/new" component={LocationForm}/>
   </Route>
