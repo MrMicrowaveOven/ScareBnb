@@ -6,13 +6,16 @@ var ApiActions = require('../actions/api_actions');
 var LocationStore = require('../stores/location');
 var ApiUtil = require('../util/api_util');
 
-
 var LocationForm = React.createClass({
 
   mixins: [LinkedStateMixin],
 
   getInitialState: function() {
     return {
+      address: "160 Spear Street",
+      city: "San Francisco",
+      state: "CA",
+      zip_code: "94105",
       lat: 38,
       lng: -122,
       description: null,
@@ -22,10 +25,37 @@ var LocationForm = React.createClass({
   },
 
   render: function() {
+    // debugger;
     return(
       <div>
         <h2 className="Add a location">Post your location!</h2>
         <form className="LocationForm" onSubmit={this.submitLocation}>
+
+
+
+          <label>Address
+            <input type="text" className="locationaddress"
+              valueLink={this.linkState("address")}
+            />
+          </label>
+
+          <label>City
+            <input type="text" className="locationcity"
+              valueLink={this.linkState("city")}
+            />
+          </label>
+
+          <label>State
+            <input type="text" className="locationstate"
+              valueLink={this.linkState("state")}
+            />
+          </label>
+
+          <label>Zip Code
+            <input type="text" className="locationzipcode"
+              valueLink={this.linkState("zip_code")}
+            />
+          </label>
 
           <label>Latitude
             <input type="text" className="locationlat"
@@ -69,6 +99,7 @@ var LocationForm = React.createClass({
           </div>
 
         </form>
+        <div id="mapAddress" className='mapAddress' ref='mapAddress'/>
       </div>
     );
   },
@@ -113,10 +144,40 @@ var LocationForm = React.createClass({
 
   },
 
-  componentDidMount: function() {
+  componentDidUpdate: function() {
+    self = this;
+    this.geocoder.geocode(
+      { 'address': this.state.address },
+      function(results, status) {
+        if (status === google.maps.GeocoderStatus.OK) {
+          self.mapAddress.setCenter(results[0].geometry.location);
+          var marker = new google.maps.Marker({
+            map: self.mapAddress,
+            position: results[0].geometry.location
+          });
+        } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+  },
 
+  componentDidMount: function() {
+    this.geocoder = new google.maps.Geocoder;
+    // var self = this;
+
+    var mapDOMNode = this.refs.mapAddress;
+    var mapOptions = {
+      center: {lat: 37.7758, lng: -122.435},
+      zoom: 13
+    };
+
+    this.mapAddress = new google.maps.Map(mapDOMNode, mapOptions);
+    // debugger;
+    // this.state.mapAddress = this.mapAddress;
+    this.setState({mapAddress: this.mapAddress});
   }
 
 });
 
+window.LocationForm = LocationForm;
 module.exports = LocationForm;
