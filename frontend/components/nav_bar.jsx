@@ -23,7 +23,7 @@ var NavBar = React.createClass({
           <div className="nav_bar_link_container">
             <Link to={"/search/"}
               onClick={this.addMap}
-              className="nav_bar_link">Map
+              className="nav_bar_link">Map<br/>
             </Link>
             <Link to={"/locations/new" }
               onClick={this.addLocationForm}

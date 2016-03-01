@@ -20,8 +20,10 @@ var Show = React.createClass({
       }
     var self = this;
     // debugger;
-    return (<li key={location.id}>ONLY {location.description}
-      Room for {location.occupancy} people.</li>);
+    return (<li key={location.id}>This is the BEAUTIFUL and MARVELOUS show page!
+    <br/>
+    It is for Location #{location.id}
+    </li>);
   },
 
   componentWillReceiveProps: function (new_props) {
