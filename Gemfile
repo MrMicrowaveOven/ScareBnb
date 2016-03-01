@@ -25,6 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 
 gem 'newrelic_rpm'
+gem 'rails_12factor'
 
 gem 'cloudinary'
 # Use ActiveModel has_secure_password
