@@ -6,6 +6,7 @@ var ApiActions = require('../actions/api_actions');
 var LocationStore = require('../stores/location');
 var ApiUtil = require('../util/api_util');
 
+
 var LocationForm = React.createClass({
 
   mixins: [LinkedStateMixin],
@@ -15,7 +16,8 @@ var LocationForm = React.createClass({
       lat: 38,
       lng: -122,
       description: null,
-      occupancy: 1
+      occupancy: 1,
+      images: {}
     };
   },
 
@@ -52,6 +54,10 @@ var LocationForm = React.createClass({
             </select>
           </label>
 
+          <div>
+            <button className="upload" onClick={this.state.images = this.uploadImage}>Upload Image!</button>
+          </div>
+
           <input type="submit" className="CreateLocation"
             value="Post Location!" onClick={this.submitLocation}
           />
@@ -59,6 +65,15 @@ var LocationForm = React.createClass({
         </form>
       </div>
     );
+  },
+
+  uploadImage: function() {
+    var images = cloudinary.openUploadWidget({ cloud_name: 'dazguin0y', upload_preset: "fmwjjrqp" },
+    function(error, result) {
+      var images = result;
+      return images;
+    })
+    return images
   },
 
   oneThroughTen: function() {
@@ -77,7 +92,8 @@ var LocationForm = React.createClass({
       lat: this.state.lat,
       lng: this.state.lng,
       description: this.state.description,
-      occupancy: this.state.occupancy
+      occupancy: this.state.occupancy,
+      images: this.state.images
     });
 
   },
