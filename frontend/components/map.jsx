@@ -130,7 +130,7 @@ var Map = React.createClass({
   },
 
   componentDidMount: function(){
-    LocationStore.addListener(this.onChange);
+    this.locationListener = LocationStore.addListener(this.onChange);
     var mapDOMNode = this.refs.map;
     var mapOptions = {
       center: {lat: 37.7758, lng: -122.435},
@@ -139,6 +139,10 @@ var Map = React.createClass({
 
     this.map = new google.maps.Map(mapDOMNode, mapOptions);
     this.map.addListener('idle', this.onIdle);
+  },
+
+  componentWillUnmount: function() {
+    this.locationListener.remove();
   }
 
 

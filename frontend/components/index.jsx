@@ -35,7 +35,11 @@ var Index = React.createClass({
   },
 
   componentDidMount: function() {
-    LocationStore.addListener(this.onChange);
+    this.locationListener = LocationStore.addListener(this.onChange);
+  },
+  
+  componentWillUnmount: function() {
+    this.locationListener.remove();
   }
 
 });

@@ -17,7 +17,7 @@ var LocationForm = React.createClass({
       lng: -122,
       description: null,
       occupancy: 1,
-      images: {}
+      images: []
     };
   },
 
@@ -55,25 +55,39 @@ var LocationForm = React.createClass({
           </label>
 
           <div>
-            <button className="upload" onClick={this.state.images = this.uploadImage}>Upload Image!</button>
+            <button className="upload" onClick={this.uploadImage}>Upload Image!</button>
           </div>
 
-          <input type="submit" className="CreateLocation"
-            value="Post Location!" onClick={this.submitLocation}
-          />
+          <div>
+            <h2>Here are your images:{this.showImages()}</h2>
+          </div>
+
+          <div>
+            <input type="submit" className="CreateLocation"
+              value="Post Location!" onClick={this.submitLocation}
+            />
+          </div>
 
         </form>
       </div>
     );
   },
 
-  uploadImage: function() {
-    var images = cloudinary.openUploadWidget({ cloud_name: 'dazguin0y', upload_preset: "fmwjjrqp" },
-    function(error, result) {
-      var images = result;
-      return images;
+  showImages: function() {
+    var images = this.state.images;
+    allImages = images.map(function(image, index) {
+      return <img key={index} src={image.secure_url}/>
     })
-    return images
+    return allImages;
+  },
+
+  uploadImage: function(event) {
+    event.preventDefault()
+    var self = this;
+    var images = cloudinary.openUploadWidget({ cloud_name: 'dazguin0y', upload_preset: "jfqawmvc", multiple: true },
+    function(error, result) {
+      self.setState({images: self.state.images.concat(result)});
+    })
   },
 
   oneThroughTen: function() {
@@ -88,6 +102,7 @@ var LocationForm = React.createClass({
 
   submitLocation: function(event) {
     event.preventDefault();
+    debugger;
     ApiUtil.createLocation({
       lat: this.state.lat,
       lng: this.state.lng,
