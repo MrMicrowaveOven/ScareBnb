@@ -24060,7 +24060,6 @@
 	  },
 	
 	  showLocation: function (id) {
-	    // debugger;
 	    $.ajax({
 	      url: "/api/locations/" + id,
 	      method: 'GET',
@@ -24076,7 +24075,7 @@
 	      method: 'POST',
 	      data: { "location": locationParams },
 	      success: function (locationInfo) {
-	        // debugger;
+	
 	        ApiActions.createLocation(locationInfo);
 	      },
 	      failure: function (errorMessage) {}
@@ -24102,7 +24101,7 @@
 	    });
 	  },
 	
-	  createLocation: function (locationInfo) {
+	  createLocation: function (location) {
 	    AppDispatcher.dispatch({
 	      actionType: LocationConstants.NEW_LOCATION_RECEIVED,
 	      location: location
@@ -31338,6 +31337,13 @@
 	      title: suggest.label
 	    });
 	    this.mapAddress.setCenter(suggest.location);
+	    // debugger;
+	
+	    this.setState({
+	      lat: suggest.location.lat,
+	      lng: suggest.location.lng,
+	      fullAddress: suggest.label
+	    });
 	    // ReactDOM.render(
 	    //   <div>
 	    //     {suggest.label}
@@ -31371,6 +31377,7 @@
 	    ApiUtil.createLocation({
 	      lat: this.state.lat,
 	      lng: this.state.lng,
+	      fullAddress: this.state.fullAddress,
 	      description: this.state.description,
 	      occupancy: this.state.occupancy,
 	      images: this.state.images

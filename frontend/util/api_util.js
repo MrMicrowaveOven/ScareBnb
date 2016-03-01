@@ -15,7 +15,6 @@ var ApiUtil = {
   },
 
   showLocation: function(id) {
-    // debugger;
     $.ajax({
       url: "/api/locations/" + id,
       method: 'GET',
@@ -31,7 +30,7 @@ var ApiUtil = {
       method: 'POST',
       data: {"location": locationParams},
       success: function(locationInfo){
-        // debugger;
+
         ApiActions.createLocation(locationInfo);
       },
       failure: function(errorMessage){

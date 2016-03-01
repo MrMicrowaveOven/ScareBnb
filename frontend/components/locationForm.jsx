@@ -101,6 +101,13 @@ var LocationForm = React.createClass({
       title: suggest.label
     });
     this.mapAddress.setCenter(suggest.location);
+    // debugger;
+
+    this.setState({
+      lat: suggest.location.lat,
+      lng: suggest.location.lng,
+      fullAddress: suggest.label
+    })
     // ReactDOM.render(
     //   <div>
     //     {suggest.label}
@@ -137,11 +144,11 @@ var LocationForm = React.createClass({
     ApiUtil.createLocation({
       lat: this.state.lat,
       lng: this.state.lng,
+      fullAddress: this.state.fullAddress,
       description: this.state.description,
       occupancy: this.state.occupancy,
       images: this.state.images
     });
-
   },
 
   // componentDidUpdate: function() {

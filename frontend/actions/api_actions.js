@@ -8,7 +8,7 @@ var ApiActions = {
     });
   },
 
-  createLocation: function(locationInfo){
+  createLocation: function(location){
     AppDispatcher.dispatch({
       actionType: LocationConstants.NEW_LOCATION_RECEIVED,
       location: location

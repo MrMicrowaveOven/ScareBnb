@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160301021152) do
+ActiveRecord::Schema.define(version: 20160301192941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,16 +26,17 @@ ActiveRecord::Schema.define(version: 20160301021152) do
   add_index "locationImages", ["location_id"], name: "index_locationImages_on_location_id", using: :btree
 
   create_table "locations", force: :cascade do |t|
-    t.string   "description", null: false
-    t.float    "lat",         null: false
-    t.float    "lng",         null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "occupancy",   null: false
-    t.string   "address",     null: false
-    t.string   "city",        null: false
-    t.string   "state",       null: false
-    t.string   "zip_code",    null: false
+    t.string   "description",  null: false
+    t.float    "lat",          null: false
+    t.float    "lng",          null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "occupancy",    null: false
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip_code"
+    t.string   "full_address", null: false
   end
 
 end

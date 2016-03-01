@@ -14,7 +14,9 @@ class Api::LocationsController < ApplicationController
     @location = Location.new(location_params)
     if @location.save
       # debugger;
-      render json: @location
+      @locations = Location.in_bounds(params[:bounds])
+      render json: @locations
+      # render json: @location
     else
       # debugger;
       render json: {error: "Invalid parameters"}
