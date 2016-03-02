@@ -16,6 +16,19 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
+    <%#AUTH SHIT --------------------------------%>
+    
+    <% if signed_in? %>
+      <%= current_user.email %>
+      <%= button_to "Sign Out", session_url, method: :delete %>
+    <% else %>
+    <%= link_to "Sign Up", new_user_url %>
+    <%= link_to "Sign In", new_session_url %>
+    <% end %>
+
+     <%= flash[:errors].join("<br>").html_safe if flash[:errors] %>
+    <%#AUTH SHIT end-----------------------------%>
+
     <!-- <script
       src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD3-I1sq4rarS1K3i7DGjEwVBXfq8zCdpU">
     </script> -->

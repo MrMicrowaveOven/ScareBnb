@@ -2,3 +2,7 @@ bundle install
 npm install
 npm install --save react react-dom flux
 npm install --save react-router
+
+bundle exec rake db:setup
+
+heroku run rake db:migrate

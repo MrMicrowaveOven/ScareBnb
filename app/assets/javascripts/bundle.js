@@ -31066,7 +31066,8 @@
 	
 	    //Used to update the markerIndex
 	    this.newMarkerIndex = {};
-	    //locations is the locations in the store, markers are the markers on the map.
+	    //locations is the locations in the store
+	    //markers are the markers on the map.
 	    //We'll set state with
 	    return { locations: LocationStore.all(), markers: this.markerIndex };
 	  },

@@ -2,19 +2,24 @@
 #
 # Table name: locations
 #
-#  id          :integer          not null, primary key
-#  description :string           not null
-#  lat         :float            not null
-#  lng         :float            not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  occupancy   :integer          not null
+#  id           :integer          not null, primary key
+#  description  :string           not null
+#  lat          :float            not null
+#  lng          :float            not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  occupancy    :integer          not null
+#  address      :string
+#  city         :string
+#  state        :string
+#  zip_code     :string
+#  full_address :string           not null
 #
 
 class Location < ActiveRecord::Base
   validates :description, :lat, :lng, presence: true
+    
 
-  
 
   def self.in_bounds(bounds)
     # {
