@@ -12,12 +12,12 @@ var Geosuggest = require('react-geosuggest');
 
 var LocationForm = React.createClass({
 
-  mixins: [LinkedStateMixin],
+  mixins: [LinkedStateMixin, History],
 
   getInitialState: function() {
     this.defaultSFLocation = new google.maps.LatLng({lat: 38, lng: -122});
     return {
-      fullAddress: "",
+      full_address: "",
       address: "160 Spear Street",
       city: "San Francisco",
       state: "CA",
@@ -41,7 +41,7 @@ var LocationForm = React.createClass({
               location={this.defaultSFLocation}
               radius = "50"
               onSuggestSelect={this.onSuggestSelect}
-              valueLink={this.linkState("fullAddress")}
+              valueLink={this.linkState("full_address")}
             />
           </div>
 
@@ -56,14 +56,17 @@ var LocationForm = React.createClass({
           </label>
           <br/>
           <label>How many people can stay at this location?
-            <select name="Max Occupancy" valueLink={this.linkState("occupancy")}>
+            <select name="Max Occupancy"
+              valueLink={this.linkState("occupancy")}
+            >
               {this.oneThroughTen()}
             </select>
           </label>
           <br/>
           <div>
             Be sure to include some pictures of your place!
-            <button className="upload" onClick={this.uploadImage}>Upload picture!</button>
+            <button className="upload" onClick={this.uploadImage}>
+              Upload picture!</button>
           </div>
 
           <div>
@@ -106,8 +109,8 @@ var LocationForm = React.createClass({
     this.setState({
       lat: suggest.location.lat,
       lng: suggest.location.lng,
-      fullAddress: suggest.label
-    })
+      full_address: suggest.label
+    });
     // ReactDOM.render(
     //   <div>
     //     {suggest.label}
@@ -130,7 +133,6 @@ var LocationForm = React.createClass({
     event.preventDefault();
     var self = this;
     var images = cloudinary.openUploadWidget({
-
       cloud_name: 'dazguin0y', upload_preset: "jfqawmvc", multiple: true
     },
     function(error, result) {
@@ -141,92 +143,39 @@ var LocationForm = React.createClass({
 
   submitLocation: function(event) {
     event.preventDefault();
+    // debugger;
     ApiUtil.createLocation({
       lat: this.state.lat,
       lng: this.state.lng,
-      fullAddress: this.state.fullAddress,
+      full_address: this.state.full_address,
       description: this.state.description,
       occupancy: this.state.occupancy,
       images: this.state.images
     });
   },
 
-  // componentDidUpdate: function() {
-  //   var self = this;
-  //   this.geocoder.geocode(
-  //     { 'address': this.state.address },
-  //     function(results, status) {
-  //       if (status === google.maps.GeocoderStatus.OK) {
-  //         self.mapAddress.setCenter(results[0].geometry.location);
-  //         var marker = new google.maps.Marker({
-  //           map: self.mapAddress,
-  //           position: results[0].geometry.location
-  //         });
-  //       } else {
-  //     alert('Geocode was not successful for the following reason: ' + status);
-  //     }
-  //   });
-  // },
+  creationSuccess: function() {
+    this.history.push("/");
+  },
 
   componentDidMount: function() {
+    this.locationListener = LocationStore.addListener(this.creationSuccess);
     this.geocoder = new google.maps.Geocoder;
-    // var self = this;
+
 
     var mapDOMNode = this.refs.mapAddress;
     var mapOptions = {
       center: {lat: 37.7758, lng: -122.435},
       zoom: 15
     };
-    // debugger;
     this.mapAddress = new google.maps.Map(mapDOMNode, mapOptions);
-    // debugger;
-    // this.state.mapAddress = this.mapAddress;
-    // this.setState({mapAddress: this.mapAddress});
-    // debugger;
+  },
+
+  componentWillUnmount: function() {
+    this.locationListener.remove();
   }
 
 });
 
 window.LocationForm = LocationForm;
 module.exports = LocationForm;
-
-
-
-
-
-
-// <label>Address
-//   <input type="text" className="locationaddress"
-//     valueLink={this.linkState("address")}
-//     />
-// </label>
-//
-// <label>City
-//   <input type="text" className="locationcity"
-//     valueLink={this.linkState("city")}
-//     />
-// </label>
-//
-// <label>State
-//   <input type="text" className="locationstate"
-//     valueLink={this.linkState("state")}
-//     />
-// </label>
-//
-// <label>Zip Code
-//   <input type="text" className="locationzipcode"
-//     valueLink={this.linkState("zip_code")}
-//     />
-// </label>
-//
-// <label>Latitude
-//   <input type="text" className="locationlat"
-//     valueLink={this.linkState("lat")}
-//     />
-// </label>
-//
-// <label>Longitude
-//   <input type="text" className="locationlng"
-//     valueLink={this.linkState("lng")}
-//     />
-// </label>

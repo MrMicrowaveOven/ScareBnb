@@ -11,14 +11,14 @@ LocationStore.all = function () {
   var keys = Object.keys(_locations);
   var locations = [];
   for (var i = 0; i < keys.length; i++) {
-    locations.push(_locations[keys[i]])
+    locations.push(_locations[keys[i]]);
   }
   return locations;
 };
 
 LocationStore.find = function(id) {
   return _locations[id];
-}
+};
 
 var resetLocations = function(locations){
   _locations = {};
@@ -30,11 +30,11 @@ var resetLocations = function(locations){
 
 LocationStore.setSelectedLocation = function(location){
   selLocation = location;
-}
+};
 
 LocationStore.selectedLocation = function(){
   return selLocation;
-}
+};
 
 LocationStore.__onDispatch = function (payload) {
   switch(payload.actionType) {
@@ -44,6 +44,11 @@ LocationStore.__onDispatch = function (payload) {
       break;
     case LocationConstants.LOCATION_RECEIVED:
       LocationStore.setSelectedLocation(payload.location);
+      LocationStore.__emitChange();
+      break;
+    case LocationConstants.NEW_LOCATION_RECEIVED:
+      LocationStore.setSelectedLocation(payload.location);
+      // debugger;
       LocationStore.__emitChange();
       break;
   }

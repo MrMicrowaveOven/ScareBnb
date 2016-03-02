@@ -26,12 +26,12 @@ var Show = React.createClass({
     </li>);
   },
 
-  componentWillReceiveProps: function (new_props) {
-    ApiUtil.showLocation(new_props.params.location_id);
+  componentWillReceiveProps: function (newProps) {
+    ApiUtil.showLocation(newProps.params.location_id);
   },
 
   onChange: function() {
-    this.setState({location: LocationStore.selectedLocation()})
+    this.setState({location: LocationStore.selectedLocation()});
   },
 
   componentDidMount: function() {

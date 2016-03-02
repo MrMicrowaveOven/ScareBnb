@@ -24074,9 +24074,8 @@
 	      url: "/api/locations",
 	      method: 'POST',
 	      data: { "location": locationParams },
-	      success: function (locationInfo) {
-	
-	        ApiActions.createLocation(locationInfo);
+	      success: function (location) {
+	        ApiActions.createdLocation(location);
 	      },
 	      failure: function (errorMessage) {}
 	    });
@@ -24101,7 +24100,7 @@
 	    });
 	  },
 	
-	  createLocation: function (location) {
+	  createdLocation: function (location) {
 	    AppDispatcher.dispatch({
 	      actionType: LocationConstants.NEW_LOCATION_RECEIVED,
 	      location: location
@@ -24490,14 +24489,6 @@
 	    );
 	  },
 	
-	  // locationClick: function(event) {
-	  //   debugger;
-	  //   event.preventDefault();
-	  //   location = event.props.target;
-	  //   LocationStore.setSelectedLocation(location);
-	  //   ApiUtil.showLocation(location.id);
-	  // },
-	
 	  onChange: function () {
 	    this.setState({ locations: LocationStore.all() });
 	  },
@@ -24564,6 +24555,11 @@
 	      break;
 	    case LocationConstants.LOCATION_RECEIVED:
 	      LocationStore.setSelectedLocation(payload.location);
+	      LocationStore.__emitChange();
+	      break;
+	    case LocationConstants.NEW_LOCATION_RECEIVED:
+	      LocationStore.setSelectedLocation(payload.location);
+	      // debugger;
 	      LocationStore.__emitChange();
 	      break;
 	  }
@@ -31217,12 +31213,12 @@
 	  displayName: 'LocationForm',
 	
 	
-	  mixins: [LinkedStateMixin],
+	  mixins: [LinkedStateMixin, History],
 	
 	  getInitialState: function () {
 	    this.defaultSFLocation = new google.maps.LatLng({ lat: 38, lng: -122 });
 	    return {
-	      fullAddress: "",
+	      full_address: "",
 	      address: "160 Spear Street",
 	      city: "San Francisco",
 	      state: "CA",
@@ -31255,7 +31251,7 @@
 	            location: this.defaultSFLocation,
 	            radius: '50',
 	            onSuggestSelect: this.onSuggestSelect,
-	            valueLink: this.linkState("fullAddress")
+	            valueLink: this.linkState("full_address")
 	          })
 	        ),
 	        React.createElement('div', { id: 'mapAddress', className: 'mapAddress', ref: 'mapAddress' }),
@@ -31278,7 +31274,9 @@
 	          'How many people can stay at this location?',
 	          React.createElement(
 	            'select',
-	            { name: 'Max Occupancy', valueLink: this.linkState("occupancy") },
+	            { name: 'Max Occupancy',
+	              valueLink: this.linkState("occupancy")
+	            },
 	            this.oneThroughTen()
 	          )
 	        ),
@@ -31342,7 +31340,7 @@
 	    this.setState({
 	      lat: suggest.location.lat,
 	      lng: suggest.location.lng,
-	      fullAddress: suggest.label
+	      full_address: suggest.label
 	    });
 	    // ReactDOM.render(
 	    //   <div>
@@ -31365,7 +31363,6 @@
 	    event.preventDefault();
 	    var self = this;
 	    var images = cloudinary.openUploadWidget({
-	
 	      cloud_name: 'dazguin0y', upload_preset: "jfqawmvc", multiple: true
 	    }, function (error, result) {
 	      self.setState({ images: self.state.images.concat(result) });
@@ -31374,90 +31371,41 @@
 	
 	  submitLocation: function (event) {
 	    event.preventDefault();
+	    // debugger;
 	    ApiUtil.createLocation({
 	      lat: this.state.lat,
 	      lng: this.state.lng,
-	      fullAddress: this.state.fullAddress,
+	      full_address: this.state.full_address,
 	      description: this.state.description,
 	      occupancy: this.state.occupancy,
 	      images: this.state.images
 	    });
 	  },
 	
-	  // componentDidUpdate: function() {
-	  //   var self = this;
-	  //   this.geocoder.geocode(
-	  //     { 'address': this.state.address },
-	  //     function(results, status) {
-	  //       if (status === google.maps.GeocoderStatus.OK) {
-	  //         self.mapAddress.setCenter(results[0].geometry.location);
-	  //         var marker = new google.maps.Marker({
-	  //           map: self.mapAddress,
-	  //           position: results[0].geometry.location
-	  //         });
-	  //       } else {
-	  //     alert('Geocode was not successful for the following reason: ' + status);
-	  //     }
-	  //   });
-	  // },
+	  creationSuccess: function () {
+	    this.history.push("/");
+	  },
 	
 	  componentDidMount: function () {
+	    this.locationListener = LocationStore.addListener(this.creationSuccess);
 	    this.geocoder = new google.maps.Geocoder();
-	    // var self = this;
 	
 	    var mapDOMNode = this.refs.mapAddress;
 	    var mapOptions = {
 	      center: { lat: 37.7758, lng: -122.435 },
 	      zoom: 15
 	    };
-	    // debugger;
 	    this.mapAddress = new google.maps.Map(mapDOMNode, mapOptions);
-	    // debugger;
-	    // this.state.mapAddress = this.mapAddress;
-	    // this.setState({mapAddress: this.mapAddress});
-	    // debugger;
+	  },
+	
+	  componentWillUnmount: function () {
+	    this.locationListener.remove();
 	  }
 	
 	});
 	
 	window.LocationForm = LocationForm;
 	module.exports = LocationForm;
-	
-	// <label>Address
-	//   <input type="text" className="locationaddress"
-	//     valueLink={this.linkState("address")}
-	//     />
-	// </label>
-	//
-	// <label>City
-	//   <input type="text" className="locationcity"
-	//     valueLink={this.linkState("city")}
-	//     />
-	// </label>
-	//
-	// <label>State
-	//   <input type="text" className="locationstate"
-	//     valueLink={this.linkState("state")}
-	//     />
-	// </label>
-	//
-	// <label>Zip Code
-	//   <input type="text" className="locationzipcode"
-	//     valueLink={this.linkState("zip_code")}
-	//     />
-	// </label>
-	//
-	// <label>Latitude
-	//   <input type="text" className="locationlat"
-	//     valueLink={this.linkState("lat")}
-	//     />
-	// </label>
-	//
-	// <label>Longitude
-	//   <input type="text" className="locationlng"
-	//     valueLink={this.linkState("lng")}
-	//     />
-	// </label>
 
 /***/ },
 /* 235 */
@@ -31786,8 +31734,8 @@
 	    );
 	  },
 	
-	  componentWillReceiveProps: function (new_props) {
-	    ApiUtil.showLocation(new_props.params.location_id);
+	  componentWillReceiveProps: function (newProps) {
+	    ApiUtil.showLocation(newProps.params.location_id);
 	  },
 	
 	  onChange: function () {

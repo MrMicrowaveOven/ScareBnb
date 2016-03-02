@@ -29,9 +29,8 @@ var ApiUtil = {
       url: "/api/locations",
       method: 'POST',
       data: {"location": locationParams},
-      success: function(locationInfo){
-
-        ApiActions.createLocation(locationInfo);
+      success: function(location){
+        ApiActions.createdLocation(location);
       },
       failure: function(errorMessage){
 

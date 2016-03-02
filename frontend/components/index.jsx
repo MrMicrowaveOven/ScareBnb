@@ -22,14 +22,6 @@ var Index = React.createClass({
     );
   },
 
-  // locationClick: function(event) {
-  //   debugger;
-  //   event.preventDefault();
-  //   location = event.props.target;
-  //   LocationStore.setSelectedLocation(location);
-  //   ApiUtil.showLocation(location.id);
-  // },
-
   onChange: function() {
     this.setState({locations: LocationStore.all()});
   },
@@ -37,7 +29,7 @@ var Index = React.createClass({
   componentDidMount: function() {
     this.locationListener = LocationStore.addListener(this.onChange);
   },
-  
+
   componentWillUnmount: function() {
     this.locationListener.remove();
   }
