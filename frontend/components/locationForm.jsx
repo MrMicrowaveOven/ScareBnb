@@ -17,6 +17,7 @@ var LocationForm = React.createClass({
   getInitialState: function() {
     this.defaultSFLocation = new google.maps.LatLng({lat: 38, lng: -122});
     return {
+      title: "",
       full_address: "",
       address: "160 Spear Street",
       city: "San Francisco",
@@ -36,6 +37,15 @@ var LocationForm = React.createClass({
       <div className="LocationForm">
         <h2 className="Add a location">Post your location!</h2>
         <form className="LocationForm" onSubmit={this.submitLocation}>
+
+          <div>
+            <label>Title of Place<br/><br/>
+              <input type="text" className="title"
+                valueLink={this.linkState("title")}
+                />
+            </label>
+          </div>
+
           <div>
             <Geosuggest
               location={this.defaultSFLocation}
@@ -145,17 +155,18 @@ var LocationForm = React.createClass({
     event.preventDefault();
     // debugger;
     ApiUtil.createLocation({
+      title: this.state.title,
       lat: this.state.lat,
       lng: this.state.lng,
       full_address: this.state.full_address,
       description: this.state.description,
       occupancy: this.state.occupancy,
       images: this.state.images
-    });
+    }, this.creationSuccess);
   },
 
-  creationSuccess: function() {
-    this.history.push("/");
+  creationSuccess: function(id) {
+    this.history.push("/search/" + id);
   },
 
   componentDidMount: function() {
@@ -167,11 +178,11 @@ var LocationForm = React.createClass({
       zoom: 15
     };
     this.mapAddress = new google.maps.Map(mapDOMNode, mapOptions);
-  },
-
-  componentWillUnmount: function() {
-    this.locationListener.remove();
   }
+
+  // componentWillUnmount: function() {
+  //   this.locationListener.remove();
+  // }
 
 });
 

@@ -17,7 +17,9 @@ LocationStore.all = function () {
 };
 
 LocationStore.find = function(id) {
+
   return _locations[id];
+
 };
 
 var resetLocations = function(locations){
@@ -46,11 +48,11 @@ LocationStore.__onDispatch = function (payload) {
       LocationStore.setSelectedLocation(payload.location);
       LocationStore.__emitChange();
       break;
-    case LocationConstants.NEW_LOCATION_RECEIVED:
-      
+    // case LocationConstants.NEW_LOCATION_RECEIVED:
+
       // debugger;
 
-      break;
+      // break;
   }
 };
 

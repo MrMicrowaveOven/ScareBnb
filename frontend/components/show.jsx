@@ -7,7 +7,7 @@ var ApiUtil = require('../util/api_util');
 
 var Show = React.createClass({
   getInitialState: function() {
-    return {location: LocationStore.selectedLocation()};
+    return {location: LocationStore.find()};
   },
 
   render: function() {

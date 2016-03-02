@@ -57,8 +57,8 @@
 	var LocationStore = __webpack_require__(214);
 	var Search = __webpack_require__(232);
 	var LocationForm = __webpack_require__(234);
-	var NavBar = __webpack_require__(239);
-	var Show = __webpack_require__(240);
+	var NavBar = __webpack_require__(246);
+	var Show = __webpack_require__(247);
 	
 	var App = React.createClass({
 	  displayName: 'App',
@@ -24069,13 +24069,14 @@
 	    });
 	  },
 	
-	  createLocation: function (locationParams) {
+	  createLocation: function (locationParams, callback) {
 	    $.ajax({
 	      url: "/api/locations",
 	      method: 'POST',
 	      data: { "location": locationParams },
 	      success: function (location) {
 	        ApiActions.createdLocation(location);
+	        callback(location.id);
 	      },
 	      failure: function (errorMessage) {}
 	    });
@@ -24528,6 +24529,7 @@
 	};
 	
 	LocationStore.find = function (id) {
+	
 	  return _locations[id];
 	};
 	
@@ -24557,11 +24559,11 @@
 	      LocationStore.setSelectedLocation(payload.location);
 	      LocationStore.__emitChange();
 	      break;
-	    case LocationConstants.NEW_LOCATION_RECEIVED:
+	    // case LocationConstants.NEW_LOCATION_RECEIVED:
 	
-	      // debugger;
+	    // debugger;
 	
-	      break;
+	    // break;
 	  }
 	};
 	
@@ -31208,7 +31210,7 @@
 	var LocationStore = __webpack_require__(214);
 	var ApiUtil = __webpack_require__(206);
 	
-	var Geosuggest = __webpack_require__(241);
+	var Geosuggest = __webpack_require__(239);
 	
 	var LocationForm = React.createClass({
 	  displayName: 'LocationForm',
@@ -31219,6 +31221,7 @@
 	  getInitialState: function () {
 	    this.defaultSFLocation = new google.maps.LatLng({ lat: 38, lng: -122 });
 	    return {
+	      title: "",
 	      full_address: "",
 	      address: "160 Spear Street",
 	      city: "San Francisco",
@@ -31245,6 +31248,20 @@
 	      React.createElement(
 	        'form',
 	        { className: 'LocationForm', onSubmit: this.submitLocation },
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'Title of Place',
+	            React.createElement('br', null),
+	            React.createElement('br', null),
+	            React.createElement('input', { type: 'text', className: 'title',
+	              valueLink: this.linkState("title")
+	            })
+	          )
+	        ),
 	        React.createElement(
 	          'div',
 	          null,
@@ -31374,17 +31391,18 @@
 	    event.preventDefault();
 	    // debugger;
 	    ApiUtil.createLocation({
+	      title: this.state.title,
 	      lat: this.state.lat,
 	      lng: this.state.lng,
 	      full_address: this.state.full_address,
 	      description: this.state.description,
 	      occupancy: this.state.occupancy,
 	      images: this.state.images
-	    });
+	    }, this.creationSuccess);
 	  },
 	
-	  creationSuccess: function () {
-	    this.history.push("/");
+	  creationSuccess: function (id) {
+	    this.history.push("/search/" + id);
 	  },
 	
 	  componentDidMount: function () {
@@ -31396,11 +31414,11 @@
 	      zoom: 15
 	    };
 	    this.mapAddress = new google.maps.Map(mapDOMNode, mapOptions);
-	  },
-	
-	  componentWillUnmount: function () {
-	    this.locationListener.remove();
 	  }
+	
+	  // componentWillUnmount: function() {
+	  //   this.locationListener.remove();
+	  // }
 	
 	});
 	
@@ -31641,125 +31659,6 @@
 /* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var React = __webpack_require__(1);
-	var Link = __webpack_require__(159).Link;
-	var History = __webpack_require__(159).History;
-	
-	var NavBar = React.createClass({
-	  displayName: 'NavBar',
-	
-	  mixins: [History],
-	
-	  addMap: function () {
-	    var url = "/search/";
-	    this.history.push({ pathname: url });
-	  },
-	
-	  addLocationForm: function () {
-	    var url = "/locations/new";
-	    this.history.push({ pathname: url });
-	  },
-	
-	  render: function () {
-	
-	    return React.createElement(
-	      'div',
-	      { className: 'nav_bar' },
-	      React.createElement(
-	        'div',
-	        { className: 'nav_bar_sub' },
-	        React.createElement(
-	          'div',
-	          { className: 'nav_bar_link_container' },
-	          React.createElement(
-	            Link,
-	            { to: "/search/",
-	              onClick: this.addMap,
-	              className: 'nav_bar_link' },
-	            'Map',
-	            React.createElement('br', null)
-	          ),
-	          React.createElement(
-	            Link,
-	            { to: "/locations/new",
-	              onClick: this.addLocationForm,
-	              className: 'nav_bar_link' },
-	            'Add Your Location'
-	          )
-	        )
-	      )
-	    );
-	  }
-	
-	});
-	
-	module.exports = NavBar;
-
-/***/ },
-/* 240 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	
-	var History = __webpack_require__(159).History;
-	var ApiActions = __webpack_require__(207);
-	var LocationStore = __webpack_require__(214);
-	var ApiUtil = __webpack_require__(206);
-	
-	var Show = React.createClass({
-	  displayName: 'Show',
-	
-	  getInitialState: function () {
-	    return { location: LocationStore.selectedLocation() };
-	  },
-	
-	  render: function () {
-	    var location = this.state.location;
-	    if (location === undefined) {
-	      return React.createElement(
-	        'div',
-	        null,
-	        'No Location Selected'
-	      );
-	    }
-	    var self = this;
-	    // debugger;
-	    return React.createElement(
-	      'li',
-	      { key: location.id },
-	      'This is the BEAUTIFUL and MARVELOUS show page!',
-	      React.createElement('br', null),
-	      'It is for Location #',
-	      location.id
-	    );
-	  },
-	
-	  componentWillReceiveProps: function (newProps) {
-	    ApiUtil.showLocation(newProps.params.location_id);
-	  },
-	
-	  onChange: function () {
-	    this.setState({ location: LocationStore.selectedLocation() });
-	  },
-	
-	  componentDidMount: function () {
-	    this.locationListener = LocationStore.addListener(this.onChange);
-	    // location = LocationStore.selectedLocation();
-	    ApiUtil.showLocation(this.props.params.location_id);
-	  },
-	
-	  componentWillUnmount: function () {
-	    this.locationListener.remove();
-	  }
-	
-	});
-	
-	module.exports = Show;
-
-/***/ },
-/* 241 */
-/***/ function(module, exports, __webpack_require__) {
-
 	/* global window */
 	
 	'use strict';
@@ -31784,23 +31683,23 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(242);
+	var _classnames = __webpack_require__(240);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _defaults = __webpack_require__(243);
+	var _defaults = __webpack_require__(241);
 	
 	var _defaults2 = _interopRequireDefault(_defaults);
 	
-	var _filterInputAttributes = __webpack_require__(244);
+	var _filterInputAttributes = __webpack_require__(242);
 	
 	var _filterInputAttributes2 = _interopRequireDefault(_filterInputAttributes);
 	
-	var _input = __webpack_require__(245);
+	var _input = __webpack_require__(243);
 	
 	var _input2 = _interopRequireDefault(_input);
 	
-	var _suggestList = __webpack_require__(246);
+	var _suggestList = __webpack_require__(244);
 	
 	var _suggestList2 = _interopRequireDefault(_suggestList);
 	
@@ -32200,7 +32099,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 242 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -32254,7 +32153,7 @@
 
 
 /***/ },
-/* 243 */
+/* 241 */
 /***/ function(module, exports) {
 
 	/**
@@ -32291,7 +32190,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 244 */
+/* 242 */
 /***/ function(module, exports) {
 
 	/**
@@ -32325,7 +32224,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 245 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32352,11 +32251,11 @@
 	
 	// eslint-disable-line no-unused-vars
 	
-	var _classnames = __webpack_require__(242);
+	var _classnames = __webpack_require__(240);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _filterInputAttributes = __webpack_require__(244);
+	var _filterInputAttributes = __webpack_require__(242);
 	
 	var _filterInputAttributes2 = _interopRequireDefault(_filterInputAttributes);
 	
@@ -32476,7 +32375,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 246 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32493,11 +32392,11 @@
 	
 	// eslint-disable-line no-unused-vars
 	
-	var _classnames = __webpack_require__(242);
+	var _classnames = __webpack_require__(240);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _suggestItem = __webpack_require__(247);
+	var _suggestItem = __webpack_require__(245);
 	
 	var _suggestItem2 = _interopRequireDefault(_suggestItem);
 	
@@ -32543,7 +32442,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 247 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32560,7 +32459,7 @@
 	
 	// eslint-disable-line no-unused-vars
 	
-	var _classnames = __webpack_require__(242);
+	var _classnames = __webpack_require__(240);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -32600,6 +32499,125 @@
 	};
 	
 	module.exports = exports['default'];
+
+/***/ },
+/* 246 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var Link = __webpack_require__(159).Link;
+	var History = __webpack_require__(159).History;
+	
+	var NavBar = React.createClass({
+	  displayName: 'NavBar',
+	
+	  mixins: [History],
+	
+	  addMap: function () {
+	    var url = "/search/";
+	    this.history.push({ pathname: url });
+	  },
+	
+	  addLocationForm: function () {
+	    var url = "/locations/new";
+	    this.history.push({ pathname: url });
+	  },
+	
+	  render: function () {
+	
+	    return React.createElement(
+	      'div',
+	      { className: 'nav_bar' },
+	      React.createElement(
+	        'div',
+	        { className: 'nav_bar_sub' },
+	        React.createElement(
+	          'div',
+	          { className: 'nav_bar_link_container' },
+	          React.createElement(
+	            Link,
+	            { to: "/search/",
+	              onClick: this.addMap,
+	              className: 'nav_bar_link' },
+	            'Map',
+	            React.createElement('br', null)
+	          ),
+	          React.createElement(
+	            Link,
+	            { to: "/locations/new",
+	              onClick: this.addLocationForm,
+	              className: 'nav_bar_link' },
+	            'Add Your Location'
+	          )
+	        )
+	      )
+	    );
+	  }
+	
+	});
+	
+	module.exports = NavBar;
+
+/***/ },
+/* 247 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	
+	var History = __webpack_require__(159).History;
+	var ApiActions = __webpack_require__(207);
+	var LocationStore = __webpack_require__(214);
+	var ApiUtil = __webpack_require__(206);
+	
+	var Show = React.createClass({
+	  displayName: 'Show',
+	
+	  getInitialState: function () {
+	    return { location: LocationStore.find() };
+	  },
+	
+	  render: function () {
+	    var location = this.state.location;
+	    if (location === undefined) {
+	      return React.createElement(
+	        'div',
+	        null,
+	        'No Location Selected'
+	      );
+	    }
+	    var self = this;
+	    // debugger;
+	    return React.createElement(
+	      'li',
+	      { key: location.id },
+	      'This is the BEAUTIFUL and MARVELOUS show page!',
+	      React.createElement('br', null),
+	      'It is for Location #',
+	      location.id
+	    );
+	  },
+	
+	  componentWillReceiveProps: function (newProps) {
+	    ApiUtil.showLocation(newProps.params.location_id);
+	  },
+	
+	  onChange: function () {
+	    this.setState({ location: LocationStore.selectedLocation() });
+	  },
+	
+	  componentDidMount: function () {
+	    this.locationListener = LocationStore.addListener(this.onChange);
+	    // location = LocationStore.selectedLocation();
+	    ApiUtil.showLocation(this.props.params.location_id);
+	  },
+	
+	  componentWillUnmount: function () {
+	    this.locationListener.remove();
+	  }
+	
+	});
+	
+	module.exports = Show;
 
 /***/ }
 /******/ ]);
