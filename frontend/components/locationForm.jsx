@@ -159,9 +159,7 @@ var LocationForm = React.createClass({
   },
 
   componentDidMount: function() {
-    this.locationListener = LocationStore.addListener(this.creationSuccess);
     this.geocoder = new google.maps.Geocoder;
-
 
     var mapDOMNode = this.refs.mapAddress;
     var mapOptions = {

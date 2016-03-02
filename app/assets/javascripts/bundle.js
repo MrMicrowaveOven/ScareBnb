@@ -24558,9 +24558,9 @@
 	      LocationStore.__emitChange();
 	      break;
 	    case LocationConstants.NEW_LOCATION_RECEIVED:
-	      LocationStore.setSelectedLocation(payload.location);
+	
 	      // debugger;
-	      LocationStore.__emitChange();
+	
 	      break;
 	  }
 	};
@@ -31388,7 +31388,6 @@
 	  },
 	
 	  componentDidMount: function () {
-	    this.locationListener = LocationStore.addListener(this.creationSuccess);
 	    this.geocoder = new google.maps.Geocoder();
 	
 	    var mapDOMNode = this.refs.mapAddress;

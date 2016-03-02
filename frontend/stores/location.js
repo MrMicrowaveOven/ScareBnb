@@ -47,9 +47,9 @@ LocationStore.__onDispatch = function (payload) {
       LocationStore.__emitChange();
       break;
     case LocationConstants.NEW_LOCATION_RECEIVED:
-      LocationStore.setSelectedLocation(payload.location);
+      
       // debugger;
-      LocationStore.__emitChange();
+
       break;
   }
 };
