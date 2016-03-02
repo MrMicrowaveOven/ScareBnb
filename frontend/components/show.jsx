@@ -7,7 +7,8 @@ var ApiUtil = require('../util/api_util');
 
 var Show = React.createClass({
   getInitialState: function() {
-    return {location: LocationStore.find()};
+    LocationStore.setSelectedLocation(LocationStore.find(this.props.params.location_id));
+    return {location: LocationStore.selectedLocation()};
   },
 
   render: function() {
@@ -20,10 +21,17 @@ var Show = React.createClass({
       }
     var self = this;
     // debugger;
-    return (<li key={location.id}>This is the BEAUTIFUL and MARVELOUS show page!
-    <br/>
-    It is for Location #{location.id}
-    </li>);
+    return (
+        <li key={location.id}>
+          {location.title}
+          <br/><br/>
+          Image """"
+          <br/><br/>
+          Address: {location.full_address}
+          <br/><br/>
+          {location.description}
+      </li>
+    );
   },
 
   componentWillReceiveProps: function (newProps) {

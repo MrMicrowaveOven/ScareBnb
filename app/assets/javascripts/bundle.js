@@ -24529,7 +24529,6 @@
 	};
 	
 	LocationStore.find = function (id) {
-	
 	  return _locations[id];
 	};
 	
@@ -32573,7 +32572,8 @@
 	  displayName: 'Show',
 	
 	  getInitialState: function () {
-	    return { location: LocationStore.find() };
+	    LocationStore.setSelectedLocation(LocationStore.find(this.props.params.location_id));
+	    return { location: LocationStore.selectedLocation() };
 	  },
 	
 	  render: function () {
@@ -32590,10 +32590,17 @@
 	    return React.createElement(
 	      'li',
 	      { key: location.id },
-	      'This is the BEAUTIFUL and MARVELOUS show page!',
+	      location.title,
 	      React.createElement('br', null),
-	      'It is for Location #',
-	      location.id
+	      React.createElement('br', null),
+	      'Image """"',
+	      React.createElement('br', null),
+	      React.createElement('br', null),
+	      'Address: ',
+	      location.full_address,
+	      React.createElement('br', null),
+	      React.createElement('br', null),
+	      location.description
 	    );
 	  },
 	

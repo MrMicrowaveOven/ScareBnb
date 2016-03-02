@@ -17,9 +17,7 @@ LocationStore.all = function () {
 };
 
 LocationStore.find = function(id) {
-
   return _locations[id];
-
 };
 
 var resetLocations = function(locations){

@@ -14,12 +14,13 @@
 #  state        :string
 #  zip_code     :string
 #  full_address :string           not null
+#  title        :string           not null
 #
 
 class Location < ActiveRecord::Base
   validates :description, :lat, :lng, presence: true
-    
 
+  has_many :location_images
 
   def self.in_bounds(bounds)
     # {
