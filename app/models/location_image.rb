@@ -14,5 +14,4 @@ class LocationImage < ActiveRecord::Base
 
   belongs_to :location
 
-
 end

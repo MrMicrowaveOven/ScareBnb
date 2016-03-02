@@ -134,7 +134,11 @@ var LocationForm = React.createClass({
   showImages: function() {
     var images = this.state.images;
     var allImages = images.map(function(image, index) {
-      return <img key={index} src={image.secure_url}/>;
+      var imageStyle = {
+        backgroundImage: 'url(' + image.secure_url + ')'
+      };
+      // return <img key={index} src={image.secure_url}/>;
+      return <div style={imageStyle} />;
     });
     return allImages;
   },

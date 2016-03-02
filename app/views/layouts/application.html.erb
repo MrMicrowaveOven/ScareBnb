@@ -17,7 +17,7 @@
   </head>
   <body>
     <%#AUTH SHIT --------------------------------%>
-    
+
     <% if signed_in? %>
       <%= current_user.email %>
       <%= button_to "Sign Out", session_url, method: :delete %>

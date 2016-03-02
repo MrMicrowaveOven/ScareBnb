@@ -20,7 +20,9 @@ var ApiActions = {
       actionType: LocationConstants.LOCATION_RECEIVED,
       location: location
     });
-  }
+  },
+
+  
 
 };
 

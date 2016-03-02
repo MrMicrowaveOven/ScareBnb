@@ -1,12 +1,14 @@
 class Api::LocationsController < ApplicationController
   def index
-    @locations = Location.in_bounds(params[:bounds])
-    render json: @locations
+    if (params[:bounds])
+      @locations = Location.includes(:location_images).in_bounds(params[:bounds])
+    else
+      @locations = Location.includes(:location_images).all
+    end
   end
 
   def show
-    @location = Location.find(params[:id])
-    render json: @location
+    @location = Location.includes(:location_images).where(id: params[:id]).first
   end
 
   def create

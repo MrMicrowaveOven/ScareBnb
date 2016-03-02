@@ -24,7 +24,7 @@ limage1 = LocationImage.create({
   image_url: "http://foundsf.org/images/d/d2/Sfai-tower-and-roof-0307.jpg"
 })
 
-# limage2 = LocationImage.create({
-#   location_id: 1,
-#   image_url: "http://foundsf.org/images/9/9f/Art1%24the-making-of-a-fresco.jpg"
-# })
+limage2 = LocationImage.create({
+  location_id: 1,
+  image_url: "http://foundsf.org/images/9/9f/Art1%24the-making-of-a-fresco.jpg"
+})

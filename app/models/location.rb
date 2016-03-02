@@ -22,6 +22,7 @@ class Location < ActiveRecord::Base
 
   has_many :location_images
 
+
   def self.in_bounds(bounds)
     # {
     #    "northEast"=> {"lat"=>"37.80971", "lng"=>"-122.39208"},

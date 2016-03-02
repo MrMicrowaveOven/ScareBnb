@@ -25,7 +25,7 @@ var Show = React.createClass({
         <li key={location.id}>
           {location.title}
           <br/><br/>
-          Image """"
+          <img src={location.images[0].image_url}/>
           <br/><br/>
           Address: {location.full_address}
           <br/><br/>

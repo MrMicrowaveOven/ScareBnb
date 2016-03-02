@@ -31371,7 +31371,11 @@
 	  showImages: function () {
 	    var images = this.state.images;
 	    var allImages = images.map(function (image, index) {
-	      return React.createElement('img', { key: index, src: image.secure_url });
+	      var imageStyle = {
+	        backgroundImage: 'url(' + image.secure_url + ')'
+	      };
+	      // return <img key={index} src={image.secure_url}/>;
+	      return React.createElement('div', { style: imageStyle });
 	    });
 	    return allImages;
 	  },
@@ -32593,7 +32597,7 @@
 	      location.title,
 	      React.createElement('br', null),
 	      React.createElement('br', null),
-	      'Image """"',
+	      React.createElement('img', { src: location.images[0].image_url }),
 	      React.createElement('br', null),
 	      React.createElement('br', null),
 	      'Address: ',
