@@ -82,7 +82,8 @@
 	                    'Location BnB'
 	                )
 	            ),
-	            React.createElement(LocationScreen, null)
+	            React.createElement(LocationScreen, null),
+	            React.createElement(LocationForm, null)
 	        );
 	    }
 	});
@@ -24473,7 +24474,7 @@
 	
 	  render: function () {
 	    var self = this;
-	    var locations = self.state.locations.map(function (location) {
+	    var locations = self.props.locations.map(function (location) {
 	      return React.createElement(
 	        'li',
 	        { key: location.id },
@@ -24483,7 +24484,7 @@
 	          location.id
 	        ),
 	        React.createElement(
-	          'a',
+	          'div',
 	          { onClick: self.onClick.bind(self, event, location) },
 	          ' ',
 	          location.description,
@@ -24493,11 +24494,11 @@
 	        )
 	      );
 	    });
-	    debugger;
+	    // debugger;
 	    return React.createElement(
 	      'div',
 	      null,
-	      React.createElement(Show, { show: this.state.show }),
+	      React.createElement(Show, { show: this.props.show }),
 	      React.createElement(
 	        'ul',
 	        { className: 'location_index', id: 'location_list' },
@@ -24508,7 +24509,8 @@
 	
 	  onClick: function (event, location) {
 	    event.preventDefault();
-	    LocationStore.setSelectedLocation(location);
+	    ApiActions.receiveLocation(location);
+	    // LocationStore.selectedLocation;
 	  },
 	
 	  componentDidMount: function () {
@@ -31244,6 +31246,7 @@
 	  mixins: [LinkedStateMixin, History],
 	
 	  getInitialState: function () {
+	    // debugger;
 	    this.defaultSFLocation = new google.maps.LatLng({ lat: 38, lng: -122 });
 	    return {
 	      title: "",
@@ -32543,6 +32546,7 @@
 	  mixins: [History],
 	
 	  addMap: function () {
+	    // debugger;
 	    var url = "/location_screen/";
 	    this.history.push({ pathname: url });
 	  },
@@ -32550,6 +32554,7 @@
 	  addLocationForm: function () {
 	    var url = "/locations/new";
 	    this.history.push({ pathname: url });
+	    // debugger;
 	  },
 	
 	  render: function () {
@@ -32565,11 +32570,10 @@
 	          { className: 'nav_bar_link_container' },
 	          React.createElement(
 	            Link,
-	            { to: "/location_screen/",
-	              onClick: this.addMap,
-	              className: 'nav_bar_link' },
-	            'Scare Search!',
-	            React.createElement('br', null)
+	            { to: "/locations/new",
+	              onClick: this.addLocationForm,
+	              className: 'new_location_link' },
+	            'Add Your Location'
 	          ),
 	          React.createElement(
 	            Link,
@@ -32614,7 +32618,7 @@
 	  // },
 	
 	  render: function () {
-	    var location = this.state.location;
+	    var location = this.props.show;
 	    if (location === undefined) {
 	      return React.createElement(
 	        'div',
@@ -32623,7 +32627,7 @@
 	      );
 	    }
 	    var self = this;
-	    if (this.state.show) {
+	    if (this.props.show) {
 	      return React.createElement(
 	        'div',
 	        { className: 'show_location' },
@@ -32654,10 +32658,10 @@
 	
 	  showImagesIfAny: function () {
 	    // debugger;
-	    if (this.state.show.images.length === 0) {
+	    if (this.props.show.images.length === 0) {
 	      return "No images";
 	    }
-	    var pics = this.state.location.images.map(function (image, index) {
+	    var pics = this.props.show.images.map(function (image, index) {
 	      return React.createElement('img', { src: image.image_url, key: index });
 	    });
 	    return pics;
@@ -32697,7 +32701,7 @@
 	  displayName: 'LocationScreen',
 	
 	  getInitialState: function () {
-	    return { locations: LocationStore.all() };
+	    return { locations: LocationStore.all(), show: LocationStore.selectedLocation() };
 	  },
 	
 	  componentDidMount: function () {
@@ -32706,7 +32710,7 @@
 	  },
 	
 	  onChange: function () {
-	    this.setState({ locations: LocationStore.all() });
+	    this.setState({ locations: LocationStore.all(), show: LocationStore.selectedLocation() });
 	  },
 	
 	  componentWillUnmount: function () {
@@ -32718,7 +32722,7 @@
 	      'div',
 	      { className: 'location_screen' },
 	      React.createElement(Map, { locations: this.state.locations }),
-	      React.createElement(Index, { locations: this.state.locations, show: LocationStore.selectedLocation() })
+	      React.createElement(Index, { locations: this.state.locations, show: this.state.show })
 	    );
 	  }
 	});

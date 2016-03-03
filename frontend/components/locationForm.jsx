@@ -15,6 +15,7 @@ var LocationForm = React.createClass({
   mixins: [LinkedStateMixin, History],
 
   getInitialState: function() {
+    // debugger;
     this.defaultSFLocation = new google.maps.LatLng({lat: 38, lng: -122});
     return {
       title: "",

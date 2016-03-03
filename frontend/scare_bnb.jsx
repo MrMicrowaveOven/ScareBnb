@@ -23,6 +23,7 @@ var App = React.createClass({
             <div><NavBar/></div>
             <header><h1>Location BnB</h1></header>
             <LocationScreen />
+            <LocationForm />
           </div>
       );
     }

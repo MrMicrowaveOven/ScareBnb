@@ -13,17 +13,17 @@ var Index = React.createClass({
 
   render: function() {
     var self = this;
-    var locations = self.state.locations.map(function(location) {
+    var locations = self.props.locations.map(function(location) {
       return (
       <li key={location.id}>
         <div>{location.id}</div>
-        <a onClick={self.onClick.bind(self, event, location)}> {location.description} Room for {location.occupancy} people. </a>
+        <div onClick={self.onClick.bind(self, event, location)}> {location.description} Room for {location.occupancy} people. </div>
       </li>);
     });
-    debugger;
+    // debugger;
     return(
       <div>
-        <Show show={this.state.show}/>
+        <Show show={this.props.show}/>
         <ul className="location_index" id="location_list">{locations}</ul>
       </div>
     );
@@ -31,7 +31,8 @@ var Index = React.createClass({
 
   onClick: function(event, location) {
     event.preventDefault();
-    LocationStore.setSelectedLocation(location);
+    ApiActions.receiveLocation(location);
+    // LocationStore.selectedLocation;
   },
 
 

@@ -19,7 +19,7 @@ var Show = React.createClass({
   // },
 
   render: function() {
-    var location = this.state.location;
+    var location = this.props.show;
     if (location === undefined)
       {
         return(
@@ -27,7 +27,7 @@ var Show = React.createClass({
         );
       }
     var self = this;
-    if (this.state.show){
+    if (this.props.show){
       return (
         <div className="show_location">
           <div key={location.id}>
@@ -48,10 +48,10 @@ var Show = React.createClass({
 
   showImagesIfAny: function() {
     // debugger;
-    if (this.state.show.images.length === 0) {
+    if (this.props.show.images.length === 0) {
       return("No images");
     }
-    var pics = this.state.location.images.map(function(image, index) {
+    var pics = this.props.show.images.map(function(image, index) {
       return (<img src={image.image_url} key={index}/>);
     });
     return pics;

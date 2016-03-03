@@ -8,7 +8,7 @@ var LocationStore = require('../stores/location');
 
 var LocationScreen = React.createClass({
   getInitialState: function () {
-    return {locations: LocationStore.all()};
+    return {locations: LocationStore.all(), show: LocationStore.selectedLocation()};
   },
 
   componentDidMount: function () {
@@ -17,7 +17,7 @@ var LocationScreen = React.createClass({
   },
 
   onChange: function () {
-    this.setState({locations: LocationStore.all()});
+    this.setState({locations: LocationStore.all(), show: LocationStore.selectedLocation()});
   },
 
   componentWillUnmount: function () {
@@ -28,7 +28,7 @@ var LocationScreen = React.createClass({
     return(
       <div className="location_screen">
         <Map locations={this.state.locations}/>
-        <Index locations={this.state.locations} show={LocationStore.selectedLocation()}/>
+        <Index locations={this.state.locations} show={this.state.show}/>
       </div>
     );
   }
