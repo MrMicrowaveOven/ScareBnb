@@ -167,12 +167,11 @@ var LocationForm = React.createClass({
   },
 
   creationSuccess: function(id) {
-
+    ApiUtil.showLocation(id);
     this.history.push("location_screen");
   },
 
   componentDidMount: function() {
-    // console.log("Mountedform");
     this.geocoder = new google.maps.Geocoder;
 
     var mapDOMNode = this.refs.mapAddress;
@@ -185,10 +184,6 @@ var LocationForm = React.createClass({
       this.mapAddress = new google.maps.Map(mapDOMNode, mapOptions);
     }
   }
-
-  // componentWillUnmount: function() {
-  //   this.locationListener.remove();
-  // }
 
 });
 

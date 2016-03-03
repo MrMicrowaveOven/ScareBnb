@@ -17,6 +17,10 @@ var Map = React.createClass({
     //locations is the locations in the store
     //markers are the markers on the map.
     //We'll set state with
+
+    //If a location was just created, we want it centered on the map.
+
+
     return {locations: LocationStore.all(), markers: this.markerIndex};
   },
 
@@ -136,8 +140,12 @@ var Map = React.createClass({
   componentDidMount: function(){
     this.locationListener = LocationStore.addListener(this.onChange);
     var mapDOMNode = this.refs.map;
+    var defaultCenter = {lat: 37.7758, lng: -122.435};
+    // debugger;
+    // if (LocationStore.selectedLocation !== null)
+    //   {defaultCenter = LocationStore.selectedLocation.location;}
     var mapOptions = {
-      center: {lat: 37.7758, lng: -122.435},
+      center: defaultCenter,
       zoom: 13
     };
     // debugger;
