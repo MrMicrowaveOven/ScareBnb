@@ -155,7 +155,6 @@ var LocationForm = React.createClass({
 
   submitLocation: function(event) {
     event.preventDefault();
-    // debugger;
     ApiUtil.createLocation({
       title: this.state.title,
       lat: this.state.lat,
@@ -168,7 +167,8 @@ var LocationForm = React.createClass({
   },
 
   creationSuccess: function(id) {
-    this.history.push("/search/" + id);
+
+    this.history.push("location_screen");
   },
 
   componentDidMount: function() {

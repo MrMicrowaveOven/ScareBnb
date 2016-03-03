@@ -24505,7 +24505,7 @@
 	    return React.createElement(
 	      'div',
 	      null,
-	      React.createElement(Show, { show: this.props.show }),
+	      React.createElement(Show, { show: this.state.show }),
 	      React.createElement(
 	        'ul',
 	        { className: 'location_index', id: 'location_list' },
@@ -31520,7 +31520,6 @@
 	
 	  submitLocation: function (event) {
 	    event.preventDefault();
-	    // debugger;
 	    ApiUtil.createLocation({
 	      title: this.state.title,
 	      lat: this.state.lat,
@@ -31533,7 +31532,8 @@
 	  },
 	
 	  creationSuccess: function (id) {
-	    this.history.push("/search/" + id);
+	
+	    this.history.push("location_screen");
 	  },
 	
 	  componentDidMount: function () {

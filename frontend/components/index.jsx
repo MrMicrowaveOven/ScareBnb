@@ -23,7 +23,7 @@ var Index = React.createClass({
     // debugger;
     return(
       <div>
-        <Show show={this.props.show}/>
+        <Show show={this.state.show}/>
         <ul className="location_index" id="location_list">{locations}</ul>
       </div>
     );
