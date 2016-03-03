@@ -8,7 +8,11 @@ class Api::LocationsController < ApplicationController
   end
 
   def show
-    @location = Location.includes(:location_images).where(id: params[:id]).first
+    if (params[:id])
+      @location = Location.includes(:location_images).where(id: params[:id]).first
+    else
+      @location = nil
+    end
   end
 
   def create

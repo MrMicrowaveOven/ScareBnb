@@ -13,6 +13,8 @@ var Search = require('./components/search');
 var LocationForm = require('./components/locationForm');
 var NavBar = require('./components/nav_bar');
 var Show = require('./components/show');
+var LocationScreen = require('./components/location_screen');
+
 
 var App = React.createClass({
     render: function(){
@@ -20,19 +22,22 @@ var App = React.createClass({
           <div>
             <div><NavBar/></div>
             <header><h1>Location BnB</h1></header>
-            {this.props.children}
+            <LocationScreen />
           </div>
       );
     }
 });
 
+// {this.props.children}
 var routes = (
   <Route path="/" component={App}>
-    <IndexRedirect to="search"/>
-    <Route path="search" component={Search}>
-      <Route path="/search/:location_id" component={Show}/>
-    </Route>
-    <Route path="locations/new" component={LocationForm}/>
+      <IndexRedirect to="location_screen"/>
+      <Route path="location_screen" component={LocationScreen}>
+          <Route path="search" component={Search}>
+              <Route path=":location_id" component={Show}/>
+          </Route>
+      </Route>
+      <Route path="locations/new" component={LocationForm}/>
   </Route>
 );
 

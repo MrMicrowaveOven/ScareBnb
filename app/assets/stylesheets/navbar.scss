@@ -1,5 +1,5 @@
 .nav_bar {
-  background: linear-gradient(rgba(102, 102, 102, 0.98), rgba(52, 52, 52, 0.98));
+  // background: linear-gradient(rgba(102, 102, 102, 0.98), rgba(52, 52, 52, 0.98));
   width: 100%;
   position: fixed;
   top: 10px;
@@ -19,7 +19,7 @@
 }
 
 .nav_bar_link_container {
-  float: right;
+  float: left;
   height: 36px;
 }
 

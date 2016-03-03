@@ -13,16 +13,15 @@
 
 
 
-
  *= require_tree .
  *= require_self
  */
+.
 
+.authButtons {
+  float: right;
+}
 
- .map {
-   height: 300px;
-   width: 400px;
- }
 
  .mapAddress {
    margin-left: auto;
@@ -38,6 +37,38 @@
  .locationdescription {
    width: 400px;
    height: 200px;
+ }
+
+ .new_location_link {
+   font-size: 20px;
+   display: flex;
+   align-items: flex-end;
+ }
+
+ .location_screen {
+    display: flex;
+    /*flex-direction: row;
+    align-items: stretch;*/
+ }
+
+ .search_container {
+   flex: 1
+ }
+
+ .map {
+   height: 600px;
+   width: 500px;
+   /*display: flex;
+   justify-content: flex-start;
+   align-content: flex-start;*/
+ }
+
+ .location_index {
+
+ }
+
+ .show_location {
+   flex: 1;
  }
 
 /*GEOSuggest Styling: DO NOT TOUCH-----------------------------------*/

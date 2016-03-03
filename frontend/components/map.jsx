@@ -17,7 +17,7 @@ var Map = React.createClass({
     //locations is the locations in the store
     //markers are the markers on the map.
     //We'll set state with
-    return {locations: LocationStore.all(), markers: this.markerIndex};
+    return {locations: this.props.locations, markers: this.markerIndex};
   },
 
   render: function() {
