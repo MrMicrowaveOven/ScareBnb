@@ -24505,7 +24505,7 @@
 	    return React.createElement(
 	      'div',
 	      null,
-	      React.createElement(Show, { show: this.state.show }),
+	      React.createElement(Show, null),
 	      React.createElement(
 	        'ul',
 	        { className: 'location_index', id: 'location_list' },
@@ -24517,7 +24517,6 @@
 	  onClick: function (event, location) {
 	    event.preventDefault();
 	    ApiActions.receiveLocation(location);
-	    // LocationStore.selectedLocation;
 	  },
 	
 	  onChange: function () {
@@ -32789,7 +32788,7 @@
 	  },
 	
 	  switchPage: function (page) {
-	    debugger;
+	    // debugger;
 	    this.setState({ page: page });
 	  },
 	
@@ -32802,7 +32801,7 @@
 	    );
 	  },
 	  componentDidMount: function () {
-	    debugger;
+	    // debugger;
 	  }
 	
 	});

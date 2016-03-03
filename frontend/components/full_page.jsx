@@ -12,7 +12,7 @@ var FullPage = React.createClass({
   },
 
   switchPage: function(page) {
-    debugger;
+    // debugger;
     this.setState({page: page});
   },
 
@@ -25,7 +25,7 @@ var FullPage = React.createClass({
     );
   },
   componentDidMount: function() {
-    debugger;
+    // debugger;
   }
 
 });

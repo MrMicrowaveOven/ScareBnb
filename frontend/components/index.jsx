@@ -23,7 +23,7 @@ var Index = React.createClass({
     // debugger;
     return(
       <div>
-        <Show show={this.state.show}/>
+        <Show/>
         <ul className="location_index" id="location_list">{locations}</ul>
       </div>
     );
@@ -32,11 +32,10 @@ var Index = React.createClass({
   onClick: function(event, location) {
     event.preventDefault();
     ApiActions.receiveLocation(location);
-    // LocationStore.selectedLocation;
   },
 
   onChange: function() {
-    this.setState({locations: LocationStore.all(), show: LocationStore.selectedLocation()})
+    this.setState({locations: LocationStore.all(), show: LocationStore.selectedLocation()});
   },
 
   componentDidMount: function() {
