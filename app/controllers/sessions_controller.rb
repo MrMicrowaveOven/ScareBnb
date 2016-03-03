@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
 
     if user
       sign_in(user)
-      redirect_to "/"
+      redirect_to root_url
     else
       flash.now[:errors] = ["Invalid email or password"]
       render :new
@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
 
   def destroy
     sign_out
-    redirect_to new_user_url
+    render :new
   end
 
   private

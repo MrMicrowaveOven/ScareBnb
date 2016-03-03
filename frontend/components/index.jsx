@@ -2,18 +2,18 @@ var React = require('react');
 var Show = require('./show');
 var History = require('react-router').History;
 var ApiActions = require('../actions/api_actions');
-var LocationStore = require('../stores/location');
 var ApiUtil = require('../util/api_util');
 var Link = require('react-router').Link;
+var LocationStore = require('../stores/location');
 
 var Index = React.createClass({
   getInitialState: function() {
-    return {locations: this.props.locations, show: this.props.show};
+    return {locations: LocationStore.all(), show: LocationStore.selectedLocation()};
   },
 
   render: function() {
     var self = this;
-    var locations = self.props.locations.map(function(location) {
+    var locations = this.state.locations.map(function(location) {
       return (
       <li key={location.id}>
         <div>{location.id}</div>
@@ -35,9 +35,12 @@ var Index = React.createClass({
     // LocationStore.selectedLocation;
   },
 
+  onChange: function() {
+    this.setState({locations: LocationStore.all(), show: LocationStore.selectedLocation()})
+  },
 
   componentDidMount: function() {
-    // this.locationListener = LocationStore.addListener(this.onChange);
+    this.locationListener = LocationStore.addListener(this.onChange);
   },
 
   componentWillUnmount: function() {

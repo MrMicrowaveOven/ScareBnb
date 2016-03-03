@@ -3,12 +3,9 @@ var ReactDOM = require('react-dom');
 var LinkedStateMixin = require('react-addons-linked-state-mixin');
 
 var History = require('react-router').History;
-var ApiActions = require('../actions/api_actions');
-var LocationStore = require('../stores/location');
 var ApiUtil = require('../util/api_util');
 
 var Geosuggest = require('react-geosuggest');
-
 
 var LocationForm = React.createClass({
 
@@ -175,6 +172,7 @@ var LocationForm = React.createClass({
   },
 
   componentDidMount: function() {
+    // console.log("Mountedform");
     this.geocoder = new google.maps.Geocoder;
 
     var mapDOMNode = this.refs.mapAddress;
@@ -182,7 +180,10 @@ var LocationForm = React.createClass({
       center: {lat: 37.7758, lng: -122.435},
       zoom: 15
     };
-    this.mapAddress = new google.maps.Map(mapDOMNode, mapOptions);
+    // debugger;
+    if (mapDOMNode !== undefined){
+      this.mapAddress = new google.maps.Map(mapDOMNode, mapOptions);
+    }
   }
 
   // componentWillUnmount: function() {

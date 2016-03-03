@@ -7,23 +7,24 @@ var Route = ReactRouter.Route;
 var IndexRoute = ReactRouter.IndexRoute;
 var IndexRedirect = ReactRouter.IndexRedirect;
 var ApiUtil = require('./util/api_util');
-var Index = require('./components/index');
-var LocationStore = require('./stores/location');
 var Search = require('./components/search');
 var LocationForm = require('./components/locationForm');
 var NavBar = require('./components/nav_bar');
 var Show = require('./components/show');
 var LocationScreen = require('./components/location_screen');
+var FullPage = require('./components/full_page');
 
+
+window.ApiUtil = ApiUtil;
 
 var App = React.createClass({
+
     render: function(){
       return (
           <div>
             <div><NavBar/></div>
             <header><h1>Location BnB</h1></header>
-            <LocationScreen />
-            <LocationForm />
+            {this.props.children}
           </div>
       );
     }
@@ -32,13 +33,9 @@ var App = React.createClass({
 // {this.props.children}
 var routes = (
   <Route path="/" component={App}>
-      <IndexRedirect to="location_screen"/>
-      <Route path="location_screen" component={LocationScreen}>
-          <Route path="search" component={Search}>
-              <Route path=":location_id" component={Show}/>
-          </Route>
-      </Route>
-      <Route path="locations/new" component={LocationForm}/>
+          <IndexRedirect to="location_screen"/>
+          <Route path="location_screen" component={LocationScreen}/>
+          <Route path="locations/new" component={LocationForm}/>
   </Route>
 );
 

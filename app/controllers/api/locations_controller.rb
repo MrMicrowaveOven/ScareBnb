@@ -16,13 +16,13 @@ class Api::LocationsController < ApplicationController
   end
 
   def create
-    # debugger;
+
     @location = Location.new(location_params)
     if @location.save
-      # debugger;
+
       render json: @location
     else
-      # debugger;
+      
       render json: {error: "Invalid parameters"}
     end
   end

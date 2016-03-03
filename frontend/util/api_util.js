@@ -6,9 +6,9 @@ var ApiUtil = {
     $.ajax({
       url: "/api/locations",
       method: 'GET',
-      // dataType: "json",
       data: {"bounds": bounds},
       success: function(locationObjects){
+
         ApiActions.receiveAll(locationObjects);
       }
     });
@@ -37,7 +37,21 @@ var ApiUtil = {
 
       }
     });
+  },
+
+  signOut: function() {
+    $.ajax({
+      url: "/session",
+      method: "DELETE",
+      success: function() {
+        window.location = "/session/new"
+      },
+      failure: function(errorMessage){
+      }
+
+    })
   }
+
 };
 
 // window.ApiUtil = ApiUtil;

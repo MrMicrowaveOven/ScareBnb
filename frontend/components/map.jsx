@@ -17,7 +17,7 @@ var Map = React.createClass({
     //locations is the locations in the store
     //markers are the markers on the map.
     //We'll set state with
-    return {locations: this.props.locations, markers: this.markerIndex};
+    return {locations: LocationStore.all(), markers: this.markerIndex};
   },
 
   render: function() {
@@ -39,11 +39,14 @@ var Map = React.createClass({
   refreshBandM: function(){
     this.setState({locations: LocationStore.all(),
       markers: this.allMarkersInIndex()});
+
+
   },
 
   //Adds a marker to the map
   addMarker: function(location) {
     var self = this;
+    var image = "Hello";
     var marker = new google.maps.Marker(
       {
         position: {lat: location.lat, lng: location.lng},
@@ -137,7 +140,7 @@ var Map = React.createClass({
       center: {lat: 37.7758, lng: -122.435},
       zoom: 13
     };
-
+    // debugger;
     this.map = new google.maps.Map(mapDOMNode, mapOptions);
     this.map.addListener('idle', this.onIdle);
   },

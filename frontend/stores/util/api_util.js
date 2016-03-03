@@ -15,6 +15,7 @@ var ApiUtil = {
   },
 
   showLocation: function(id) {
+
     $.ajax({
       url: "/api/locations/" + id,
       method: 'GET',

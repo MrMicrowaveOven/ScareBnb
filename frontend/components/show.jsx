@@ -1,15 +1,12 @@
 var React = require('react');
 
 var History = require('react-router').History;
-var ApiActions = require('../actions/api_actions');
 var LocationStore = require('../stores/location');
-var ApiUtil = require('../util/api_util');
-
 var Show = React.createClass({
   getInitialState: function() {
     // debugger;
     // LocationStore.setSelectedLocation(LocationStore.find(this.getInitialLocation()));
-    return {show: this.props.show};
+    return {show: LocationStore.selectedLocation()};
   },
 
   // getInitialLocation: function() {
@@ -19,39 +16,36 @@ var Show = React.createClass({
   // },
 
   render: function() {
-    var location = this.props.show;
-    if (location === undefined)
+
+    var location = this.state.show;
+    if (location === null)
       {
         return(
           <div>No Location Selected</div>
         );
       }
     var self = this;
-    if (this.props.show){
-      return (
-        <div className="show_location">
-          <div key={location.id}>
-            <h2>{location.title}</h2>
-            <br/><br/>
-            {self.showImagesIfAny()}
-            <br/><br/>
-            Address: {location.full_address}
-            <br/><br/>
-            {location.description}
-          </div>
+    return (
+      <div className="show_location">
+        <div key={location.id}>
+          <h2>{location.title}</h2>
+          <br/><br/>
+          {self.showImagesIfAny()}
+          <br/><br/>
+          Address: {location.full_address}
+          <br/><br/>
+          {location.description}
         </div>
-      );
-    } else {
-      return (<div/> );
-    }
+      </div>
+    );
   },
 
   showImagesIfAny: function() {
     // debugger;
-    if (this.props.show.images.length === 0) {
+    if (this.state.show.images.length === 0) {
       return("No images");
     }
-    var pics = this.props.show.images.map(function(image, index) {
+    var pics = this.state.show.images.map(function(image, index) {
       return (<img src={image.image_url} key={index}/>);
     });
     return pics;
@@ -63,11 +57,16 @@ var Show = React.createClass({
   // },
 
 
-  // componentDidMount: function() {
-  //   this.locationListener = LocationStore.addListener(this.onChange);
-    // location = LocationStore.selectedLocation();
-    // ApiUtil.showLocation(this.state.location);
-  // },
+  componentDidMount: function() {
+    this.locationListener = LocationStore.addListener(this.onChange);
+    // var currentLocation = LocationStore.selectedLocation();
+
+    // ApiUtil.showLocation(this.state.show);
+  },
+
+  onChange: function() {
+    this.setState({show: LocationStore.selectedLocation()});
+  },
 
   componentWillUnmount: function() {
     this.locationListener.remove();

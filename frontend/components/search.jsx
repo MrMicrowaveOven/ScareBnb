@@ -1,9 +1,6 @@
 var React = require('react');
 
 var History = require('react-router').History;
-var ApiActions = require('../actions/api_actions');
-var LocationStore = require('../stores/location');
-var ApiUtil = require('../util/api_util');
 var Map = require('./map');
 var Index = require('./index');
 var Show = require('./show');
@@ -15,7 +12,6 @@ var Search = React.createClass({
       <div className="search_container">
         <Map/>
         <Index/>
-        <Show/>
       </div>
     );
   }

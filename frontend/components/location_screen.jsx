@@ -1,14 +1,17 @@
 var React = require('react');
 var ApiUtil = require('../util/api_util');
-var Show = require('./show');
 var Map = require('./map');
 var Index = require('./index');
 var LocationStore = require('../stores/location');
+var Search = require('./search');
 
 
 var LocationScreen = React.createClass({
   getInitialState: function () {
-    return {locations: LocationStore.all(), show: LocationStore.selectedLocation()};
+    return {
+      locations: LocationStore.all(),
+      show: LocationStore.selectedLocation()
+    };
   },
 
   componentDidMount: function () {
@@ -17,7 +20,10 @@ var LocationScreen = React.createClass({
   },
 
   onChange: function () {
-    this.setState({locations: LocationStore.all(), show: LocationStore.selectedLocation()});
+    this.setState({
+      locations: LocationStore.all(),
+      show: LocationStore.selectedLocation()
+    });
   },
 
   componentWillUnmount: function () {
@@ -25,10 +31,10 @@ var LocationScreen = React.createClass({
   },
 
   render: function() {
+
     return(
       <div className="location_screen">
-        <Map locations={this.state.locations}/>
-        <Index locations={this.state.locations} show={this.state.show}/>
+        <Search/>
       </div>
     );
   }

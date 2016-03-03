@@ -34,7 +34,7 @@ LocationStore.setSelectedLocation = function(location){
 
 LocationStore.selectedLocation = function(){
   if(selLocation !== undefined) {return selLocation;}
-  else if (_locations !== {}) { return LocationStore.find(1); }
+  else if (Object.keys(_locations).length > 0) { return LocationStore.find(1); }
   else { return null; }
 };
 
@@ -42,7 +42,6 @@ LocationStore.__onDispatch = function (payload) {
   switch(payload.actionType) {
     case LocationConstants.LOCATIONS_RECEIVED:
       var result = resetLocations(payload.locations);
-      // debugger;
       LocationStore.__emitChange();
       break;
     case LocationConstants.LOCATION_RECEIVED:
