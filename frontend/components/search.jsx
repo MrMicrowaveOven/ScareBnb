@@ -9,9 +9,12 @@ var Show = require('./show');
 var Search = React.createClass({
   render: function() {
     return(
-      <div className="search_container">
-        <Map/>
-        <Index/>
+      <div className="loc_container">
+        <div className="search_container">
+          <Map/>
+          <Index/>
+        </div>
+        <Show className="show_bit"/>
       </div>
     );
   }

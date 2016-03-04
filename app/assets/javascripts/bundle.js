@@ -53,12 +53,12 @@
 	var IndexRoute = ReactRouter.IndexRoute;
 	var IndexRedirect = ReactRouter.IndexRedirect;
 	var ApiUtil = __webpack_require__(206);
-	var Search = __webpack_require__(233);
+	var Search = __webpack_require__(213);
 	var LocationForm = __webpack_require__(235);
 	var NavBar = __webpack_require__(247);
-	var Show = __webpack_require__(214);
-	var LocationScreen = __webpack_require__(248);
-	var FullPage = __webpack_require__(249);
+	var Show = __webpack_require__(234);
+	var LocationScreen = __webpack_require__(249);
+	var FullPage = __webpack_require__(248);
 	
 	window.ApiUtil = ApiUtil;
 	
@@ -24465,75 +24465,32 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var Show = __webpack_require__(214);
+	
 	var History = __webpack_require__(159).History;
-	var ApiActions = __webpack_require__(207);
-	var ApiUtil = __webpack_require__(206);
-	var Link = __webpack_require__(159).Link;
-	var LocationStore = __webpack_require__(215);
+	var Map = __webpack_require__(214);
+	var Index = __webpack_require__(233);
+	var Show = __webpack_require__(234);
 	
-	var Index = React.createClass({
-	  displayName: 'Index',
-	
-	  getInitialState: function () {
-	    return { locations: LocationStore.all(), show: LocationStore.selectedLocation() };
-	  },
+	// {this.props.children}
+	var Search = React.createClass({
+	  displayName: 'Search',
 	
 	  render: function () {
-	    var self = this;
-	    var locations = this.state.locations.map(function (location) {
-	      return React.createElement(
-	        'li',
-	        { key: location.id },
-	        React.createElement(
-	          'div',
-	          null,
-	          location.id
-	        ),
-	        React.createElement(
-	          'div',
-	          { onClick: self.onClick.bind(self, event, location) },
-	          ' ',
-	          location.description,
-	          ' Room for ',
-	          location.occupancy,
-	          ' people. '
-	        )
-	      );
-	    });
-	    // debugger;
 	    return React.createElement(
 	      'div',
-	      null,
-	      React.createElement(Show, null),
+	      { className: 'loc_container' },
 	      React.createElement(
-	        'ul',
-	        { className: 'location_index', id: 'location_list' },
-	        locations
-	      )
+	        'div',
+	        { className: 'search_container' },
+	        React.createElement(Map, null),
+	        React.createElement(Index, null)
+	      ),
+	      React.createElement(Show, { className: 'show_bit' })
 	    );
-	  },
-	
-	  onClick: function (event, location) {
-	    event.preventDefault();
-	    ApiActions.receiveLocation(location);
-	  },
-	
-	  onChange: function () {
-	    this.setState({ locations: LocationStore.all(), show: LocationStore.selectedLocation() });
-	  },
-	
-	  componentDidMount: function () {
-	    this.locationListener = LocationStore.addListener(this.onChange);
-	  },
-	
-	  componentWillUnmount: function () {
-	    this.locationListener.remove();
 	  }
-	
 	});
 	
-	module.exports = Index;
+	module.exports = Search;
 
 /***/ },
 /* 214 */
@@ -24542,83 +24499,160 @@
 	var React = __webpack_require__(1);
 	
 	var History = __webpack_require__(159).History;
+	var ApiActions = __webpack_require__(207);
 	var LocationStore = __webpack_require__(215);
-	var Show = React.createClass({
-	  displayName: 'Show',
+	var ApiUtil = __webpack_require__(206);
+	var MapStyle = __webpack_require__(250);
+	
+	var Map = React.createClass({
+	  displayName: 'Map',
 	
 	  getInitialState: function () {
-	    // debugger;
-	    // LocationStore.setSelectedLocation(LocationStore.find(this.getInitialLocation()));
-	    return { show: LocationStore.selectedLocation() };
-	  },
+	    //markerIndex is a means of indexing all markers for locations in the store.
+	    //locationId = markerIndex key
+	    //It also keeps track of markers that were on the screen before onChange.
+	    this.markerIndex = {};
 	
-	  // getInitialLocation: function() {
-	  //   // debugger;
-	  //   if (this.props.params === undefined) {return 0;}
-	  //   return (this.props.params.location_id)
-	  // },
+	    //Used to update the markerIndex
+	    this.newMarkerIndex = {};
+	    //locations is the locations in the store
+	    //markers are the markers on the map.
+	    //We'll set state with
+	
+	    //If a location was just created, we want it centered on the map.
+	
+	    return { locations: LocationStore.all(), markers: this.markerIndex };
+	  },
 	
 	  render: function () {
+	    return React.createElement('div', { className: 'map', ref: 'map' });
+	  },
 	
-	    var location = this.state.show;
-	    if (location === null) {
-	      return React.createElement(
-	        'div',
-	        null,
-	        'No Location Selected'
-	      );
-	    }
+	  //Called when the Store changes
+	  onChange: function () {
 	    var self = this;
-	    return React.createElement(
-	      'div',
-	      { className: 'show_location' },
-	      React.createElement(
-	        'div',
-	        { key: location.id },
-	        React.createElement(
-	          'h2',
-	          null,
-	          location.title
-	        ),
-	        React.createElement('br', null),
-	        React.createElement('br', null),
-	        self.showImagesIfAny(),
-	        React.createElement('br', null),
-	        React.createElement('br', null),
-	        'Address: ',
-	        location.full_address,
-	        React.createElement('br', null),
-	        React.createElement('br', null),
-	        location.description
-	      )
-	    );
+	
+	    self.markerUpdate();
+	    Map.theMap = self;
+	    this.refreshBandM();
 	  },
 	
-	  showImagesIfAny: function () {
-	    // debugger;
-	    if (this.state.show.images.length === 0) {
-	      return "No images";
-	    }
-	    var pics = this.state.show.images.map(function (image, index) {
-	      return React.createElement('img', { src: image.image_url, key: index });
+	  //reRender
+	  refreshBandM: function () {
+	    this.setState({ locations: LocationStore.all(),
+	      markers: this.allMarkersInIndex() });
+	  },
+	
+	  //Adds a marker to the map
+	  addMarker: function (location) {
+	    var self = this;
+	    var image = "https://49.media.tumblr.com/cf07c4116283d8b2a71326ed4fc4cb2c/tumblr_o3hr8mRRGS1v497yzo1_75sq.gif";
+	    var marker = new google.maps.Marker({
+	      position: { lat: location.lat, lng: location.lng },
+	      map: self.map,
+	      title: location.title,
+	      icon: image,
+	      opacity: .5
 	    });
-	    return pics;
+	    // debugger;
+	    self.newMarkerIndex[location.id] = marker;
+	    return marker;
 	  },
 	
-	  // componentWillReceiveProps: function (newProps) {
-	  //   // debugger;
-	  //   ApiUtil.showLocation(this.state.location);
-	  // },
+	  //Removes marker from map
+	  removeMarker: function (marker) {
+	    var locationId = this.findLocationIdByMarker(marker);
+	    delete this.markerIndex[locationId];
+	    marker.setMap(null);
+	    marker = null;
+	  },
+	
+	  markerUpdate: function () {
+	    var self = this;
+	
+	    //If there's a location in the store that isn't in the markerIndex,
+	    //create a marker for it.
+	    LocationStore.all().forEach(function (location) {
+	      if (self.markerIndex[location.id] === undefined) {
+	        self.newMarkerIndex[location.id] = self.addMarker(location);
+	      } else {
+	        self.newMarkerIndex[location.id] = self.markerIndex[location.id];
+	        delete self.markerIndex[location.id];
+	      }
+	    });
+	
+	    //
+	    self.removeOldMarkers();
+	
+	    self.markerIndex = self.newMarkerIndex;
+	    self.newMarkerIndex = {};
+	
+	    this.refreshBandM();
+	  },
+	
+	  removeOldMarkers: function () {
+	    var self = this;
+	    Object.keys(self.markerIndex).forEach(function (markerId) {
+	      self.removeMarker(self.markerIndex[markerId]);
+	    });
+	  },
+	
+	  allMarkersInIndex: function () {
+	    var arr = [];
+	    for (var marker in this.markerIndex) {
+	      arr.push(this.markerIndex[marker]);
+	    }
+	    return arr;
+	  },
+	
+	  findLocationIdByMarker: function (marker) {
+	    var markerIndex = this.markerIndex;
+	    // debugger;
+	    for (var locationId in markerIndex) {
+	      if (markerIndex.hasOwnProperty(locationId)) {
+	        if (markerIndex[locationId] === marker) {
+	          return locationId;
+	        }
+	      }
+	    }
+	    return -1;
+	  },
+	
+	  onIdle: function () {
+	    var boundaries = this.map.getBounds();
+	    var northEast = boundaries.getNorthEast();
+	    var southWest = boundaries.getSouthWest();
+	    this.bounds = { northEast: {
+	        lat: northEast.lat(), lng: northEast.lng()
+	      }, southWest: {
+	        lat: southWest.lat(), lng: southWest.lng()
+	      } };
+	    ApiUtil.fetchLocations(this.bounds);
+	  },
 	
 	  componentDidMount: function () {
 	    this.locationListener = LocationStore.addListener(this.onChange);
-	    // var currentLocation = LocationStore.selectedLocation();
+	    var mapDOMNode = this.refs.map;
+	    var defaultCenter = { lat: 37.7758, lng: -122.435 };
+	    // debugger;
+	    // if (LocationStore.selectedLocation !== null)
+	    //   {defaultCenter = LocationStore.selectedLocation.location;}
+	    var mapOptions = {
+	      center: defaultCenter,
+	      zoom: 13,
 	
-	    // ApiUtil.showLocation(this.state.show);
-	  },
+	      mapTypeControlOptions: {
+	        mapTypeIds: [google.maps.MapTypeId.DARK, "darkmap"]
+	      }
 	
-	  onChange: function () {
-	    this.setState({ show: LocationStore.selectedLocation() });
+	    };
+	    // debugger;
+	    this.map = new google.maps.Map(mapDOMNode, mapOptions);
+	
+	    this.map.mapTypes.set("darkmap", MapStyle);
+	    this.map.setMapTypeId("darkmap");
+	
+	    this.map.addListener('idle', this.onIdle);
 	  },
 	
 	  componentWillUnmount: function () {
@@ -24626,8 +24660,8 @@
 	  }
 	
 	});
-	
-	module.exports = Show;
+	window.Map = Map;
+	module.exports = Map;
 
 /***/ },
 /* 215 */
@@ -24665,7 +24699,6 @@
 	
 	LocationStore.setSelectedLocation = function (location) {
 	  selLocation = location;
-	  debugger;
 	};
 	
 	LocationStore.selectedLocation = function () {
@@ -31151,27 +31184,74 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	
+	var Show = __webpack_require__(234);
 	var History = __webpack_require__(159).History;
-	var Map = __webpack_require__(234);
-	var Index = __webpack_require__(213);
-	var Show = __webpack_require__(214);
+	var ApiActions = __webpack_require__(207);
+	var ApiUtil = __webpack_require__(206);
+	var Link = __webpack_require__(159).Link;
+	var LocationStore = __webpack_require__(215);
 	
-	// {this.props.children}
-	var Search = React.createClass({
-	  displayName: 'Search',
+	var Index = React.createClass({
+	  displayName: 'Index',
+	
+	  getInitialState: function () {
+	    return { locations: LocationStore.all(), show: LocationStore.selectedLocation() };
+	  },
 	
 	  render: function () {
+	    var self = this;
+	    var locations = this.state.locations.map(function (location) {
+	      return React.createElement(
+	        'li',
+	        { key: location.id },
+	        React.createElement(
+	          'div',
+	          null,
+	          location.id
+	        ),
+	        React.createElement(
+	          'div',
+	          { onClick: self.onClick.bind(self, event, location) },
+	          ' ',
+	          location.description,
+	          ' Room for ',
+	          location.occupancy,
+	          ' people. '
+	        )
+	      );
+	    });
+	
 	    return React.createElement(
 	      'div',
-	      { className: 'search_container' },
-	      React.createElement(Map, null),
-	      React.createElement(Index, null)
+	      null,
+	      React.createElement(
+	        'ul',
+	        { className: 'location_index', id: 'location_list' },
+	        locations
+	      )
 	    );
+	  },
+	
+	  onClick: function (event, location) {
+	    event.preventDefault();
+	    ApiActions.receiveLocation(location);
+	  },
+	
+	  onChange: function () {
+	    this.setState({ locations: LocationStore.all(), show: LocationStore.selectedLocation() });
+	  },
+	
+	  componentDidMount: function () {
+	    this.locationListener = LocationStore.addListener(this.onChange);
+	  },
+	
+	  componentWillUnmount: function () {
+	    this.locationListener.remove();
 	  }
+	
 	});
 	
-	module.exports = Search;
+	module.exports = Index;
 
 /***/ },
 /* 234 */
@@ -31180,148 +31260,84 @@
 	var React = __webpack_require__(1);
 	
 	var History = __webpack_require__(159).History;
-	var ApiActions = __webpack_require__(207);
 	var LocationStore = __webpack_require__(215);
-	var ApiUtil = __webpack_require__(206);
-	
-	var Map = React.createClass({
-	  displayName: 'Map',
+	var Show = React.createClass({
+	  displayName: 'Show',
 	
 	  getInitialState: function () {
-	    //markerIndex is a means of indexing all markers for locations in the store.
-	    //locationId = markerIndex key
-	    //It also keeps track of markers that were on the screen before onChange.
-	    this.markerIndex = {};
-	
-	    //Used to update the markerIndex
-	    this.newMarkerIndex = {};
-	    //locations is the locations in the store
-	    //markers are the markers on the map.
-	    //We'll set state with
-	
-	    //If a location was just created, we want it centered on the map.
-	
-	    return { locations: LocationStore.all(), markers: this.markerIndex };
+	    // debugger;
+	    // LocationStore.setSelectedLocation(LocationStore.find(this.getInitialLocation()));
+	    return { show: LocationStore.selectedLocation() };
 	  },
+	
+	  // getInitialLocation: function() {
+	  //   // debugger;
+	  //   if (this.props.params === undefined) {return 0;}
+	  //   return (this.props.params.location_id)
+	  // },
 	
 	  render: function () {
-	    return React.createElement('div', { className: 'map', ref: 'map' });
-	  },
 	
-	  //Called when the Store changes
-	  onChange: function () {
-	    var self = this;
+	    var location = this.state.show;
 	
-	    self.markerUpdate();
-	    Map.theMap = self;
-	    this.refreshBandM();
-	  },
-	
-	  //reRender
-	  refreshBandM: function () {
-	    this.setState({ locations: LocationStore.all(),
-	      markers: this.allMarkersInIndex() });
-	  },
-	
-	  //Adds a marker to the map
-	  addMarker: function (location) {
-	    var self = this;
-	    var image = "Hello";
-	    var marker = new google.maps.Marker({
-	      position: { lat: location.lat, lng: location.lng },
-	      map: self.map,
-	      title: location.description
-	    });
-	    // debugger;
-	    self.newMarkerIndex[location.id] = marker;
-	    return marker;
-	  },
-	
-	  //Removes marker from map
-	  removeMarker: function (marker) {
-	    var locationId = this.findLocationIdByMarker(marker);
-	    delete this.markerIndex[locationId];
-	    marker.setMap(null);
-	    marker = null;
-	  },
-	
-	  markerUpdate: function () {
-	    var self = this;
-	
-	    //If there's a location in the store that isn't in the markerIndex,
-	    //create a marker for it.
-	    LocationStore.all().forEach(function (location) {
-	      if (self.markerIndex[location.id] === undefined) {
-	        self.newMarkerIndex[location.id] = self.addMarker(location);
-	      } else {
-	        self.newMarkerIndex[location.id] = self.markerIndex[location.id];
-	        delete self.markerIndex[location.id];
-	      }
-	    });
-	
-	    //
-	    self.removeOldMarkers();
-	
-	    self.markerIndex = self.newMarkerIndex;
-	    self.newMarkerIndex = {};
-	
-	    this.refreshBandM();
-	  },
-	
-	  removeOldMarkers: function () {
-	    var self = this;
-	    Object.keys(self.markerIndex).forEach(function (markerId) {
-	      self.removeMarker(self.markerIndex[markerId]);
-	    });
-	  },
-	
-	  allMarkersInIndex: function () {
-	    var arr = [];
-	    for (var marker in this.markerIndex) {
-	      arr.push(this.markerIndex[marker]);
+	    if (location === null || location === undefined) {
+	      return React.createElement(
+	        'div',
+	        null,
+	        'No Location Selected'
+	      );
 	    }
-	    return arr;
+	    var self = this;
+	    return React.createElement(
+	      'div',
+	      { className: 'show_location' },
+	      React.createElement(
+	        'div',
+	        { key: location.id },
+	        React.createElement(
+	          'h2',
+	          null,
+	          location.title
+	        ),
+	        React.createElement('br', null),
+	        React.createElement('br', null),
+	        self.showImagesIfAny(),
+	        React.createElement('br', null),
+	        React.createElement('br', null),
+	        'Address: ',
+	        location.full_address,
+	        React.createElement('br', null),
+	        React.createElement('br', null),
+	        location.description
+	      )
+	    );
 	  },
 	
-	  findLocationIdByMarker: function (marker) {
-	    var markerIndex = this.markerIndex;
+	  showImagesIfAny: function () {
 	    // debugger;
-	    for (var locationId in markerIndex) {
-	      if (markerIndex.hasOwnProperty(locationId)) {
-	        if (markerIndex[locationId] === marker) {
-	          return locationId;
-	        }
-	      }
+	    if (this.state.show.images.length === 0) {
+	      return "No images";
 	    }
-	    return -1;
+	    var pics = this.state.show.images.map(function (image, index) {
+	      return React.createElement('img', { src: image.image_url, key: index });
+	    });
+	    return pics;
 	  },
 	
-	  onIdle: function () {
-	    var boundaries = this.map.getBounds();
-	    var northEast = boundaries.getNorthEast();
-	    var southWest = boundaries.getSouthWest();
-	    this.bounds = { northEast: {
-	        lat: northEast.lat(), lng: northEast.lng()
-	      }, southWest: {
-	        lat: southWest.lat(), lng: southWest.lng()
-	      } };
-	    ApiUtil.fetchLocations(this.bounds);
-	  },
+	  // componentWillReceiveProps: function (newProps) {
+	  //   // debugger;
+	  //   ApiUtil.showLocation(this.state.location);
+	  // },
 	
 	  componentDidMount: function () {
 	    this.locationListener = LocationStore.addListener(this.onChange);
-	    var mapDOMNode = this.refs.map;
-	    var defaultCenter = { lat: 37.7758, lng: -122.435 };
-	    // debugger;
-	    // if (LocationStore.selectedLocation !== null)
-	    //   {defaultCenter = LocationStore.selectedLocation.location;}
-	    var mapOptions = {
-	      center: defaultCenter,
-	      zoom: 13
-	    };
-	    // debugger;
-	    this.map = new google.maps.Map(mapDOMNode, mapOptions);
-	    this.map.addListener('idle', this.onIdle);
+	    // var currentLocation = LocationStore.selectedLocation();
+	
+	    // ApiUtil.showLocation(this.state.show);
+	  },
+	
+	  onChange: function () {
+	    this.setState({ show: LocationStore.selectedLocation() });
 	  },
 	
 	  componentWillUnmount: function () {
@@ -31329,8 +31345,8 @@
 	  }
 	
 	});
-	window.Map = Map;
-	module.exports = Map;
+	
+	module.exports = Show;
 
 /***/ },
 /* 235 */
@@ -32645,7 +32661,7 @@
 	var Link = __webpack_require__(159).Link;
 	var History = __webpack_require__(159).History;
 	var ApiUtil = __webpack_require__(206);
-	var FullPage = __webpack_require__(249);
+	var FullPage = __webpack_require__(248);
 	
 	var NavBar = React.createClass({
 	  displayName: 'NavBar',
@@ -32724,11 +32740,51 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var ApiUtil = __webpack_require__(206);
-	var Map = __webpack_require__(234);
-	var Index = __webpack_require__(213);
 	var LocationStore = __webpack_require__(215);
-	var Search = __webpack_require__(233);
+	var LocationScreen = __webpack_require__(249);
+	var LocationForm = __webpack_require__(235);
+	
+	var FullPage = React.createClass({
+	  displayName: 'FullPage',
+	
+	  getInitialState: function () {
+	    return {
+	      page: 1, locations: LocationStore.all(),
+	      show: LocationStore.selectedLocation()
+	    };
+	  },
+	
+	  switchPage: function (page) {
+	    // debugger;
+	    this.setState({ page: page });
+	  },
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(LocationScreen, { locations: this.props.locations, show: this.props.show }),
+	      React.createElement(LocationForm, null)
+	    );
+	  },
+	  componentDidMount: function () {
+	    // debugger;
+	  }
+	
+	});
+	
+	module.exports = FullPage;
+
+/***/ },
+/* 249 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var ApiUtil = __webpack_require__(206);
+	var Map = __webpack_require__(214);
+	var Index = __webpack_require__(233);
+	var LocationStore = __webpack_require__(215);
+	var Search = __webpack_require__(213);
 	
 	var LocationScreen = React.createClass({
 	  displayName: 'LocationScreen',
@@ -32769,44 +32825,124 @@
 	module.exports = LocationScreen;
 
 /***/ },
-/* 249 */
-/***/ function(module, exports, __webpack_require__) {
+/* 250 */
+/***/ function(module, exports) {
 
-	var React = __webpack_require__(1);
-	var LocationStore = __webpack_require__(215);
-	var LocationScreen = __webpack_require__(248);
-	var LocationForm = __webpack_require__(235);
 	
-	var FullPage = React.createClass({
-	  displayName: 'FullPage',
 	
-	  getInitialState: function () {
-	    return {
-	      page: 1, locations: LocationStore.all(),
-	      show: LocationStore.selectedLocation()
-	    };
-	  },
+	var MapStyle = new google.maps.StyledMapType([{
+	    "featureType": "all",
+	    "elementType": "labels.text.fill",
+	    "stylers": [{
+	        "saturation": 36
+	    }, {
+	        "color": "#000000"
+	    }, {
+	        "lightness": 40
+	    }]
+	}, {
+	    "featureType": "all",
+	    "elementType": "labels.text.stroke",
+	    "stylers": [{
+	        "visibility": "on"
+	    }, {
+	        "color": "#000000"
+	    }, {
+	        "lightness": 16
+	    }]
+	}, {
+	    "featureType": "all",
+	    "elementType": "labels.icon",
+	    "stylers": [{
+	        "visibility": "off"
+	    }]
+	}, {
+	    "featureType": "administrative",
+	    "elementType": "geometry.fill",
+	    "stylers": [{
+	        "color": "#000000"
+	    }, {
+	        "lightness": 20
+	    }]
+	}, {
+	    "featureType": "administrative",
+	    "elementType": "geometry.stroke",
+	    "stylers": [{
+	        "color": "#000000"
+	    }, {
+	        "lightness": 17
+	    }, {
+	        "weight": 1.2
+	    }]
+	}, {
+	    "featureType": "landscape",
+	    "elementType": "geometry",
+	    "stylers": [{
+	        "color": "#000000"
+	    }, {
+	        "lightness": 20
+	    }]
+	}, {
+	    "featureType": "poi",
+	    "elementType": "geometry",
+	    "stylers": [{
+	        "color": "#000000"
+	    }, {
+	        "lightness": 21
+	    }]
+	}, {
+	    "featureType": "road.highway",
+	    "elementType": "geometry.fill",
+	    "stylers": [{
+	        "color": "#000000"
+	    }, {
+	        "lightness": 17
+	    }]
+	}, {
+	    "featureType": "road.highway",
+	    "elementType": "geometry.stroke",
+	    "stylers": [{
+	        "color": "#000000"
+	    }, {
+	        "lightness": 29
+	    }, {
+	        "weight": 0.2
+	    }]
+	}, {
+	    "featureType": "road.arterial",
+	    "elementType": "geometry",
+	    "stylers": [{
+	        "color": "#000000"
+	    }, {
+	        "lightness": 18
+	    }]
+	}, {
+	    "featureType": "road.local",
+	    "elementType": "geometry",
+	    "stylers": [{
+	        "color": "#000000"
+	    }, {
+	        "lightness": 16
+	    }]
+	}, {
+	    "featureType": "transit",
+	    "elementType": "geometry",
+	    "stylers": [{
+	        "color": "#000000"
+	    }, {
+	        "lightness": 19
+	    }]
+	}, {
+	    "featureType": "water",
+	    "elementType": "geometry",
+	    "stylers": [{
+	        "color": "#000000"
+	    }, {
+	        "lightness": 17
+	    }]
+	}], { name: "DarkMap" });
 	
-	  switchPage: function (page) {
-	    // debugger;
-	    this.setState({ page: page });
-	  },
-	
-	  render: function () {
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(LocationScreen, { locations: this.props.locations, show: this.props.show }),
-	      React.createElement(LocationForm, null)
-	    );
-	  },
-	  componentDidMount: function () {
-	    // debugger;
-	  }
-	
-	});
-	
-	module.exports = FullPage;
+	module.exports = MapStyle;
 
 /***/ }
 /******/ ]);

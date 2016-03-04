@@ -30,7 +30,6 @@ var resetLocations = function(locations){
 
 LocationStore.setSelectedLocation = function(location){
   selLocation = location;
-  debugger;
 };
 
 LocationStore.selectedLocation = function(){

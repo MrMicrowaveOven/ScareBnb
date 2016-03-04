@@ -18,7 +18,8 @@ var Show = React.createClass({
   render: function() {
 
     var location = this.state.show;
-    if (location === null)
+
+    if (location === null || location === undefined)
       {
         return(
           <div>No Location Selected</div>

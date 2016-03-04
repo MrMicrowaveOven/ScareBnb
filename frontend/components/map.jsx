@@ -4,6 +4,7 @@ var History = require('react-router').History;
 var ApiActions = require('../actions/api_actions');
 var LocationStore = require('../stores/location');
 var ApiUtil = require('../util/api_util');
+var MapStyle = require('../style_docs/maps_stylesheet');
 
 var Map = React.createClass({
   getInitialState: function() {
@@ -50,12 +51,14 @@ var Map = React.createClass({
   //Adds a marker to the map
   addMarker: function(location) {
     var self = this;
-    var image = "Hello";
+    var image = "https://49.media.tumblr.com/cf07c4116283d8b2a71326ed4fc4cb2c/tumblr_o3hr8mRRGS1v497yzo1_75sq.gif";
     var marker = new google.maps.Marker(
       {
         position: {lat: location.lat, lng: location.lng},
         map: self.map,
-        title: location.description
+        title: location.title,
+        icon: image,
+        opacity: .5
       }
     );
     // debugger;
@@ -146,10 +149,19 @@ var Map = React.createClass({
     //   {defaultCenter = LocationStore.selectedLocation.location;}
     var mapOptions = {
       center: defaultCenter,
-      zoom: 13
+      zoom: 13,
+
+      mapTypeControlOptions: {
+        mapTypeIds: [google.maps.MapTypeId.DARK, "darkmap"]
+      }
+
     };
     // debugger;
     this.map = new google.maps.Map(mapDOMNode, mapOptions);
+
+    this.map.mapTypes.set("darkmap", MapStyle);
+    this.map.setMapTypeId("darkmap");
+
     this.map.addListener('idle', this.onIdle);
   },
 

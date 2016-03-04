@@ -20,10 +20,9 @@ var Index = React.createClass({
         <div onClick={self.onClick.bind(self, event, location)}> {location.description} Room for {location.occupancy} people. </div>
       </li>);
     });
-    // debugger;
+
     return(
       <div>
-        <Show/>
         <ul className="location_index" id="location_list">{locations}</ul>
       </div>
     );
