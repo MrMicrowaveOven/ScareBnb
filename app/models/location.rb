@@ -15,6 +15,8 @@
 #  zip_code     :string
 #  full_address :string           not null
 #  title        :string           not null
+#  image        :string
+#  price        :integer          not null
 #
 
 class Location < ActiveRecord::Base

@@ -31320,6 +31320,7 @@
 	
 	  render: function () {
 	    var self = this;
+	    // debugger;
 	    var locations = this.state.locations.map(function (location) {
 	      return React.createElement(
 	        'li',
@@ -31331,7 +31332,8 @@
 	        ),
 	        React.createElement(
 	          'div',
-	          { onClick: self.onClick.bind(self, event, location) },
+	          null,
+	          React.createElement('img', { src: location.image, onClick: self.onClick.bind(self, event, location) }),
 	          ' ',
 	          location.description,
 	          ' Room for ',
