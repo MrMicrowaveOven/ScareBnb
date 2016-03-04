@@ -20,7 +20,7 @@
 class Location < ActiveRecord::Base
   validates :description, :lat, :lng, presence: true
 
-  has_many :location_images
+  # has_many :location_images
 
 
   def self.in_bounds(bounds)

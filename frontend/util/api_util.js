@@ -44,12 +44,12 @@ var ApiUtil = {
       url: "/session",
       method: "DELETE",
       success: function() {
-        window.location = "/session/new"
+        window.location = "/session/new";
       },
       failure: function(errorMessage){
       }
 
-    })
+    });
   }
 
 };

@@ -31,7 +31,7 @@ var Show = React.createClass({
         <div key={location.id}>
           <h2>{location.title}</h2>
           <br/><br/>
-          {self.showImagesIfAny()}
+          {self.showImageIfAny()}
           <br/><br/>
           Address: {location.full_address}
           <br/><br/>
@@ -41,15 +41,17 @@ var Show = React.createClass({
     );
   },
 
-  showImagesIfAny: function() {
-    // debugger;
-    if (this.state.show.images.length === 0) {
-      return("No images");
+  showImageIfAny: function() {
+    var image_string = this.state.show.image;
+    if (image_string === "") {
+      return("No image");
     }
-    var pics = this.state.show.images.map(function(image, index) {
-      return (<img src={image.image_url} key={index}/>);
-    });
-    return pics;
+    var image_show = <img src={image_string}/>;
+
+    // var pics = this.state.show.images.map(function(image, index) {
+    //   return (<img src={image.image_url} key={index}/>);
+    // });
+    return (image_show);
   },
 
   // componentWillReceiveProps: function (newProps) {

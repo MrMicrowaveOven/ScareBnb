@@ -26,7 +26,8 @@ var LocationForm = React.createClass({
       lng: -122,
       description: null,
       occupancy: 1,
-      images: []
+      price: 35,
+      image: ""
     };
   },
 
@@ -73,13 +74,15 @@ var LocationForm = React.createClass({
           </label>
           <br/>
           <div>
-            Be sure to include some pictures of your place!
+            Be sure to include a picture of your place!
             <button className="upload" onClick={this.uploadImage}>
               Upload picture!</button>
           </div>
 
           <div>
-            <h2>Here are your images:{this.showImages()}</h2>
+            <h2>
+              {this.showImage()}
+            </h2>
           </div>
 
           <div>
@@ -91,6 +94,14 @@ var LocationForm = React.createClass({
         </form>
       </div>
     );
+  },
+
+  showImage: function() {
+    var image = this.state.image;
+    if (image === "") {return;}
+    var imageShow = <img src={image.secure_url}/>;
+    // debugger;
+    return (<div>"Here is your image: " {imageShow}</div>);
   },
 
   oneThroughTen: function() {
@@ -107,13 +118,13 @@ var LocationForm = React.createClass({
     if (this.mapAddressMarker !== undefined)
       {this.mapAddressMarker.setMap(null);}
 
-    var image = "https://49.media.tumblr.com/cf07c4116283d8b2a71326ed4fc4cb2c/tumblr_o3hr8mRRGS1v497yzo1_75sq.gif";
+    var ghost = "https://49.media.tumblr.com/cf07c4116283d8b2a71326ed4fc4cb2c/tumblr_o3hr8mRRGS1v497yzo1_75sq.gif";
 
     this.mapAddressMarker = new google.maps.Marker({
       position: suggest.location,
       map: this.mapAddress,
       title: suggest.label,
-      icon: image,
+      icon: ghost,
       opacity: .5
     });
     this.mapAddress.setCenter(suggest.location);
@@ -134,32 +145,24 @@ var LocationForm = React.createClass({
 
   },
 
-  showImages: function() {
-    var images = this.state.images;
-    var allImages = images.map(function(image, index) {
-      var imageStyle = {
-        backgroundImage: 'url(' + image.secure_url + ')'
-      };
-      // return <img key={index} src={image.secure_url}/>;
-      return <div style={imageStyle} />;
-    });
-    return allImages;
-  },
 
   uploadImage: function(event) {
     event.preventDefault();
     var self = this;
-    var images = cloudinary.openUploadWidget({
-      cloud_name: 'dazguin0y', upload_preset: "jfqawmvc", multiple: true
-    },
-    function(error, result) {
-      self.setState({images: self.state.images.concat(result)});
-    });
+    var image = cloudinary.openUploadWidget(
+      {
+        cloud_name: 'dazguin0y', upload_preset: "sppqijhu", multiple: false
+      },
+      function(error, result) {
+        self.setState({image: result[0]});
+      }
+    );
   },
 
 
   submitLocation: function(event) {
     event.preventDefault();
+
     ApiUtil.createLocation({
       title: this.state.title,
       lat: this.state.lat,
@@ -167,12 +170,15 @@ var LocationForm = React.createClass({
       full_address: this.state.full_address,
       description: this.state.description,
       occupancy: this.state.occupancy,
-      images: this.state.images
+      price: this.state.price,
+      image: this.state.image.secure_url
     }, this.creationSuccess);
   },
 
   creationSuccess: function(id) {
+    debugger;
     ApiUtil.showLocation(id);
+    // this.setState({images: })
     this.history.push("location_screen");
   },
 

@@ -30,6 +30,7 @@ var Index = React.createClass({
 
   onClick: function(event, location) {
     event.preventDefault();
+    // debugger;
     ApiActions.receiveLocation(location);
   },
 

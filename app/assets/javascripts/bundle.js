@@ -54,11 +54,11 @@
 	var IndexRedirect = ReactRouter.IndexRedirect;
 	var ApiUtil = __webpack_require__(206);
 	var Search = __webpack_require__(213);
-	var LocationForm = __webpack_require__(235);
-	var NavBar = __webpack_require__(247);
-	var Show = __webpack_require__(234);
-	var LocationScreen = __webpack_require__(249);
-	var FullPage = __webpack_require__(248);
+	var LocationForm = __webpack_require__(236);
+	var NavBar = __webpack_require__(248);
+	var Show = __webpack_require__(235);
+	var LocationScreen = __webpack_require__(250);
+	var FullPage = __webpack_require__(249);
 	
 	window.ApiUtil = ApiUtil;
 	
@@ -24468,8 +24468,8 @@
 	
 	var History = __webpack_require__(159).History;
 	var Map = __webpack_require__(214);
-	var Index = __webpack_require__(233);
-	var Show = __webpack_require__(234);
+	var Index = __webpack_require__(234);
+	var Show = __webpack_require__(235);
 	
 	// {this.props.children}
 	var Search = React.createClass({
@@ -24502,7 +24502,7 @@
 	var ApiActions = __webpack_require__(207);
 	var LocationStore = __webpack_require__(215);
 	var ApiUtil = __webpack_require__(206);
-	var MapStyle = __webpack_require__(250);
+	var MapStyle = __webpack_require__(233);
 	
 	var Map = React.createClass({
 	  displayName: 'Map',
@@ -31181,10 +31181,130 @@
 
 /***/ },
 /* 233 */
+/***/ function(module, exports) {
+
+	
+	
+	var MapStyle = new google.maps.StyledMapType([{
+	    "featureType": "all",
+	    "elementType": "labels.text.fill",
+	    "stylers": [{
+	        "saturation": 36
+	    }, {
+	        "color": "#000000"
+	    }, {
+	        "lightness": 40
+	    }]
+	}, {
+	    "featureType": "all",
+	    "elementType": "labels.text.stroke",
+	    "stylers": [{
+	        "visibility": "on"
+	    }, {
+	        "color": "#000000"
+	    }, {
+	        "lightness": 16
+	    }]
+	}, {
+	    "featureType": "all",
+	    "elementType": "labels.icon",
+	    "stylers": [{
+	        "visibility": "off"
+	    }]
+	}, {
+	    "featureType": "administrative",
+	    "elementType": "geometry.fill",
+	    "stylers": [{
+	        "color": "#000000"
+	    }, {
+	        "lightness": 20
+	    }]
+	}, {
+	    "featureType": "administrative",
+	    "elementType": "geometry.stroke",
+	    "stylers": [{
+	        "color": "#000000"
+	    }, {
+	        "lightness": 17
+	    }, {
+	        "weight": 1.2
+	    }]
+	}, {
+	    "featureType": "landscape",
+	    "elementType": "geometry",
+	    "stylers": [{
+	        "color": "#000000"
+	    }, {
+	        "lightness": 20
+	    }]
+	}, {
+	    "featureType": "poi",
+	    "elementType": "geometry",
+	    "stylers": [{
+	        "color": "#000000"
+	    }, {
+	        "lightness": 21
+	    }]
+	}, {
+	    "featureType": "road.highway",
+	    "elementType": "geometry.fill",
+	    "stylers": [{
+	        "color": "#000000"
+	    }, {
+	        "lightness": 17
+	    }]
+	}, {
+	    "featureType": "road.highway",
+	    "elementType": "geometry.stroke",
+	    "stylers": [{
+	        "color": "#000000"
+	    }, {
+	        "lightness": 29
+	    }, {
+	        "weight": 0.2
+	    }]
+	}, {
+	    "featureType": "road.arterial",
+	    "elementType": "geometry",
+	    "stylers": [{
+	        "color": "#000000"
+	    }, {
+	        "lightness": 18
+	    }]
+	}, {
+	    "featureType": "road.local",
+	    "elementType": "geometry",
+	    "stylers": [{
+	        "color": "#000000"
+	    }, {
+	        "lightness": 16
+	    }]
+	}, {
+	    "featureType": "transit",
+	    "elementType": "geometry",
+	    "stylers": [{
+	        "color": "#000000"
+	    }, {
+	        "lightness": 19
+	    }]
+	}, {
+	    "featureType": "water",
+	    "elementType": "geometry",
+	    "stylers": [{
+	        "color": "#000000"
+	    }, {
+	        "lightness": 17
+	    }]
+	}], { name: "DarkMap" });
+	
+	module.exports = MapStyle;
+
+/***/ },
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var Show = __webpack_require__(234);
+	var Show = __webpack_require__(235);
 	var History = __webpack_require__(159).History;
 	var ApiActions = __webpack_require__(207);
 	var ApiUtil = __webpack_require__(206);
@@ -31234,6 +31354,7 @@
 	
 	  onClick: function (event, location) {
 	    event.preventDefault();
+	    // debugger;
 	    ApiActions.receiveLocation(location);
 	  },
 	
@@ -31254,7 +31375,7 @@
 	module.exports = Index;
 
 /***/ },
-/* 234 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
@@ -31301,7 +31422,7 @@
 	        ),
 	        React.createElement('br', null),
 	        React.createElement('br', null),
-	        self.showImagesIfAny(),
+	        self.showImageIfAny(),
 	        React.createElement('br', null),
 	        React.createElement('br', null),
 	        'Address: ',
@@ -31313,15 +31434,17 @@
 	    );
 	  },
 	
-	  showImagesIfAny: function () {
-	    // debugger;
-	    if (this.state.show.images.length === 0) {
-	      return "No images";
+	  showImageIfAny: function () {
+	    var image_string = this.state.show.image;
+	    if (image_string === "") {
+	      return "No image";
 	    }
-	    var pics = this.state.show.images.map(function (image, index) {
-	      return React.createElement('img', { src: image.image_url, key: index });
-	    });
-	    return pics;
+	    var image_show = React.createElement('img', { src: image_string });
+	
+	    // var pics = this.state.show.images.map(function(image, index) {
+	    //   return (<img src={image.image_url} key={index}/>);
+	    // });
+	    return image_show;
 	  },
 	
 	  // componentWillReceiveProps: function (newProps) {
@@ -31349,18 +31472,18 @@
 	module.exports = Show;
 
 /***/ },
-/* 235 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
-	var LinkedStateMixin = __webpack_require__(236);
+	var LinkedStateMixin = __webpack_require__(237);
 	
 	var History = __webpack_require__(159).History;
 	var ApiUtil = __webpack_require__(206);
-	var MapStyle = __webpack_require__(250);
+	var MapStyle = __webpack_require__(233);
 	
-	var Geosuggest = __webpack_require__(240);
+	var Geosuggest = __webpack_require__(241);
 	
 	var LocationForm = React.createClass({
 	  displayName: 'LocationForm',
@@ -31382,7 +31505,8 @@
 	      lng: -122,
 	      description: null,
 	      occupancy: 1,
-	      images: []
+	      price: 35,
+	      image: ""
 	    };
 	  },
 	
@@ -31453,7 +31577,7 @@
 	        React.createElement(
 	          'div',
 	          null,
-	          'Be sure to include some pictures of your place!',
+	          'Be sure to include a picture of your place!',
 	          React.createElement(
 	            'button',
 	            { className: 'upload', onClick: this.uploadImage },
@@ -31466,8 +31590,7 @@
 	          React.createElement(
 	            'h2',
 	            null,
-	            'Here are your images:',
-	            this.showImages()
+	            this.showImage()
 	          )
 	        ),
 	        React.createElement(
@@ -31478,6 +31601,21 @@
 	          })
 	        )
 	      )
+	    );
+	  },
+	
+	  showImage: function () {
+	    var image = this.state.image;
+	    if (image === "") {
+	      return;
+	    }
+	    var imageShow = React.createElement('img', { src: image.secure_url });
+	    // debugger;
+	    return React.createElement(
+	      'div',
+	      null,
+	      '"Here is your image: " ',
+	      imageShow
 	    );
 	  },
 	
@@ -31498,13 +31636,13 @@
 	      this.mapAddressMarker.setMap(null);
 	    }
 	
-	    var image = "https://49.media.tumblr.com/cf07c4116283d8b2a71326ed4fc4cb2c/tumblr_o3hr8mRRGS1v497yzo1_75sq.gif";
+	    var ghost = "https://49.media.tumblr.com/cf07c4116283d8b2a71326ed4fc4cb2c/tumblr_o3hr8mRRGS1v497yzo1_75sq.gif";
 	
 	    this.mapAddressMarker = new google.maps.Marker({
 	      position: suggest.location,
 	      map: this.mapAddress,
 	      title: suggest.label,
-	      icon: image,
+	      icon: ghost,
 	      opacity: .5
 	    });
 	    this.mapAddress.setCenter(suggest.location);
@@ -31524,30 +31662,19 @@
 	    // );
 	  },
 	
-	  showImages: function () {
-	    var images = this.state.images;
-	    var allImages = images.map(function (image, index) {
-	      var imageStyle = {
-	        backgroundImage: 'url(' + image.secure_url + ')'
-	      };
-	      // return <img key={index} src={image.secure_url}/>;
-	      return React.createElement('div', { style: imageStyle });
-	    });
-	    return allImages;
-	  },
-	
 	  uploadImage: function (event) {
 	    event.preventDefault();
 	    var self = this;
-	    var images = cloudinary.openUploadWidget({
-	      cloud_name: 'dazguin0y', upload_preset: "jfqawmvc", multiple: true
+	    var image = cloudinary.openUploadWidget({
+	      cloud_name: 'dazguin0y', upload_preset: "sppqijhu", multiple: false
 	    }, function (error, result) {
-	      self.setState({ images: self.state.images.concat(result) });
+	      self.setState({ image: result[0] });
 	    });
 	  },
 	
 	  submitLocation: function (event) {
 	    event.preventDefault();
+	
 	    ApiUtil.createLocation({
 	      title: this.state.title,
 	      lat: this.state.lat,
@@ -31555,12 +31682,15 @@
 	      full_address: this.state.full_address,
 	      description: this.state.description,
 	      occupancy: this.state.occupancy,
-	      images: this.state.images
+	      price: this.state.price,
+	      image: this.state.image.secure_url
 	    }, this.creationSuccess);
 	  },
 	
 	  creationSuccess: function (id) {
+	    debugger;
 	    ApiUtil.showLocation(id);
+	    // this.setState({images: })
 	    this.history.push("location_screen");
 	  },
 	
@@ -31590,13 +31720,13 @@
 	module.exports = LocationForm;
 
 /***/ },
-/* 236 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(237);
+	module.exports = __webpack_require__(238);
 
 /***/ },
-/* 237 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -31613,8 +31743,8 @@
 	
 	'use strict';
 	
-	var ReactLink = __webpack_require__(238);
-	var ReactStateSetters = __webpack_require__(239);
+	var ReactLink = __webpack_require__(239);
+	var ReactStateSetters = __webpack_require__(240);
 	
 	/**
 	 * A simple mixin around ReactLink.forState().
@@ -31637,7 +31767,7 @@
 	module.exports = LinkedStateMixin;
 
 /***/ },
-/* 238 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -31711,7 +31841,7 @@
 	module.exports = ReactLink;
 
 /***/ },
-/* 239 */
+/* 240 */
 /***/ function(module, exports) {
 
 	/**
@@ -31820,7 +31950,7 @@
 	module.exports = ReactStateSetters;
 
 /***/ },
-/* 240 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* global window */
@@ -31847,23 +31977,23 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(241);
+	var _classnames = __webpack_require__(242);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _defaults = __webpack_require__(242);
+	var _defaults = __webpack_require__(243);
 	
 	var _defaults2 = _interopRequireDefault(_defaults);
 	
-	var _filterInputAttributes = __webpack_require__(243);
+	var _filterInputAttributes = __webpack_require__(244);
 	
 	var _filterInputAttributes2 = _interopRequireDefault(_filterInputAttributes);
 	
-	var _input = __webpack_require__(244);
+	var _input = __webpack_require__(245);
 	
 	var _input2 = _interopRequireDefault(_input);
 	
-	var _suggestList = __webpack_require__(245);
+	var _suggestList = __webpack_require__(246);
 	
 	var _suggestList2 = _interopRequireDefault(_suggestList);
 	
@@ -32263,7 +32393,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 241 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -32317,7 +32447,7 @@
 
 
 /***/ },
-/* 242 */
+/* 243 */
 /***/ function(module, exports) {
 
 	/**
@@ -32354,7 +32484,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 243 */
+/* 244 */
 /***/ function(module, exports) {
 
 	/**
@@ -32388,7 +32518,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 244 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32415,11 +32545,11 @@
 	
 	// eslint-disable-line no-unused-vars
 	
-	var _classnames = __webpack_require__(241);
+	var _classnames = __webpack_require__(242);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _filterInputAttributes = __webpack_require__(243);
+	var _filterInputAttributes = __webpack_require__(244);
 	
 	var _filterInputAttributes2 = _interopRequireDefault(_filterInputAttributes);
 	
@@ -32539,7 +32669,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 245 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32556,11 +32686,11 @@
 	
 	// eslint-disable-line no-unused-vars
 	
-	var _classnames = __webpack_require__(241);
+	var _classnames = __webpack_require__(242);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _suggestItem = __webpack_require__(246);
+	var _suggestItem = __webpack_require__(247);
 	
 	var _suggestItem2 = _interopRequireDefault(_suggestItem);
 	
@@ -32606,7 +32736,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 246 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32623,7 +32753,7 @@
 	
 	// eslint-disable-line no-unused-vars
 	
-	var _classnames = __webpack_require__(241);
+	var _classnames = __webpack_require__(242);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -32665,14 +32795,14 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 247 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
 	var Link = __webpack_require__(159).Link;
 	var History = __webpack_require__(159).History;
 	var ApiUtil = __webpack_require__(206);
-	var FullPage = __webpack_require__(248);
+	var FullPage = __webpack_require__(249);
 	
 	var NavBar = React.createClass({
 	  displayName: 'NavBar',
@@ -32718,13 +32848,13 @@
 	module.exports = NavBar;
 
 /***/ },
-/* 248 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
 	var LocationStore = __webpack_require__(215);
-	var LocationScreen = __webpack_require__(249);
-	var LocationForm = __webpack_require__(235);
+	var LocationScreen = __webpack_require__(250);
+	var LocationForm = __webpack_require__(236);
 	
 	var FullPage = React.createClass({
 	  displayName: 'FullPage',
@@ -32758,13 +32888,13 @@
 	module.exports = FullPage;
 
 /***/ },
-/* 249 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
 	var ApiUtil = __webpack_require__(206);
 	var Map = __webpack_require__(214);
-	var Index = __webpack_require__(233);
+	var Index = __webpack_require__(234);
 	var LocationStore = __webpack_require__(215);
 	var Search = __webpack_require__(213);
 	
@@ -32805,126 +32935,6 @@
 	});
 	
 	module.exports = LocationScreen;
-
-/***/ },
-/* 250 */
-/***/ function(module, exports) {
-
-	
-	
-	var MapStyle = new google.maps.StyledMapType([{
-	    "featureType": "all",
-	    "elementType": "labels.text.fill",
-	    "stylers": [{
-	        "saturation": 36
-	    }, {
-	        "color": "#000000"
-	    }, {
-	        "lightness": 40
-	    }]
-	}, {
-	    "featureType": "all",
-	    "elementType": "labels.text.stroke",
-	    "stylers": [{
-	        "visibility": "on"
-	    }, {
-	        "color": "#000000"
-	    }, {
-	        "lightness": 16
-	    }]
-	}, {
-	    "featureType": "all",
-	    "elementType": "labels.icon",
-	    "stylers": [{
-	        "visibility": "off"
-	    }]
-	}, {
-	    "featureType": "administrative",
-	    "elementType": "geometry.fill",
-	    "stylers": [{
-	        "color": "#000000"
-	    }, {
-	        "lightness": 20
-	    }]
-	}, {
-	    "featureType": "administrative",
-	    "elementType": "geometry.stroke",
-	    "stylers": [{
-	        "color": "#000000"
-	    }, {
-	        "lightness": 17
-	    }, {
-	        "weight": 1.2
-	    }]
-	}, {
-	    "featureType": "landscape",
-	    "elementType": "geometry",
-	    "stylers": [{
-	        "color": "#000000"
-	    }, {
-	        "lightness": 20
-	    }]
-	}, {
-	    "featureType": "poi",
-	    "elementType": "geometry",
-	    "stylers": [{
-	        "color": "#000000"
-	    }, {
-	        "lightness": 21
-	    }]
-	}, {
-	    "featureType": "road.highway",
-	    "elementType": "geometry.fill",
-	    "stylers": [{
-	        "color": "#000000"
-	    }, {
-	        "lightness": 17
-	    }]
-	}, {
-	    "featureType": "road.highway",
-	    "elementType": "geometry.stroke",
-	    "stylers": [{
-	        "color": "#000000"
-	    }, {
-	        "lightness": 29
-	    }, {
-	        "weight": 0.2
-	    }]
-	}, {
-	    "featureType": "road.arterial",
-	    "elementType": "geometry",
-	    "stylers": [{
-	        "color": "#000000"
-	    }, {
-	        "lightness": 18
-	    }]
-	}, {
-	    "featureType": "road.local",
-	    "elementType": "geometry",
-	    "stylers": [{
-	        "color": "#000000"
-	    }, {
-	        "lightness": 16
-	    }]
-	}, {
-	    "featureType": "transit",
-	    "elementType": "geometry",
-	    "stylers": [{
-	        "color": "#000000"
-	    }, {
-	        "lightness": 19
-	    }]
-	}, {
-	    "featureType": "water",
-	    "elementType": "geometry",
-	    "stylers": [{
-	        "color": "#000000"
-	    }, {
-	        "lightness": 17
-	    }]
-	}], { name: "DarkMap" });
-	
-	module.exports = MapStyle;
 
 /***/ }
 /******/ ]);

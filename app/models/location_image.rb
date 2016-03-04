@@ -10,8 +10,8 @@
 #
 
 class LocationImage < ActiveRecord::Base
-  validates :location_id, :image_url, presence: true
-
-  belongs_to :location
+  # validates :location_id, :image_url, presence: true
+  #
+  # belongs_to :location
 
 end
