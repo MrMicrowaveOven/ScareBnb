@@ -1,25 +1,29 @@
 .nav_bar {
-  // background: linear-gradient(rgba(102, 102, 102, 0.98), rgba(52, 52, 52, 0.98));
+  background: gray;
+  // linear-gradient(rgba(102, 102, 102, 0.98), rgba(52, 52, 52, 0.98));
   width: 100%;
   position: fixed;
   top: 10px;
-  width: 100%;
   min-height: 78px;
-  z-index: 1;
-  box-shadow: 3px 0 10px 2px rgba(102,102,102, 0.95);
+  // z-index: 1;
+  // box-shadow: 3px 0 10px 2px rgba(102,102,102, 0.95);
 }
 
 .nav_bar_sub {
-  text-decoration: none;
-  color: rgba(230, 230, 230, 0.9);
+  // text-decoration: none;
+  color: red;
   font-size: 1.2em;
-  margin-bottom: 8px;
-  text-shadow: 1px 1px 1px rgba(210,210,210, 0.6);
-  transition: text-shadow 1s, color 1s;
+  // margin-bottom: 8px;
+  // text-shadow: 1px 1px 1px rgba(210,210,210, 0.6);
+  // transition: text-shadow 1s, color 1s;
 }
 
 .nav_bar_link_container {
-  float: left;
+
+  display: flex;
+  flex-flow: row;
+  align-items: flex-start;
+  justify-content: flex-end;
   height: 36px;
 }
 

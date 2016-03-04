@@ -7,36 +7,6 @@ var FullPage = require('./full_page');
 var NavBar = React.createClass({
   mixins: [History],
 
-  // getInitialState: function() {
-  //   return({page: 1});
-  // },
-  //
-  // switchPage: function(page) {
-  //   this.setState({page: page});
-  // },
-
-  // addMap: function() {
-  //   // debugger;
-  //   var url = "/location_screen";
-  //   this.history.push({pathname: url});
-  // },
-  //
-  // addLocationForm: function() {
-  //   var url = "/locations/new";
-  //   this.history.push({pathname:url});
-  // },
-
-  // toMap: function() {
-  //   debugger;
-  //   FullPage.switchPage(1);
-  // },
-  //
-  // toLocationForm: function() {
-  //   debugger;
-  //   FullPage.switchPage(2);
-  // },
-
-
   render: function () {
     // debugger;
     return (

@@ -4,6 +4,7 @@ var LinkedStateMixin = require('react-addons-linked-state-mixin');
 
 var History = require('react-router').History;
 var ApiUtil = require('../util/api_util');
+var MapStyle = require('../style_docs/maps_stylesheet');
 
 var Geosuggest = require('react-geosuggest');
 
@@ -106,10 +107,14 @@ var LocationForm = React.createClass({
     if (this.mapAddressMarker !== undefined)
       {this.mapAddressMarker.setMap(null);}
 
+    var image = "https://49.media.tumblr.com/cf07c4116283d8b2a71326ed4fc4cb2c/tumblr_o3hr8mRRGS1v497yzo1_75sq.gif";
+
     this.mapAddressMarker = new google.maps.Marker({
       position: suggest.location,
       map: this.mapAddress,
-      title: suggest.label
+      title: suggest.label,
+      icon: image,
+      opacity: .5
     });
     this.mapAddress.setCenter(suggest.location);
     // debugger;
@@ -177,11 +182,17 @@ var LocationForm = React.createClass({
     var mapDOMNode = this.refs.mapAddress;
     var mapOptions = {
       center: {lat: 37.7758, lng: -122.435},
-      zoom: 15
+      zoom: 15,
+
+      mapTypeControlOptions: {
+        mapTypeIds: [google.maps.MapTypeId.DARK, "darkmap"]
+      }
     };
     // debugger;
     if (mapDOMNode !== undefined){
       this.mapAddress = new google.maps.Map(mapDOMNode, mapOptions);
+      this.mapAddress.mapTypes.set("darkmap", MapStyle);
+      this.mapAddress.setMapTypeId("darkmap");
     }
   }
 

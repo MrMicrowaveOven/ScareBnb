@@ -31358,6 +31358,7 @@
 	
 	var History = __webpack_require__(159).History;
 	var ApiUtil = __webpack_require__(206);
+	var MapStyle = __webpack_require__(250);
 	
 	var Geosuggest = __webpack_require__(240);
 	
@@ -31497,10 +31498,14 @@
 	      this.mapAddressMarker.setMap(null);
 	    }
 	
+	    var image = "https://49.media.tumblr.com/cf07c4116283d8b2a71326ed4fc4cb2c/tumblr_o3hr8mRRGS1v497yzo1_75sq.gif";
+	
 	    this.mapAddressMarker = new google.maps.Marker({
 	      position: suggest.location,
 	      map: this.mapAddress,
-	      title: suggest.label
+	      title: suggest.label,
+	      icon: image,
+	      opacity: .5
 	    });
 	    this.mapAddress.setCenter(suggest.location);
 	    // debugger;
@@ -31565,11 +31570,17 @@
 	    var mapDOMNode = this.refs.mapAddress;
 	    var mapOptions = {
 	      center: { lat: 37.7758, lng: -122.435 },
-	      zoom: 15
+	      zoom: 15,
+	
+	      mapTypeControlOptions: {
+	        mapTypeIds: [google.maps.MapTypeId.DARK, "darkmap"]
+	      }
 	    };
 	    // debugger;
 	    if (mapDOMNode !== undefined) {
 	      this.mapAddress = new google.maps.Map(mapDOMNode, mapOptions);
+	      this.mapAddress.mapTypes.set("darkmap", MapStyle);
+	      this.mapAddress.setMapTypeId("darkmap");
 	    }
 	  }
 	
@@ -32667,35 +32678,6 @@
 	  displayName: 'NavBar',
 	
 	  mixins: [History],
-	
-	  // getInitialState: function() {
-	  //   return({page: 1});
-	  // },
-	  //
-	  // switchPage: function(page) {
-	  //   this.setState({page: page});
-	  // },
-	
-	  // addMap: function() {
-	  //   // debugger;
-	  //   var url = "/location_screen";
-	  //   this.history.push({pathname: url});
-	  // },
-	  //
-	  // addLocationForm: function() {
-	  //   var url = "/locations/new";
-	  //   this.history.push({pathname:url});
-	  // },
-	
-	  // toMap: function() {
-	  //   debugger;
-	  //   FullPage.switchPage(1);
-	  // },
-	  //
-	  // toLocationForm: function() {
-	  //   debugger;
-	  //   FullPage.switchPage(2);
-	  // },
 	
 	  render: function () {
 	    // debugger;
