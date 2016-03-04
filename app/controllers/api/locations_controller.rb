@@ -1,7 +1,7 @@
 class Api::LocationsController < ApplicationController
   def index
     if (params[:bounds])
-      debugger
+      # debugger
       @locations = Location.in_bounds(params[:bounds])
     else
       @locations = Location.all
@@ -21,7 +21,7 @@ class Api::LocationsController < ApplicationController
     if @location.save
       render json: @location
     else
-      debugger;
+      # debugger
       render json: {error: "Invalid parameters"}
     end
   end
