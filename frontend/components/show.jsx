@@ -41,7 +41,7 @@ var Show = React.createClass({
         <br/><br/>
 
         <div className="show_location_info">
-          saddress: {location.full_address}
+          Address: {location.full_address}
           <br/><br/>
           {location.description}
         </div>
