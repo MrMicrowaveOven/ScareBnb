@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    # debugger
+    debugger
     user = User.find_by_credentials(
       params[:user][:email],
       params[:user][:password]

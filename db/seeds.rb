@@ -6,6 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 user1 = User.create({email: "Benj", password: "violet"})
+user2 = User.create({email: "Dracula@IDvinkYourBlood.com", password: "vampire"})
 
 loc1 = Location.create({
   lat: 37.803376, lng: -122.417167,

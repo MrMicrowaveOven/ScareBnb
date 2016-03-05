@@ -28,12 +28,20 @@ var Show = React.createClass({
     var self = this;
     return (
       <div className="show_location">
-        <div key={location.id}>
+        <div className="show_title">
           <h2>{location.title}</h2>
-          <br/><br/>
+        </div>
+
+        <br/><br/>
+
+        <div className="show_image">
           {self.showImageIfAny()}
-          <br/><br/>
-          Address: {location.full_address}
+        </div>
+
+        <br/><br/>
+
+        <div className="show_location_info">
+          saddress: {location.full_address}
           <br/><br/>
           {location.description}
         </div>

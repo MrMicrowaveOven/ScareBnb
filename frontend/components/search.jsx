@@ -12,9 +12,13 @@ var Search = React.createClass({
       <div className="loc_container">
         <div className="search_container">
           <Map/>
-          <Index/>
+          <div className="index_bit">
+            <Index/>
+          </div>
         </div>
-        <Show className="show_bit"/>
+        <div className="show_bit">
+          <Show/>
+        </div>
       </div>
     );
   }

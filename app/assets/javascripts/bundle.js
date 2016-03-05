@@ -24483,9 +24483,17 @@
 	        'div',
 	        { className: 'search_container' },
 	        React.createElement(Map, null),
-	        React.createElement(Index, null)
+	        React.createElement(
+	          'div',
+	          { className: 'index_bit' },
+	          React.createElement(Index, null)
+	        )
 	      ),
-	      React.createElement(Show, { className: 'show_bit' })
+	      React.createElement(
+	        'div',
+	        { className: 'show_bit' },
+	        React.createElement(Show, null)
+	      )
 	    );
 	  }
 	});
@@ -24639,7 +24647,7 @@
 	    //   {defaultCenter = LocationStore.selectedLocation.location;}
 	    var mapOptions = {
 	      center: defaultCenter,
-	      zoom: 13,
+	      zoom: 10,
 	
 	      mapTypeControlOptions: {
 	        mapTypeIds: [google.maps.MapTypeId.DARK, "darkmap"]
@@ -31323,22 +31331,19 @@
 	    // debugger;
 	    var locations = this.state.locations.map(function (location) {
 	      return React.createElement(
-	        'li',
+	        'div',
 	        { key: location.id },
 	        React.createElement(
 	          'div',
 	          null,
-	          location.id
-	        ),
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement('img', { src: location.image, onClick: self.onClick.bind(self, event, location) }),
-	          ' ',
-	          location.description,
-	          ' Room for ',
+	          React.createElement('img', { src: location.image,
+	            onClick: self.onClick.bind(self, event, location) }),
+	          React.createElement('br', null),
+	          location.title,
+	          React.createElement('br', null),
+	          'Room for ',
 	          location.occupancy,
-	          ' people. '
+	          ' people.'
 	        )
 	      );
 	    });
@@ -31416,18 +31421,26 @@
 	      { className: 'show_location' },
 	      React.createElement(
 	        'div',
-	        { key: location.id },
+	        { className: 'show_title' },
 	        React.createElement(
 	          'h2',
 	          null,
 	          location.title
-	        ),
-	        React.createElement('br', null),
-	        React.createElement('br', null),
-	        self.showImageIfAny(),
-	        React.createElement('br', null),
-	        React.createElement('br', null),
-	        'Address: ',
+	        )
+	      ),
+	      React.createElement('br', null),
+	      React.createElement('br', null),
+	      React.createElement(
+	        'div',
+	        { className: 'show_image' },
+	        self.showImageIfAny()
+	      ),
+	      React.createElement('br', null),
+	      React.createElement('br', null),
+	      React.createElement(
+	        'div',
+	        { className: 'show_location_info' },
+	        'saddress: ',
 	        location.full_address,
 	        React.createElement('br', null),
 	        React.createElement('br', null),

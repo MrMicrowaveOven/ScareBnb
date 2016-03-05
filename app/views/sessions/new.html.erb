@@ -4,13 +4,25 @@
   <%#= auth_token_input %>
   <label>
     Email
-    <input type="text" name="user[email]" value="">
+    <input type="text" class="email_input" name="user[email]" value="">
   </label>
 
   <label>
     Password
-    <input type="password" name="user[password]" value="">
+    <input type="password" class="password_input" name="user[password]" value="">
   </label>
 
   <input type="submit" value="Sign In">
+  <br>
+</form>
+
+
+  <script type="text/javascript">
+
+  </script>
+
+<form action="<%= session_url %>" method="post">
+  <input type="hidden" name="user[email]" value="Dracula@IDvinkYourBlood.com">
+  <input type="hidden" name="user[password]" value="vampire">
+<input type="submit" value="Log In as Demo User!" onclick="return demo();">
 </form>

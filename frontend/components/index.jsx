@@ -16,10 +16,17 @@ var Index = React.createClass({
     // debugger;
     var locations = this.state.locations.map(function(location) {
       return (
-      <li key={location.id}>
-        <div>{location.id}</div>
-        <div><img src={location.image} onClick={self.onClick.bind(self, event, location)}/> {location.description} Room for {location.occupancy} people. </div>
-      </li>);
+      <div key={location.id}>
+
+        <div>
+          <img src={location.image}
+            onClick={self.onClick.bind(self, event, location)}/>
+          <br/>
+          {location.title}
+          <br/>
+          Room for {location.occupancy} people.
+        </div>
+      </div>);
     });
 
     return(
