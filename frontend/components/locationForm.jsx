@@ -26,6 +26,7 @@ var LocationForm = React.createClass({
       lng: -122,
       description: null,
       occupancy: 1,
+      link: "",
       price: 35,
       image: ""
     };
@@ -90,7 +91,7 @@ var LocationForm = React.createClass({
               value="Post Location!" onClick={this.submitLocation}
             />
           </div>
-
+          <br/><br/>
         </form>
       </div>
     );
@@ -162,7 +163,6 @@ var LocationForm = React.createClass({
 
   submitLocation: function(event) {
     event.preventDefault();
-
     ApiUtil.createLocation({
       title: this.state.title,
       lat: this.state.lat,
@@ -170,13 +170,13 @@ var LocationForm = React.createClass({
       full_address: this.state.full_address,
       description: this.state.description,
       occupancy: this.state.occupancy,
+      link: this.state.link,
       price: this.state.price,
       image: this.state.image.secure_url
     }, this.creationSuccess);
   },
 
   creationSuccess: function(id) {
-    debugger;
     ApiUtil.showLocation(id);
     // this.setState({images: })
     this.history.push("location_screen");

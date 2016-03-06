@@ -31328,22 +31328,23 @@
 	
 	  render: function () {
 	    var self = this;
-	    // debugger;
 	    var locations = this.state.locations.map(function (location) {
 	      return React.createElement(
 	        'div',
-	        { key: location.id },
+	        { key: location.id, className: 'index_location' },
+	        React.createElement('img', { src: location.image, key: location.id, className: 'index_image',
+	          onClick: self.onClick.bind(self, event, location) }),
 	        React.createElement(
 	          'div',
-	          null,
-	          React.createElement('img', { src: location.image,
-	            onClick: self.onClick.bind(self, event, location) }),
-	          React.createElement('br', null),
+	          { className: 'index_text' },
 	          location.title,
 	          React.createElement('br', null),
 	          'Room for ',
 	          location.occupancy,
-	          ' people.'
+	          ' people.',
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null)
 	        )
 	      );
 	    });
@@ -31407,7 +31408,6 @@
 	  render: function () {
 	
 	    var location = this.state.show;
-	
 	    if (location === null || location === undefined) {
 	      return React.createElement(
 	        'div',
@@ -31440,12 +31440,43 @@
 	      React.createElement(
 	        'div',
 	        { className: 'show_location_info' },
-	        'saddress: ',
+	        'Address: ',
 	        location.full_address,
 	        React.createElement('br', null),
 	        React.createElement('br', null),
-	        location.description
+	        location.description,
+	        React.createElement('br', null),
+	        React.createElement('br', null),
+	        'Room for ',
+	        location.occupancy,
+	        ' people.',
+	        self.showLinkIfAny(),
+	        React.createElement('br', null),
+	        'Price: $',
+	        location.price,
+	        ' per night.'
 	      )
+	    );
+	  },
+	
+	  showLinkIfAny: function () {
+	    var link = this.state.show.link;
+	    // debugger;
+	    if (link === "" || link === undefined) {
+	      return React.createElement('br', null);
+	    }
+	
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement('br', null),
+	      'Click ',
+	      React.createElement(
+	        'a',
+	        { href: link },
+	        'here'
+	      ),
+	      ' for more haunted location information.'
 	    );
 	  },
 	
@@ -31520,6 +31551,7 @@
 	      lng: -122,
 	      description: null,
 	      occupancy: 1,
+	      link: "",
 	      price: 35,
 	      image: ""
 	    };
@@ -31614,7 +31646,9 @@
 	          React.createElement('input', { type: 'submit', className: 'CreateLocation',
 	            value: 'Post Location!', onClick: this.submitLocation
 	          })
-	        )
+	        ),
+	        React.createElement('br', null),
+	        React.createElement('br', null)
 	      )
 	    );
 	  },
@@ -31689,7 +31723,6 @@
 	
 	  submitLocation: function (event) {
 	    event.preventDefault();
-	
 	    ApiUtil.createLocation({
 	      title: this.state.title,
 	      lat: this.state.lat,
@@ -31697,13 +31730,13 @@
 	      full_address: this.state.full_address,
 	      description: this.state.description,
 	      occupancy: this.state.occupancy,
+	      link: this.state.link,
 	      price: this.state.price,
 	      image: this.state.image.secure_url
 	    }, this.creationSuccess);
 	  },
 	
 	  creationSuccess: function (id) {
-	    debugger;
 	    ApiUtil.showLocation(id);
 	    // this.setState({images: })
 	    this.history.push("location_screen");
@@ -32831,28 +32864,24 @@
 	      { className: 'nav_bar' },
 	      React.createElement(
 	        'div',
-	        { className: 'nav_bar_sub' },
+	        { className: 'nav_bar_link_container' },
 	        React.createElement(
-	          'div',
-	          { className: 'nav_bar_link_container' },
-	          React.createElement(
-	            'button',
-	            { onClick: ApiUtil.signOut,
-	              className: 'sign_out_button' },
-	            'Sign Out'
-	          ),
-	          React.createElement(
-	            Link,
-	            { to: "location_screen",
-	              className: 'search_location_link' },
-	            'Search Haunted Locations!'
-	          ),
-	          React.createElement(
-	            Link,
-	            { to: "locations/new",
-	              className: 'new_location_link' },
-	            'Add Your Haunted Location!'
-	          )
+	          Link,
+	          { to: "location_screen",
+	            className: 'search_location_link' },
+	          'Search Haunted Locations!'
+	        ),
+	        React.createElement(
+	          Link,
+	          { to: "locations/new",
+	            className: 'new_location_link' },
+	          'Add Your Haunted Location!'
+	        ),
+	        React.createElement(
+	          'button',
+	          { onClick: ApiUtil.signOut,
+	            className: 'sign_out_button' },
+	          'Sign Out'
 	        )
 	      )
 	    );

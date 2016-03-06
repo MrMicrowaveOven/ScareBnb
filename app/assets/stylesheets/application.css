@@ -17,6 +17,16 @@
  *= require_self
  */
 
+ body {
+   font-family: sans-serif;
+   background-image: url("http://res.cloudinary.com/dazguin0y/image/upload/e_brightness:-60/v1457241867/UserImages/downloaded_yqoe2t.jpg");
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+   background-size: cover;
+   background-position: center;
+   color: lightgrey;
+ }
+
 /*SignUp and SignIn buttons*/
 .authButtons {
   float: right;
@@ -61,11 +71,6 @@
 
 
 
- .map {
-   height: 400px;
-   width: 90%;
-   display: flex;
- }
 
  /*Contains Map and Index*/
  .search_container {
@@ -77,8 +82,36 @@
    /*padding: 20px;
    border: 20px;*/
    margin: 20px;
-
  }
+
+ .map {
+   height: 400px;
+   width: 90%;
+   display: flex;
+ }
+
+/*Just Index Stuff*/
+  .index_bit {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .index_location {
+    /*width: 50px*/
+  }
+
+  .index_image {
+    cursor: pointer;
+    width: 50%;
+    float: left;
+    height: auto;
+  }
+
+  .index_text {
+    text-align: justify;
+    text-justify: inter-word;
+  }
 
 /*Just show, right-half*/
 
@@ -97,6 +130,7 @@
    display: flex;
    align-items: center;
    justify-content: center;
+   width: 100%;
  }
 
 /*END OF LOCATION VIEW THINGS*/

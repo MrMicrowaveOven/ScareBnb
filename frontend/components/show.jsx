@@ -18,7 +18,6 @@ var Show = React.createClass({
   render: function() {
 
     var location = this.state.show;
-
     if (location === null || location === undefined)
       {
         return(
@@ -44,9 +43,29 @@ var Show = React.createClass({
           Address: {location.full_address}
           <br/><br/>
           {location.description}
+          <br/><br/>
+          Room for {location.occupancy} people.
+          {self.showLinkIfAny()}
+          <br/>
+          Price: ${location.price} per night.
+
         </div>
       </div>
     );
+  },
+
+  showLinkIfAny: function() {
+    var link = this.state.show.link;
+    // debugger;
+    if (link === "" || link === undefined) {return <br/>;}
+
+    return (
+      <div>
+        <br/>
+        Click <a href={link}>here</a> for more haunted location information.
+      </div>
+    );
+
   },
 
   showImageIfAny: function() {

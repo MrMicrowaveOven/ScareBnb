@@ -13,19 +13,19 @@ var Index = React.createClass({
 
   render: function() {
     var self = this;
-    // debugger;
     var locations = this.state.locations.map(function(location) {
       return (
-      <div key={location.id}>
+      <div key={location.id} className="index_location">
 
-        <div>
-          <img src={location.image}
+          <img src={location.image} key={location.id} className="index_image"
             onClick={self.onClick.bind(self, event, location)}/>
-          <br/>
-          {location.title}
-          <br/>
-          Room for {location.occupancy} people.
-        </div>
+
+          <div className="index_text">
+            {location.title}
+            <br/>
+            Room for {location.occupancy} people.
+            <br/><br/><br/>
+          </div>
       </div>);
     });
 
