@@ -10,7 +10,7 @@ var NavBar = React.createClass({
   render: function () {
     // debugger;
     return (
-      // <div className="nav_bar">
+      <div className="nav_bar">
 
           <ul className="nav_bar_link_container">
               <li className="logo">
@@ -35,7 +35,7 @@ var NavBar = React.createClass({
               </li>
 
           </ul>
-      // </div>
+      </div>
     );
   }
 

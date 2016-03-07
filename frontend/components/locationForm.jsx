@@ -18,10 +18,6 @@ var LocationForm = React.createClass({
     return {
       title: "",
       full_address: "",
-      address: "160 Spear Street",
-      city: "San Francisco",
-      state: "CA",
-      zip_code: "94105",
       lat: 38,
       lng: -122,
       description: null,

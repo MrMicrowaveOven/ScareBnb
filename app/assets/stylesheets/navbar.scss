@@ -1,14 +1,21 @@
 
 
 .nav_bar {
-  background: black;
-  linear-gradient: (rgba(102, 102, 102, 0.98), rgba(52, 52, 52, 0.98));
+  // background: black;
   width: 100%;
+  // top: 0px;
   position: fixed;
-  top: 0px;
-  min-height: 40px;
+  // min-height: 40px;
   z-index: 1;
   // box-shadow: 3px 0 10px 2px rgba(102,102,102, 0.95);
+}
+
+.nav_bar_link_container {
+  // linear-gradient: (rgba(102, 102, 102, 0.98), rgba(52, 52, 52, 0.98));
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 .logo {
@@ -28,7 +35,7 @@
 .non-logo {
   float: right;
   font-size: 26px;
-  padding: 6px 14px;
+  padding: 3px 18px;
 }
 
 .non-logo:focus, .non-logo:hover {
@@ -48,14 +55,6 @@ a:focus, a:hover, Link:focus, Link:hover {
 
 }
 
-.nav_bar_link_container {
-
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-
-}
 
 
 

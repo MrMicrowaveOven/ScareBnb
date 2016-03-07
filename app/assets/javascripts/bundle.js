@@ -31413,13 +31413,11 @@
 	        { className: 'show_title' },
 	        location.title
 	      ),
-	      React.createElement('br', null),
 	      React.createElement(
 	        'div',
 	        { className: 'show_image' },
 	        self.showImageIfAny()
 	      ),
-	      React.createElement('br', null),
 	      React.createElement('br', null),
 	      React.createElement(
 	        'div',
@@ -31433,7 +31431,6 @@
 	          { className: 'show_description' },
 	          location.description
 	        ),
-	        React.createElement('br', null),
 	        React.createElement('br', null),
 	        'Room for ',
 	        location.occupancy,
@@ -31531,10 +31528,6 @@
 	    return {
 	      title: "",
 	      full_address: "",
-	      address: "160 Spear Street",
-	      city: "San Francisco",
-	      state: "CA",
-	      zip_code: "94105",
 	      lat: 38,
 	      lng: -122,
 	      description: null,
@@ -32847,9 +32840,9 @@
 	
 	  render: function () {
 	    // debugger;
-	    return(
-	      // <div className="nav_bar">
-	
+	    return React.createElement(
+	      'div',
+	      { className: 'nav_bar' },
 	      React.createElement(
 	        'ul',
 	        { className: 'nav_bar_link_container' },
@@ -32889,8 +32882,6 @@
 	          )
 	        )
 	      )
-	      // </div>
-	
 	    );
 	  }
 	

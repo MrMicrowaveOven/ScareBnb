@@ -28,13 +28,13 @@ var Show = React.createClass({
     return (
       <div className="show_location">
           <h2 className="show_title">{location.title}</h2>
-        <br/>
+
 
         <div className="show_image">
           {self.showImageIfAny()}
         </div>
 
-        <br/><br/>
+        <br/>
 
         <div className="show_location_info">
           Address: {location.full_address}
@@ -42,7 +42,7 @@ var Show = React.createClass({
           <div className="show_description">
             {location.description}
           </div>
-          <br/><br/>
+          <br/>
           Room for {location.occupancy} people.
           {self.showLinkIfAny()}
           <br/>
