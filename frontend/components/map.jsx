@@ -149,7 +149,7 @@ var Map = React.createClass({
     //   {defaultCenter = LocationStore.selectedLocation.location;}
     var mapOptions = {
       center: defaultCenter,
-      zoom: 10,
+      zoom: 11,
 
       mapTypeControlOptions: {
         mapTypeIds: [google.maps.MapTypeId.DARK, "darkmap"]

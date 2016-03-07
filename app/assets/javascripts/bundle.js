@@ -24647,7 +24647,7 @@
 	    //   {defaultCenter = LocationStore.selectedLocation.location;}
 	    var mapOptions = {
 	      center: defaultCenter,
-	      zoom: 10,
+	      zoom: 11,
 	
 	      mapTypeControlOptions: {
 	        mapTypeIds: [google.maps.MapTypeId.DARK, "darkmap"]
@@ -32865,6 +32865,11 @@
 	      React.createElement(
 	        'div',
 	        { className: 'nav_bar_link_container' },
+	        React.createElement(
+	          'div',
+	          { className: 'logo' },
+	          React.createElement('img', { src: 'https://45.media.tumblr.com/ee2a1e38364c90c7b0322cb2409fa448/tumblr_o3n80k74ih1v497yzo1_400.gif' })
+	        ),
 	        React.createElement(
 	          Link,
 	          { to: "location_screen",

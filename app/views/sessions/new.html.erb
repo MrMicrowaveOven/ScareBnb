@@ -1,28 +1,83 @@
-<h2>Sign In</h2>
 
-<form action="<%= session_url %>" method="post">
-  <%#= auth_token_input %>
-  <label>
-    Email
-    <input type="text" class="email_input" name="user[email]" value="">
-  </label>
-
-  <label>
-    Password
-    <input type="password" class="password_input" name="user[password]" value="">
-  </label>
-
-  <input type="submit" value="Sign In">
-  <br>
-</form>
+<div class="auth_page">
+  <div class="logo">
+    <img src="https://45.media.tumblr.com/ee2a1e38364c90c7b0322cb2409fa448/tumblr_o3n80k74ih1v497yzo1_400.gif"/>
+  </div>
+  <div class="auth_form_container">
+    <div class="auth_form_and_buttons">
 
 
-  <script type="text/javascript">
+      <ul class="mui-tabs__bar mui-tabs__bar--justified">
 
-  </script>
+        <li class="mui--is-active"><a data-mui-toggle="tab" data-mui-controls="pane-justified-1">
+          Sign In
+        </a></li>
 
-<form action="<%= session_url %>" method="post">
-  <input type="hidden" name="user[email]" value="Dracula@IDvinkYourBlood.com">
-  <input type="hidden" name="user[password]" value="vampire">
-<input type="submit" value="Log In as Demo User!" onclick="return demo();">
-</form>
+        <li><a data-mui-toggle="tab" data-mui-controls="pane-justified-2">
+          Sign Up
+        </a></li>
+
+      </ul>
+
+      <!-- Sign In Tab -->
+      <div class="mui-tabs__pane mui--is-active" id="pane-justified-1">
+        <form action="<%= session_url %>" method="post" class="auth_form">
+          <div class="auth_input">
+
+            <div class="mui-textfield">
+              <input type="text" class="email_input" name="user[email]" value="" placeholder="Email">
+            </div>
+
+            <div class="mui-textfield">
+              <input type="password" class="password_input" name="user[password]" value="" placeholder="Password">
+            </div>
+
+          </div>
+          <div class="sign_button">
+            <input type="submit" value="Sign In" class="mui-btn mui-btn--danger">
+          </div>
+        </form>
+
+        <form action="<%= session_url %>" method="post">
+          <input type="hidden" name="user[email]" value="Dracula@IDvinkYourBlood.com">
+          <input type="hidden" name="user[password]" value="vampire">
+          <div class="sign_button">
+            <input type="submit" value="Log In as Demo User!" onclick="return demo();" class="mui-btn mui-btn--danger">
+          </div>
+        </form>
+      </div>
+      <div class="mui-tabs__pane" id="pane-justified-2">
+
+        <!-- Sign Up Tab -->
+
+        <div class="mui-tabs__pane mui--is-active" id="pane-justified-1">
+          <form action="<%= users_url %>" method="post" class="auth_form">
+            <div class="auth_input">
+
+              <div class="mui-textfield">
+                <input type="text" class="email_input" name="user[email]" value="" placeholder="Email">
+              </div>
+
+              <div class="mui-textfield">
+                <input type="password" class="password_input" name="user[password]" value="" placeholder="Password">
+              </div>
+
+            </div>
+            <input type="submit" value="Sign Up!" class="mui-btn mui-btn--danger">
+            <br>
+          </form>
+        </div>
+        <div class="mui-tabs__pane" id="pane-justified-2">
+
+
+      </div>
+
+      <div class="auth_tabs">
+
+
+      </div>
+
+
+    </div>
+  </div>
+</div>

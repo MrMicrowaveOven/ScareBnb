@@ -27,9 +27,40 @@
    color: lightgrey;
  }
 
-/*SignUp and SignIn buttons*/
-.authButtons {
-  float: right;
+.auth_page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth_form_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth_tabs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.auth_input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth_form_and_buttons {
+  background-color: gray;
+  opacity: .7;
+  width: 350px;
+}
+
+.auth_form {
+  width: 90%;
 }
 
 /*LocationForm Stuff*/
