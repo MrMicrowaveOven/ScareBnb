@@ -38,6 +38,7 @@
   padding: 3px 18px;
 }
 
+
 .non-logo:focus, .non-logo:hover {
     text-decoration: none;
 }
@@ -71,6 +72,7 @@ a:focus, a:hover, Link:focus, Link:hover {
   display: block;
   max-height: 50px;
   color: indigo;
+  text-decoration: none;
 }
 // .nav-bar-link {
 //   font-size: 0.75rem;

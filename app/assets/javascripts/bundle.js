@@ -31552,22 +31552,17 @@
 	        'form',
 	        { className: 'LocationForm', onSubmit: this.submitLocation },
 	        React.createElement(
-	          'div',
+	          'label',
 	          null,
-	          React.createElement(
-	            'label',
-	            null,
-	            'Title of Place',
-	            React.createElement('br', null),
-	            React.createElement('br', null),
-	            React.createElement('input', { type: 'text', className: 'title',
-	              valueLink: this.linkState("title")
-	            })
-	          )
+	          'Title of Place',
+	          React.createElement('br', null),
+	          React.createElement('input', { type: 'text', className: 'title',
+	            valueLink: this.linkState("title")
+	          })
 	        ),
 	        React.createElement(
 	          'div',
-	          null,
+	          { className: 'geo_input' },
 	          React.createElement(Geosuggest, {
 	            location: this.defaultSFLocation,
 	            radius: '50',
@@ -31593,6 +31588,7 @@
 	          'label',
 	          null,
 	          'How many people can stay at this location?',
+	          React.createElement('br', null),
 	          React.createElement(
 	            'select',
 	            { name: 'Max Occupancy',
@@ -31606,6 +31602,7 @@
 	          'div',
 	          null,
 	          'Be sure to include a picture of your place!',
+	          React.createElement('br', null),
 	          React.createElement(
 	            'button',
 	            { className: 'upload', onClick: this.uploadImage },
@@ -31644,7 +31641,8 @@
 	    return React.createElement(
 	      'div',
 	      null,
-	      '"Here is your image: " ',
+	      'Here is your image: ',
+	      React.createElement('br', null),
 	      imageShow
 	    );
 	  },

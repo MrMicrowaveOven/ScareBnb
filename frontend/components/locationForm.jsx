@@ -35,15 +35,13 @@ var LocationForm = React.createClass({
         <h2 className="Add a location">Post your location!</h2>
         <form className="LocationForm" onSubmit={this.submitLocation}>
 
-          <div>
-            <label>Title of Place<br/><br/>
-              <input type="text" className="title"
-                valueLink={this.linkState("title")}
-                />
-            </label>
-          </div>
+          <label>Title of Place<br/>
+            <input type="text" className="title"
+              valueLink={this.linkState("title")}
+              />
+          </label>
 
-          <div>
+          <div className="geo_input">
             <Geosuggest
               location={this.defaultSFLocation}
               radius = "50"
@@ -63,6 +61,7 @@ var LocationForm = React.createClass({
           </label>
           <br/>
           <label>How many people can stay at this location?
+            <br/>
             <select name="Max Occupancy"
               valueLink={this.linkState("occupancy")}
             >
@@ -72,6 +71,7 @@ var LocationForm = React.createClass({
           <br/>
           <div>
             Be sure to include a picture of your place!
+            <br/>
             <button className="upload" onClick={this.uploadImage}>
               Upload picture!</button>
           </div>
@@ -98,7 +98,7 @@ var LocationForm = React.createClass({
     if (image === "") {return;}
     var imageShow = <img src={image.secure_url}/>;
     // debugger;
-    return (<div>"Here is your image: " {imageShow}</div>);
+    return (<div>Here is your image: <br/>{imageShow}</div>);
   },
 
   oneThroughTen: function() {

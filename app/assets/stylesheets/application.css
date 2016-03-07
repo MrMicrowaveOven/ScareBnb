@@ -51,16 +51,39 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
+#pane-justified-1 {
+  width: 100%;
+}
+
+#pane-justified-2 {
+  width: 100%;
+}
 
 .auth_form_and_buttons {
   background-color: gray;
   opacity: .7;
   width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .auth_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+}
+
+.sign_button {
+display: flex;
+justify-content: center;
+}
+
+.mui-textfield {
   width: 90%;
 }
 
@@ -72,8 +95,10 @@
 
  .LocationForm {
   display: flex;
-  flex-flow: column wrap;
+  flex-direction: column;
+  /*flex-flow: column wrap;*/
   align-items: center;
+  padding: 50px 0px 0px 0px;
  }
 
  .locationdescription {
@@ -200,6 +225,10 @@
    width: 400px;
    margin: 1em auto;
    text-align: left;
+ }
+ .geo_input {
+   display: flex;
+   justify-content: center;
  }
  .geosuggest__input {
    width: 100%;
