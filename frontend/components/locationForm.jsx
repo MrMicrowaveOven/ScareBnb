@@ -189,7 +189,7 @@ var LocationForm = React.createClass({
     var mapOptions = {
       center: {lat: 37.7758, lng: -122.435},
       zoom: 15,
-
+      backgroundColor: "#000000",
       mapTypeControlOptions: {
         mapTypeIds: [google.maps.MapTypeId.DARK, "darkmap"]
       }

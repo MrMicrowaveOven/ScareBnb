@@ -24,17 +24,19 @@
         <form action="<%= session_url %>" method="post" class="auth_form">
           <div class="auth_input">
 
-            <div class="mui-textfield">
-              <input type="text" class="email_input" name="user[email]" value="" placeholder="Email">
+            <div class="mui-textfield mui-textfield--float-label">
+              <input type="email" class="email_input" name="user[email]" value="" required>
+              <label>Email</label>
             </div>
 
-            <div class="mui-textfield">
-              <input type="password" class="password_input" name="user[password]" value="" placeholder="Password">
+            <div class="mui-textfield mui-textfield--float-label">
+              <input type="password" class="password_input" name="user[password]" value="" required>
+              <label>Password</label>
             </div>
 
           </div>
           <div class="sign_button">
-            <input type="submit" value="Sign In" class="mui-btn mui-btn--danger">
+            <input type="submit" value="Sign In" class="mui-btn">
           </div>
         </form>
 
@@ -42,7 +44,7 @@
           <input type="hidden" name="user[email]" value="Dracula@IDvinkYourBlood.com">
           <input type="hidden" name="user[password]" value="vampire">
           <div class="sign_button">
-            <input type="submit" value="Log In as Demo User!" onclick="return demo();" class="mui-btn mui-btn--danger">
+            <input type="submit" value="Log In as Demo User!" onclick="return demo();" class="mui-btn">
           </div>
         </form>
       </div>
@@ -54,16 +56,18 @@
           <form action="<%= users_url %>" method="post" class="auth_form">
             <div class="auth_input">
 
-              <div class="mui-textfield">
-                <input type="text" class="email_input" name="user[email]" value="" placeholder="Email">
+              <div class="mui-textfield mui-textfield--float-label">
+                <input type="email" class="email_input" name="user[email]" value="" required>
+                <label>Email</label>
               </div>
 
-              <div class="mui-textfield">
-                <input type="password" class="password_input" name="user[password]" value="" placeholder="Password">
+              <div class="mui-textfield mui-textfield--float-label">
+                <input type="password" class="password_input" name="user[password]" value="" required>
+                <label>Password</label>
               </div>
 
             </div>
-            <input type="submit" value="Sign Up!" class="mui-btn mui-btn--danger">
+            <input type="submit" value="Sign Up!" class="mui-btn">
             <br>
           </form>
         </div>

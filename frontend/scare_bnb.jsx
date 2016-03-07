@@ -23,7 +23,7 @@ var App = React.createClass({
       return (
           <div>
             <div><NavBar/></div>
-            <header><h1>Location BnB</h1></header>
+            <header></header>
             {this.props.children}
           </div>
       );

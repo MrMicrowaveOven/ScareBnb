@@ -21,11 +21,13 @@ var Index = React.createClass({
             onClick={self.onClick.bind(self, event, location)}/>
 
           <div className="index_text">
-            {location.title}
-            <br/>
-            Room for {location.occupancy} people.
-            <br/><br/><br/>
-          </div>
+              {location.title}
+              <div>
+                Room for {location.occupancy} people.
+                <br/>
+              </div>
+        </div>
+
       </div>);
     });
 

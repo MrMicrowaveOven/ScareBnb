@@ -150,7 +150,7 @@ var Map = React.createClass({
     var mapOptions = {
       center: defaultCenter,
       zoom: 11,
-
+      backgroundColor: "#000000",
       mapTypeControlOptions: {
         mapTypeIds: [google.maps.MapTypeId.DARK, "darkmap"]
       }

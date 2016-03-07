@@ -10,26 +10,32 @@ var NavBar = React.createClass({
   render: function () {
     // debugger;
     return (
-      <div className="nav_bar">
-        <div className="nav_bar_link_container">
+      // <div className="nav_bar">
 
-          <div className="logo">
-            <img src="https://45.media.tumblr.com/ee2a1e38364c90c7b0322cb2409fa448/tumblr_o3n80k74ih1v497yzo1_400.gif"/>
-          </div>
+          <ul className="nav_bar_link_container">
+              <li className="logo">
+                <img className="nav_bar_link" src="https://45.media.tumblr.com/2e79b852116c3e16b659b16685c5102f/tumblr_o3nm8rDQym1v497yzo4_250.gif"/>
+              </li>
 
-          <Link to={"location_screen"}
-            className="search_location_link">Search Haunted Locations!
-          </Link>
+              <li className="non-logo">
+                <a onClick={ApiUtil.signOut}
+                  className = "nav_bar_link">Sign Out</a>
+              </li>
 
-          <Link to={"locations/new"}
-            className="new_location_link">Add Your Haunted Location!
-          </Link>
+              <li className="non-logo">
+                <Link to={"locations/new"}
+                  className="nav_bar_link" >Add Your Haunt!
+                </Link>
+              </li>
 
-          <button onClick={ApiUtil.signOut}
-            className="sign_out_button">Sign Out</button>
+              <li className="non-logo">
+                <Link to={"location_screen"}
+                  className="nav_bar_link">Search
+                </Link>
+              </li>
 
-        </div>
-      </div>
+          </ul>
+      // </div>
     );
   }
 

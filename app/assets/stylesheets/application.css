@@ -19,7 +19,7 @@
 
  body {
    font-family: sans-serif;
-   background-image: url("http://res.cloudinary.com/dazguin0y/image/upload/e_brightness:-60/v1457241867/UserImages/downloaded_yqoe2t.jpg");
+   background-image: url("http://res.cloudinary.com/dazguin0y/image/upload/e_brightness:-80/v1457241867/UserImages/downloaded_yqoe2t.jpg");
    background-repeat: no-repeat;
    background-attachment: fixed;
    background-size: cover;
@@ -53,6 +53,11 @@
   align-items: center;
 }
 
+.show_title {
+  display: flex;
+  justify-content: center;
+}
+
 .auth_form_and_buttons {
   background-color: gray;
   opacity: .7;
@@ -80,11 +85,6 @@
    height: 200px;
  }
 
- .new_location_link {
-   font-size: 20px;
-   display: flex;
-   align-items: flex-end;
- }
 
 
 /*end of location form*/
@@ -117,30 +117,37 @@
 
  .map {
    height: 400px;
-   width: 90%;
+   width: 95%;
    display: flex;
  }
 
 /*Just Index Stuff*/
-  .index_bit {
+  .location_index {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
   }
 
   .index_location {
-    /*width: 50px*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45%
   }
 
   .index_image {
     cursor: pointer;
-    width: 50%;
+    width: 100%;
+    height: 100px;
+    padding: 8px;
     float: left;
-    height: auto;
   }
 
   .index_text {
-    text-align: justify;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 8px;
     text-justify: inter-word;
   }
 
@@ -151,10 +158,6 @@
    flex-direction: column;
    align-content: center;
    flex: 1;
- }
-
- .show_title {
-   align-self: center;
  }
 
  .show_image {

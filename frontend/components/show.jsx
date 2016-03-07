@@ -27,11 +27,8 @@ var Show = React.createClass({
     var self = this;
     return (
       <div className="show_location">
-        <div className="show_title">
-          <h2>{location.title}</h2>
-        </div>
-
-        <br/><br/>
+          <h2 className="show_title">{location.title}</h2>
+        <br/>
 
         <div className="show_image">
           {self.showImageIfAny()}

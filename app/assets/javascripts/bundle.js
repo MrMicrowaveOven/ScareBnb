@@ -75,15 +75,7 @@
 	        null,
 	        React.createElement(NavBar, null)
 	      ),
-	      React.createElement(
-	        'header',
-	        null,
-	        React.createElement(
-	          'h1',
-	          null,
-	          'Location BnB'
-	        )
-	      ),
+	      React.createElement('header', null),
 	      this.props.children
 	    );
 	  }
@@ -24648,7 +24640,7 @@
 	    var mapOptions = {
 	      center: defaultCenter,
 	      zoom: 11,
-	
+	      backgroundColor: "#000000",
 	      mapTypeControlOptions: {
 	        mapTypeIds: [google.maps.MapTypeId.DARK, "darkmap"]
 	      }
@@ -31338,13 +31330,14 @@
 	          'div',
 	          { className: 'index_text' },
 	          location.title,
-	          React.createElement('br', null),
-	          'Room for ',
-	          location.occupancy,
-	          ' people.',
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null)
+	          React.createElement(
+	            'div',
+	            null,
+	            'Room for ',
+	            location.occupancy,
+	            ' people.',
+	            React.createElement('br', null)
+	          )
 	        )
 	      );
 	    });
@@ -31420,15 +31413,10 @@
 	      'div',
 	      { className: 'show_location' },
 	      React.createElement(
-	        'div',
+	        'h2',
 	        { className: 'show_title' },
-	        React.createElement(
-	          'h2',
-	          null,
-	          location.title
-	        )
+	        location.title
 	      ),
-	      React.createElement('br', null),
 	      React.createElement('br', null),
 	      React.createElement(
 	        'div',
@@ -31749,7 +31737,7 @@
 	    var mapOptions = {
 	      center: { lat: 37.7758, lng: -122.435 },
 	      zoom: 15,
-	
+	      backgroundColor: "#000000",
 	      mapTypeControlOptions: {
 	        mapTypeIds: [google.maps.MapTypeId.DARK, "darkmap"]
 	      }
@@ -32859,36 +32847,50 @@
 	
 	  render: function () {
 	    // debugger;
-	    return React.createElement(
-	      'div',
-	      { className: 'nav_bar' },
+	    return(
+	      // <div className="nav_bar">
+	
 	      React.createElement(
-	        'div',
+	        'ul',
 	        { className: 'nav_bar_link_container' },
 	        React.createElement(
-	          'div',
+	          'li',
 	          { className: 'logo' },
-	          React.createElement('img', { src: 'https://45.media.tumblr.com/ee2a1e38364c90c7b0322cb2409fa448/tumblr_o3n80k74ih1v497yzo1_400.gif' })
+	          React.createElement('img', { className: 'nav_bar_link', src: 'https://45.media.tumblr.com/2e79b852116c3e16b659b16685c5102f/tumblr_o3nm8rDQym1v497yzo4_250.gif' })
 	        ),
 	        React.createElement(
-	          Link,
-	          { to: "location_screen",
-	            className: 'search_location_link' },
-	          'Search Haunted Locations!'
+	          'li',
+	          { className: 'non-logo' },
+	          React.createElement(
+	            'a',
+	            { onClick: ApiUtil.signOut,
+	              className: 'nav_bar_link' },
+	            'Sign Out'
+	          )
 	        ),
 	        React.createElement(
-	          Link,
-	          { to: "locations/new",
-	            className: 'new_location_link' },
-	          'Add Your Haunted Location!'
+	          'li',
+	          { className: 'non-logo' },
+	          React.createElement(
+	            Link,
+	            { to: "locations/new",
+	              className: 'nav_bar_link' },
+	            'Add Your Haunt!'
+	          )
 	        ),
 	        React.createElement(
-	          'button',
-	          { onClick: ApiUtil.signOut,
-	            className: 'sign_out_button' },
-	          'Sign Out'
+	          'li',
+	          { className: 'non-logo' },
+	          React.createElement(
+	            Link,
+	            { to: "location_screen",
+	              className: 'nav_bar_link' },
+	            'Search'
+	          )
 	        )
 	      )
+	      // </div>
+	
 	    );
 	  }
 	
