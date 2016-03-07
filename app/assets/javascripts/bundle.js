@@ -24475,11 +24475,7 @@
 	        'div',
 	        { className: 'search_container' },
 	        React.createElement(Map, null),
-	        React.createElement(
-	          'div',
-	          { className: 'index_bit' },
-	          React.createElement(Index, null)
-	        )
+	        React.createElement(Index, null)
 	      ),
 	      React.createElement(
 	        'div',
@@ -31344,7 +31340,7 @@
 	
 	    return React.createElement(
 	      'div',
-	      null,
+	      { className: 'index_bit' },
 	      React.createElement(
 	        'ul',
 	        { className: 'location_index', id: 'location_list' },
@@ -31432,7 +31428,11 @@
 	        location.full_address,
 	        React.createElement('br', null),
 	        React.createElement('br', null),
-	        location.description,
+	        React.createElement(
+	          'div',
+	          { className: 'show_description' },
+	          location.description
+	        ),
 	        React.createElement('br', null),
 	        React.createElement('br', null),
 	        'Room for ',

@@ -53,10 +53,6 @@
   align-items: center;
 }
 
-.show_title {
-  display: flex;
-  justify-content: center;
-}
 
 .auth_form_and_buttons {
   background-color: gray;
@@ -107,12 +103,11 @@
  .search_container {
    display: flex;
    flex-direction: column;
-   align-items: flex-end;
    flex: 1;
    align-items: center;
    /*padding: 20px;
    border: 20px;*/
-   margin: 20px;
+   margin: 5px;
  }
 
  .map {
@@ -122,32 +117,47 @@
  }
 
 /*Just Index Stuff*/
+  .index_bit {
+    display: flex;
+    justify-content: center;
+  }
+
   .location_index {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
+    padding: 5px;
   }
 
   .index_location {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 45%
+    /*width: 200px;
+    height: auto;*/
   }
 
   .index_image {
     cursor: pointer;
-    width: 100%;
-    height: 100px;
+    width: 225px;
+    height: 175px;
+    resize: vertical;
     padding: 8px;
     float: left;
+    font-size: 11px;
   }
+
+  /*.index_image.resize {
+    width: 100%;
+    height: auto;
+  }*/
 
   .index_text {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 8px;
+    font-size: 11px;
     text-justify: inter-word;
   }
 
@@ -158,6 +168,8 @@
    flex-direction: column;
    align-content: center;
    flex: 1;
+   margin: 5px;
+   padding: 0px 10px 0px 0px;
  }
 
  .show_image {
@@ -165,6 +177,15 @@
    align-items: center;
    justify-content: center;
    width: 100%;
+ }
+
+ .show_title {
+   display: flex;
+   justify-content: center;
+ }
+
+ .show_description {
+   text-align: justify;
  }
 
 /*END OF LOCATION VIEW THINGS*/

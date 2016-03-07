@@ -21,18 +21,18 @@ var Index = React.createClass({
             onClick={self.onClick.bind(self, event, location)}/>
 
           <div className="index_text">
-              {location.title}
-              <div>
-                Room for {location.occupancy} people.
-                <br/>
-              </div>
-        </div>
+                {location.title}
+                <div>
+                    Room for {location.occupancy} people.
+                    <br/>
+                </div>
+          </div>
 
       </div>);
     });
 
     return(
-      <div>
+      <div className="index_bit">
         <ul className="location_index" id="location_list">{locations}</ul>
       </div>
     );
