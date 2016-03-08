@@ -30,7 +30,7 @@ var NavBar = React.createClass({
 
               <li className="non-logo">
                 <Link to={"location_screen"}
-                  className="nav_bar_link">Search
+                  className="nav_bar_link">Map
                 </Link>
               </li>
 
