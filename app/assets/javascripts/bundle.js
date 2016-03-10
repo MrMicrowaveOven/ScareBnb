@@ -32876,7 +32876,7 @@
 	            Link,
 	            { to: "location_screen",
 	              className: 'nav_bar_link' },
-	            'Search'
+	            'Map'
 	          )
 	        )
 	      )
