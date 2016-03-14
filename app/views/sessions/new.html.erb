@@ -6,13 +6,15 @@
 
 
 <div class="auth_page">
-  <div class="logo">
-    <img src="https://45.media.tumblr.com/ee2a1e38364c90c7b0322cb2409fa448/tumblr_o3n80k74ih1v497yzo1_400.gif"/>
-  </div>
-  <div class="auth_form_container">
+  <!-- Logo and Form -->
+    <!-- Logo -->
+    <div class="logo">
+      <img src="https://45.media.tumblr.com/ee2a1e38364c90c7b0322cb2409fa448/tumblr_o3n80k74ih1v497yzo1_400.gif"/>
+    </div>
+    <!-- Form -->
     <div class="auth_form_and_buttons">
 
-
+      <!-- Tabs, Sign In and Sign Up -->
       <ul class="mui-tabs__bar mui-tabs__bar--justified">
 
         <li class="mui--is-active"><a data-mui-toggle="tab" data-mui-controls="pane-justified-1">
@@ -54,40 +56,26 @@
           </div>
         </form>
       </div>
-      <div class="mui-tabs__pane" id="pane-justified-2">
 
         <!-- Sign Up Tab -->
+      <div class="mui-tabs__pane" id="pane-justified-2">
+        <form action="<%= users_url %>" method="post" class="auth_form">
+          <div class="auth_input">
 
-        <div class="mui-tabs__pane mui--is-active" id="pane-justified-1">
-          <form action="<%= users_url %>" method="post" class="auth_form">
-            <div class="auth_input">
-
-              <div class="mui-textfield mui-textfield--float-label">
-                <input type="email" class="email_input" name="user[email]" value="" required>
-                <label>Email</label>
-              </div>
-
-              <div class="mui-textfield mui-textfield--float-label">
-                <input type="password" class="password_input" name="user[password]" value="" required>
-                <label>Password</label>
-              </div>
-
+            <div class="mui-textfield mui-textfield--float-label">
+              <input type="email" class="email_input" name="user[email]" value="" required>
+              <label>Email</label>
             </div>
-            <input type="submit" value="Sign Up!" class="mui-btn">
-            <br>
-          </form>
-        </div>
-        <div class="mui-tabs__pane" id="pane-justified-2">
 
+            <div class="mui-textfield mui-textfield--float-label">
+              <input type="password" class="password_input" name="user[password]" value="" required>
+              <label>Password</label>
+            </div>
 
+          </div>
+          <input type="submit" value="Sign Up!" class="mui-btn">
+          <br>
+        </form>
       </div>
-
-      <div class="auth_tabs">
-
-
-      </div>
-
-
     </div>
-  </div>
 </div>

@@ -91,11 +91,14 @@
 	);
 	
 	document.addEventListener("DOMContentLoaded", function () {
-	  ReactDOM.render(React.createElement(
-	    Router,
-	    null,
-	    routes
-	  ), document.getElementById("content"));
+	  var content = document.getElementById("content");
+	  if (content) {
+	    ReactDOM.render(React.createElement(
+	      Router,
+	      null,
+	      routes
+	    ), content);
+	  }
 	});
 
 /***/ },
