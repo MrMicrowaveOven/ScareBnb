@@ -166,6 +166,6 @@ var MapStyle = new google.maps.StyledMapType([
             }
         ]
     }
-], {name: "DarkMap"});
+], {name: "ScareMap"});
 
 module.exports = MapStyle;

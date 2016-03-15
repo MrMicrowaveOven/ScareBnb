@@ -58,7 +58,7 @@ var Map = React.createClass({
         map: self.map,
         title: location.title,
         icon: image,
-        opacity: .5
+        opacity: 0.5
       }
     );
     // debugger;
@@ -152,15 +152,15 @@ var Map = React.createClass({
       zoom: 11,
       backgroundColor: "#000000",
       mapTypeControlOptions: {
-        mapTypeIds: [google.maps.MapTypeId.DARK, "darkmap"]
+        mapTypeIds: [google.maps.MapTypeId.DARK, "scaremap"]
       }
 
     };
     // debugger;
     this.map = new google.maps.Map(mapDOMNode, mapOptions);
 
-    this.map.mapTypes.set("darkmap", MapStyle);
-    this.map.setMapTypeId("darkmap");
+    this.map.mapTypes.set("scaremap", MapStyle);
+    this.map.setMapTypeId("scaremap");
 
     this.map.addListener('idle', this.onIdle);
   },

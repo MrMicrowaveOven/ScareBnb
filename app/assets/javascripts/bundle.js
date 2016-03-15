@@ -24551,7 +24551,7 @@
 	      map: self.map,
 	      title: location.title,
 	      icon: image,
-	      opacity: .5
+	      opacity: 0.5
 	    });
 	    // debugger;
 	    self.newMarkerIndex[location.id] = marker;
@@ -24641,15 +24641,15 @@
 	      zoom: 11,
 	      backgroundColor: "#000000",
 	      mapTypeControlOptions: {
-	        mapTypeIds: [google.maps.MapTypeId.DARK, "darkmap"]
+	        mapTypeIds: [google.maps.MapTypeId.DARK, "scaremap"]
 	      }
 	
 	    };
 	    // debugger;
 	    this.map = new google.maps.Map(mapDOMNode, mapOptions);
 	
-	    this.map.mapTypes.set("darkmap", MapStyle);
-	    this.map.setMapTypeId("darkmap");
+	    this.map.mapTypes.set("scaremap", MapStyle);
+	    this.map.setMapTypeId("scaremap");
 	
 	    this.map.addListener('idle', this.onIdle);
 	  },
@@ -31294,7 +31294,7 @@
 	    }, {
 	        "lightness": 17
 	    }]
-	}], { name: "DarkMap" });
+	}], { name: "ScareMap" });
 	
 	module.exports = MapStyle;
 
@@ -31461,7 +31461,7 @@
 	      'Click ',
 	      React.createElement(
 	        'a',
-	        { href: link },
+	        { target: '_blank', href: link },
 	        'here'
 	      ),
 	      ' for more haunted location information.'
@@ -31558,11 +31558,11 @@
 	          'label',
 	          null,
 	          'Title of Place',
-	          React.createElement('br', null),
-	          React.createElement('input', { type: 'text', className: 'title',
-	            valueLink: this.linkState("title")
-	          })
+	          React.createElement('br', null)
 	        ),
+	        React.createElement('input', { type: 'text', className: 'title',
+	          valueLink: this.linkState("title")
+	        }),
 	        React.createElement(
 	          'div',
 	          { className: 'geo_input' },
@@ -31570,6 +31570,7 @@
 	            location: this.defaultSFLocation,
 	            radius: '50',
 	            onSuggestSelect: this.onSuggestSelect,
+	            onChange: this.geoChange,
 	            valueLink: this.linkState("full_address")
 	          })
 	        ),
@@ -31662,7 +31663,16 @@
 	    return list;
 	  },
 	
+	  geoChange: function () {
+	    if (this.mapAddressMarker) {
+	      this.mapAddressMarker.setMap(null);
+	      delete this.mapAddressMarker;
+	    }
+	    // this.mapAddressMarker = null;
+	  },
+	
 	  onSuggestSelect: function (suggest) {
+	    // debugger;
 	    if (this.mapAddressMarker !== undefined) {
 	      this.mapAddressMarker.setMap(null);
 	    }
@@ -31733,20 +31743,20 @@
 	      zoom: 15,
 	      backgroundColor: "#000000",
 	      mapTypeControlOptions: {
-	        mapTypeIds: [google.maps.MapTypeId.DARK, "darkmap"]
+	        mapTypeIds: [google.maps.MapTypeId.DARK, "scaremap"]
 	      }
 	    };
 	    // debugger;
 	    if (mapDOMNode !== undefined) {
 	      this.mapAddress = new google.maps.Map(mapDOMNode, mapOptions);
-	      this.mapAddress.mapTypes.set("darkmap", MapStyle);
-	      this.mapAddress.setMapTypeId("darkmap");
+	      this.mapAddress.mapTypes.set("scaremap", MapStyle);
+	      this.mapAddress.setMapTypeId("scaremap");
 	    }
 	  }
 	
 	});
 	
-	window.LocationForm = LocationForm;
+	// window.LocationForm = LocationForm;
 	module.exports = LocationForm;
 
 /***/ },

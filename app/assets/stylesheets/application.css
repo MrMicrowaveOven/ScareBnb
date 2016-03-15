@@ -19,6 +19,7 @@
 
  body {
    font-family: sans-serif;
+   background-color: black;
    background-image: url("http://res.cloudinary.com/dazguin0y/image/upload/e_brightness:-80/v1457241867/UserImages/downloaded_yqoe2t.jpg");
    background-repeat: no-repeat;
    background-attachment: fixed;
@@ -198,7 +199,6 @@ justify-content: center;
    flex-direction: column;
    align-content: center;
    flex: 1;
-   margin: 5px;
    padding: 0px 20px;
  }
 

@@ -60,7 +60,7 @@ var Show = React.createClass({
     return (
       <div>
         <br/>
-        Click <a href={link}>here</a> for more haunted location information.
+        Click <a target="_blank" href={link}>here</a> for more haunted location information.
       </div>
     );
 
