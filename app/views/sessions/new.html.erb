@@ -18,11 +18,15 @@
       <ul class="mui-tabs__bar mui-tabs__bar--justified">
 
         <li class="mui--is-active"><a data-mui-toggle="tab" data-mui-controls="pane-justified-1">
-          Sign In
+          <div class="mui--text-dark">
+            Sign In
+          </div>
         </a></li>
 
         <li><a data-mui-toggle="tab" data-mui-controls="pane-justified-2">
-          Sign Up
+          <div class="mui--text-dark">
+            Sign Up
+          </div>
         </a></li>
 
       </ul>
@@ -34,12 +38,12 @@
 
             <div class="mui-textfield mui-textfield--float-label">
               <input type="email" class="email_input" name="user[email]" value="" required>
-              <label>Email</label>
+              <label><div class="mui--text-dark">Email</div></label>
             </div>
 
             <div class="mui-textfield mui-textfield--float-label">
               <input type="password" class="password_input" name="user[password]" value="" required>
-              <label>Password</label>
+              <label><div class="mui--text-dark">Password</div></label>
             </div>
 
           </div>
@@ -52,7 +56,8 @@
           <input type="hidden" name="user[email]" value="Dracula@IDvinkYourBlood.com">
           <input type="hidden" name="user[password]" value="vampire">
           <div class="sign_button">
-            <input type="submit" value="Sign In as Demo User!" onclick="return demo();" class="mui-btn">
+            <input type="submit" value="Sign In as Demo User!" class="mui-btn">
+            <!-- onclick="return demo();" -->
           </div>
         </form>
       </div>
@@ -64,12 +69,12 @@
 
             <div class="mui-textfield mui-textfield--float-label">
               <input type="email" class="email_input" name="user[email]" value="" required>
-              <label>Email</label>
+              <label><div class="mui--text-dark">Email</div></label>
             </div>
 
             <div class="mui-textfield mui-textfield--float-label">
               <input type="password" class="password_input" name="user[password]" value="" required>
-              <label>Password</label>
+              <label><div class="mui--text-dark">Password</div></label>
             </div>
 
           </div>

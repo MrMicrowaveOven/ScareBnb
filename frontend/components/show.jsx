@@ -27,8 +27,7 @@ var Show = React.createClass({
     var self = this;
     return (
       <div className="show_location">
-          <h2 className="show_title">{location.title}</h2>
-
+        <h2 className="show_title">{location.title}</h2>
 
         <div className="show_image">
           {self.showImageIfAny()}
