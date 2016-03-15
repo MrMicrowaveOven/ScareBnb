@@ -24531,11 +24531,15 @@
 	  onChange: function () {
 	    var self = this;
 	
-	    if (self.markerIndex !== undefined && LocationStore.lastLocation() !== undefined) {
+	    if (self.markerIndex !== undefined && self.markerIndex[1] !== undefined && LocationStore.lastLocation() !== undefined) {
 	      self.markerIndex[LocationStore.lastLocation().id].setAnimation(null);
 	    }
 	    if (self.markerIndex[LocationStore.selectedLocation().id] !== undefined) {
 	      self.markerIndex[LocationStore.selectedLocation().id].setAnimation(google.maps.Animation.BOUNCE);
+	      //Stop animation after 2 seconds.
+	      window.setTimeout(function () {
+	        self.markerIndex[LocationStore.selectedLocation().id].setAnimation(null);
+	      }, 1475);
 	    }
 	    self.markerUpdate();
 	    Map.theMap = self;
@@ -31726,9 +31730,12 @@
 	    event.preventDefault();
 	    var self = this;
 	    var image = cloudinary.openUploadWidget({
-	      cloud_name: 'dazguin0y', upload_preset: "sppqijhu", multiple: false
+	      cloud_name: 'dazguin0y', upload_preset: "sppqijhu", multiple: false,
+	      theme: "minimal", show_powered_by: false, stylesheet: ""
 	    }, function (error, result) {
-	      self.setState({ image: result[0] });
+	      if (result) {
+	        self.setState({ image: result[0] });
+	      }
 	    });
 	  },
 	

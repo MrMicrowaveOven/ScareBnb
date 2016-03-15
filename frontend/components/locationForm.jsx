@@ -160,10 +160,13 @@ var LocationForm = React.createClass({
     var self = this;
     var image = cloudinary.openUploadWidget(
       {
-        cloud_name: 'dazguin0y', upload_preset: "sppqijhu", multiple: false
+        cloud_name: 'dazguin0y', upload_preset: "sppqijhu", multiple: false,
+        theme: "minimal", show_powered_by: false, stylesheet: ""
       },
       function(error, result) {
-        self.setState({image: result[0]});
+        if (result) {
+          self.setState({image: result[0]});
+        }
       }
     );
   },

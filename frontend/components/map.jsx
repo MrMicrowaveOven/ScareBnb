@@ -36,12 +36,17 @@ var Map = React.createClass({
   onChange: function(){
     var self = this;
 
-    if (self.markerIndex !== undefined && LocationStore.lastLocation() !== undefined) {
+    if (self.markerIndex !== undefined && self.markerIndex[1] !== undefined && LocationStore.lastLocation() !== undefined) {
       self.markerIndex[LocationStore.lastLocation().id].setAnimation(null);
     }
     if (self.markerIndex[LocationStore.selectedLocation().id] !== undefined) {
       self.markerIndex[LocationStore.selectedLocation().id].
         setAnimation(google.maps.Animation.BOUNCE);
+        //Stop animation after 2 seconds.
+        window.setTimeout(function(){
+          self.markerIndex[LocationStore.selectedLocation().id].
+            setAnimation(null);
+        }, 1475);
     }
     self.markerUpdate();
     Map.theMap = self;
