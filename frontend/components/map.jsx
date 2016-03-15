@@ -35,13 +35,14 @@ var Map = React.createClass({
   //Called when the Store changes
   onChange: function(){
     var self = this;
-    // debugger;
-    // if (self.markerIndex[LocationStore.lastLocation()] !== undefined) {
-    //   self.markerIndex[LocationStore.lastLocation().id].setAnimation(null);
-    // }
-    // if (self.markerIndex[LocationStore.selectedLocation().id] !== undefined) {
-    //   self.markerIndex[LocationStore.selectedLocation().id].setAnimation(google.maps.Animation.BOUNCE);
-    // }
+
+    if (self.markerIndex !== undefined && LocationStore.lastLocation() !== undefined) {
+      self.markerIndex[LocationStore.lastLocation().id].setAnimation(null);
+    }
+    if (self.markerIndex[LocationStore.selectedLocation().id] !== undefined) {
+      self.markerIndex[LocationStore.selectedLocation().id].
+        setAnimation(google.maps.Animation.BOUNCE);
+    }
     self.markerUpdate();
     Map.theMap = self;
     this.refreshBandM();

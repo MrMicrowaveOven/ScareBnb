@@ -29,35 +29,23 @@ var resetLocations = function(locations){
   }
 };
 
-LocationStore.setSelectedLocation = function(location){
-  // debugger;
-  // if (this.selectedLocation() !== undefined){
-  //   if (Map.markerIndex !== undefined) {
-  //     debugger;
-  //     Map.markerIndex[this.selectedLocation()].setAnimation(null);
-  //   }
-  // }
+LocationStore.selectedLocation = function(){
+  if(selLocation !== undefined) {return selLocation;}
+  else if (Object.keys(_locations).length > 0) { return LocationStore.find(1); }
+  else { return null; }
+};
 
+LocationStore.setSelectedLocation = function(location){
+  lastLocation = selLocation;
   selLocation = location;
-  
-  // debugger;
-  // if (selLocation !== undefined && Map.markerIndex !== undefined) {
-  //   Map.markerIndex[selLocation.id].setAnimation(google.maps.Animation.BOUNCE);
-  // }
 };
 
 LocationStore.lastLocation = function(){
   return lastLocation;
 };
 
-// LocationStore.setLastLocation = function(location) {
-//   lastLocation = this.s
-// }
-
-LocationStore.selectedLocation = function(){
-  if(selLocation !== undefined) {return selLocation;}
-  else if (Object.keys(_locations).length > 0) { return LocationStore.find(1); }
-  else { return null; }
+LocationStore.setLastLocation = function(location) {
+  lastLocation = location;
 };
 
 LocationStore.__onDispatch = function (payload) {
@@ -67,6 +55,7 @@ LocationStore.__onDispatch = function (payload) {
       LocationStore.__emitChange();
       break;
     case LocationConstants.LOCATION_RECEIVED:
+      // LocationStore.setLastLocation(LocationStore.selectedLocation());
       LocationStore.setSelectedLocation(payload.location);
       LocationStore.__emitChange();
       break;

@@ -24530,13 +24530,13 @@
 	  //Called when the Store changes
 	  onChange: function () {
 	    var self = this;
-	    // debugger;
-	    // if (self.markerIndex[LocationStore.lastLocation()] !== undefined) {
-	    //   self.markerIndex[LocationStore.lastLocation().id].setAnimation(null);
-	    // }
-	    // if (self.markerIndex[LocationStore.selectedLocation().id] !== undefined) {
-	    //   self.markerIndex[LocationStore.selectedLocation().id].setAnimation(google.maps.Animation.BOUNCE);
-	    // }
+	
+	    if (self.markerIndex !== undefined && LocationStore.lastLocation() !== undefined) {
+	      self.markerIndex[LocationStore.lastLocation().id].setAnimation(null);
+	    }
+	    if (self.markerIndex[LocationStore.selectedLocation().id] !== undefined) {
+	      self.markerIndex[LocationStore.selectedLocation().id].setAnimation(google.maps.Animation.BOUNCE);
+	    }
 	    self.markerUpdate();
 	    Map.theMap = self;
 	    this.refreshBandM();
@@ -24704,31 +24704,6 @@
 	  }
 	};
 	
-	LocationStore.setSelectedLocation = function (location) {
-	  // debugger;
-	  // if (this.selectedLocation() !== undefined){
-	  //   if (Map.markerIndex !== undefined) {
-	  //     debugger;
-	  //     Map.markerIndex[this.selectedLocation()].setAnimation(null);
-	  //   }
-	  // }
-	
-	  selLocation = location;
-	
-	  // debugger;
-	  // if (selLocation !== undefined && Map.markerIndex !== undefined) {
-	  //   Map.markerIndex[selLocation.id].setAnimation(google.maps.Animation.BOUNCE);
-	  // }
-	};
-	
-	LocationStore.lastLocation = function () {
-	  return lastLocation;
-	};
-	
-	// LocationStore.setLastLocation = function(location) {
-	//   lastLocation = this.s
-	// }
-	
 	LocationStore.selectedLocation = function () {
 	  if (selLocation !== undefined) {
 	    return selLocation;
@@ -24739,6 +24714,19 @@
 	  }
 	};
 	
+	LocationStore.setSelectedLocation = function (location) {
+	  lastLocation = selLocation;
+	  selLocation = location;
+	};
+	
+	LocationStore.lastLocation = function () {
+	  return lastLocation;
+	};
+	
+	LocationStore.setLastLocation = function (location) {
+	  lastLocation = location;
+	};
+	
 	LocationStore.__onDispatch = function (payload) {
 	  switch (payload.actionType) {
 	    case LocationConstants.LOCATIONS_RECEIVED:
@@ -24746,6 +24734,7 @@
 	      LocationStore.__emitChange();
 	      break;
 	    case LocationConstants.LOCATION_RECEIVED:
+	      // LocationStore.setLastLocation(LocationStore.selectedLocation());
 	      LocationStore.setSelectedLocation(payload.location);
 	      LocationStore.__emitChange();
 	      break;
