@@ -51,13 +51,11 @@
           <input type="submit" value="Sign In" class="mui-btn">
 
         </form>
-
         <form action="<%= session_url %>" method="post">
           <input type="hidden" name="user[email]" value="Dracula@IDvinkYourBlood.com">
           <input type="hidden" name="user[password]" value="vampire">
           <div class="sign_button">
             <input type="submit" value="Sign In as Demo User!" class="mui-btn">
-            <!-- onclick="return demo();" -->
           </div>
         </form>
       </div>
@@ -77,9 +75,15 @@
               <label><div class="mui--text-dark">Password</div></label>
             </div>
 
+            </div>
+            <input type="submit" value="Sign Up!" class="mui-btn">
+        </form>
+        <form action="<%= session_url %>" method="post">
+          <input type="hidden" name="user[email]" value="Dracula@IDvinkYourBlood.com">
+          <input type="hidden" name="user[password]" value="vampire">
+          <div class="sign_button">
+            <input type="submit" value="Sign In as Demo User!" class="mui-btn">
           </div>
-          <input type="submit" value="Sign Up!" class="mui-btn">
-          <br>
         </form>
       </div>
     </div>
