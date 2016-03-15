@@ -24530,7 +24530,13 @@
 	  //Called when the Store changes
 	  onChange: function () {
 	    var self = this;
-	
+	    // debugger;
+	    // if (self.markerIndex[LocationStore.lastLocation()] !== undefined) {
+	    //   self.markerIndex[LocationStore.lastLocation().id].setAnimation(null);
+	    // }
+	    // if (self.markerIndex[LocationStore.selectedLocation().id] !== undefined) {
+	    //   self.markerIndex[LocationStore.selectedLocation().id].setAnimation(google.maps.Animation.BOUNCE);
+	    // }
 	    self.markerUpdate();
 	    Map.theMap = self;
 	    this.refreshBandM();
@@ -24549,11 +24555,11 @@
 	    var marker = new google.maps.Marker({
 	      position: { lat: location.lat, lng: location.lng },
 	      map: self.map,
+	      // animation: google.maps.Animation.DROP,
 	      title: location.title,
 	      icon: image,
 	      opacity: 0.5
 	    });
-	    // debugger;
 	    self.newMarkerIndex[location.id] = marker;
 	    return marker;
 	  },
@@ -24631,6 +24637,7 @@
 	
 	  componentDidMount: function () {
 	    this.locationListener = LocationStore.addListener(this.onChange);
+	    // this.showListener = LocationStore.addListener(this.onChange);
 	    var mapDOMNode = this.refs.map;
 	    var defaultCenter = { lat: 37.7758, lng: -122.435 };
 	    // debugger;
@@ -24673,6 +24680,7 @@
 	
 	var _locations = {};
 	
+	var lastLocation;
 	var selLocation;
 	
 	LocationStore.all = function () {
@@ -24697,8 +24705,29 @@
 	};
 	
 	LocationStore.setSelectedLocation = function (location) {
+	  // debugger;
+	  // if (this.selectedLocation() !== undefined){
+	  //   if (Map.markerIndex !== undefined) {
+	  //     debugger;
+	  //     Map.markerIndex[this.selectedLocation()].setAnimation(null);
+	  //   }
+	  // }
+	
 	  selLocation = location;
+	
+	  // debugger;
+	  // if (selLocation !== undefined && Map.markerIndex !== undefined) {
+	  //   Map.markerIndex[selLocation.id].setAnimation(google.maps.Animation.BOUNCE);
+	  // }
 	};
+	
+	LocationStore.lastLocation = function () {
+	  return lastLocation;
+	};
+	
+	// LocationStore.setLastLocation = function(location) {
+	//   lastLocation = this.s
+	// }
 	
 	LocationStore.selectedLocation = function () {
 	  if (selLocation !== undefined) {
@@ -31682,9 +31711,10 @@
 	    this.mapAddressMarker = new google.maps.Marker({
 	      position: suggest.location,
 	      map: this.mapAddress,
+	      animation: google.maps.Animation.DROP,
 	      title: suggest.label,
 	      icon: ghost,
-	      opacity: .5
+	      opacity: 0.5
 	    });
 	    this.mapAddress.setCenter(suggest.location);
 	    // debugger;

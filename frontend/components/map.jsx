@@ -35,7 +35,13 @@ var Map = React.createClass({
   //Called when the Store changes
   onChange: function(){
     var self = this;
-
+    // debugger;
+    // if (self.markerIndex[LocationStore.lastLocation()] !== undefined) {
+    //   self.markerIndex[LocationStore.lastLocation().id].setAnimation(null);
+    // }
+    // if (self.markerIndex[LocationStore.selectedLocation().id] !== undefined) {
+    //   self.markerIndex[LocationStore.selectedLocation().id].setAnimation(google.maps.Animation.BOUNCE);
+    // }
     self.markerUpdate();
     Map.theMap = self;
     this.refreshBandM();
@@ -57,12 +63,12 @@ var Map = React.createClass({
       {
         position: {lat: location.lat, lng: location.lng},
         map: self.map,
+        // animation: google.maps.Animation.DROP,
         title: location.title,
         icon: image,
         opacity: 0.5
       }
     );
-    // debugger;
     self.newMarkerIndex[location.id] = marker;
     return marker;
   },
@@ -143,6 +149,7 @@ var Map = React.createClass({
 
   componentDidMount: function(){
     this.locationListener = LocationStore.addListener(this.onChange);
+    // this.showListener = LocationStore.addListener(this.onChange);
     var mapDOMNode = this.refs.map;
     var defaultCenter = {lat: 37.7758, lng: -122.435};
     // debugger;

@@ -131,9 +131,10 @@ var LocationForm = React.createClass({
     this.mapAddressMarker = new google.maps.Marker({
       position: suggest.location,
       map: this.mapAddress,
+      animation: google.maps.Animation.DROP,
       title: suggest.label,
       icon: ghost,
-      opacity: .5
+      opacity: 0.5
     });
     this.mapAddress.setCenter(suggest.location);
     // debugger;

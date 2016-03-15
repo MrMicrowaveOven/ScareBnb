@@ -5,6 +5,7 @@ var LocationStore = new Store(AppDispatcher);
 
 var _locations = {};
 
+var lastLocation;
 var selLocation;
 
 LocationStore.all = function () {
@@ -29,8 +30,29 @@ var resetLocations = function(locations){
 };
 
 LocationStore.setSelectedLocation = function(location){
+  // debugger;
+  // if (this.selectedLocation() !== undefined){
+  //   if (Map.markerIndex !== undefined) {
+  //     debugger;
+  //     Map.markerIndex[this.selectedLocation()].setAnimation(null);
+  //   }
+  // }
+
   selLocation = location;
+  
+  // debugger;
+  // if (selLocation !== undefined && Map.markerIndex !== undefined) {
+  //   Map.markerIndex[selLocation.id].setAnimation(google.maps.Animation.BOUNCE);
+  // }
 };
+
+LocationStore.lastLocation = function(){
+  return lastLocation;
+};
+
+// LocationStore.setLastLocation = function(location) {
+//   lastLocation = this.s
+// }
 
 LocationStore.selectedLocation = function(){
   if(selLocation !== undefined) {return selLocation;}
