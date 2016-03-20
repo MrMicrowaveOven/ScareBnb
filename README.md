@@ -1,5 +1,4 @@
 # SCAREBNB
-
 ScareBnb is a web application inspired by AirBnb, built using Ruby on Rails and React.js.  ScareBnb allows users to:
 * Create an account
 * Log in / Log out
