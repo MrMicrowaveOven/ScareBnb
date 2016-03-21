@@ -24476,7 +24476,7 @@
 	      { className: 'loc_container' },
 	      React.createElement(
 	        'div',
-	        { className: 'search_container' },
+	        { className: 'mdl-card', id: 'search_container' },
 	        React.createElement(Map, null),
 	        React.createElement(Index, null)
 	      ),
@@ -24534,12 +24534,14 @@
 	    if (self.markerIndex !== undefined && self.markerIndex[1] !== undefined && LocationStore.lastLocation() !== undefined) {
 	      self.markerIndex[LocationStore.lastLocation().id].setAnimation(null);
 	    }
-	    if (self.markerIndex[LocationStore.selectedLocation().id] !== undefined) {
-	      self.markerIndex[LocationStore.selectedLocation().id].setAnimation(google.maps.Animation.BOUNCE);
-	      //Stop animation after 2 seconds.
-	      window.setTimeout(function () {
-	        self.markerIndex[LocationStore.selectedLocation().id].setAnimation(null);
-	      }, 1475);
+	    if (LocationStore.selectedLocation() !== null && LocationStore.selectedLocation() !== undefined) {
+	      if (self.markerIndex[LocationStore.selectedLocation().id] !== undefined) {
+	        self.markerIndex[LocationStore.selectedLocation().id].setAnimation(google.maps.Animation.BOUNCE);
+	        //Stop animation after 2 seconds.
+	        window.setTimeout(function () {
+	          self.markerIndex[LocationStore.selectedLocation().id].setAnimation(null);
+	        }, 1475);
+	      }
 	    }
 	    self.markerUpdate();
 	    Map.theMap = self;
@@ -31432,7 +31434,7 @@
 	    var self = this;
 	    return React.createElement(
 	      'div',
-	      { className: 'show_location' },
+	      { className: 'mdl-card', id: 'show_location' },
 	      React.createElement(
 	        'h2',
 	        { className: 'show_title' },
@@ -32928,43 +32930,41 @@
 
 /***/ },
 /* 249 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	var React = __webpack_require__(1);
-	var LocationStore = __webpack_require__(215);
-	var LocationScreen = __webpack_require__(250);
-	var LocationForm = __webpack_require__(236);
-	
-	var FullPage = React.createClass({
-	  displayName: 'FullPage',
-	
-	  getInitialState: function () {
-	    return {
-	      page: 1, locations: LocationStore.all(),
-	      show: LocationStore.selectedLocation()
-	    };
-	  },
-	
-	  switchPage: function (page) {
-	    // debugger;
-	    this.setState({ page: page });
-	  },
-	
-	  render: function () {
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(LocationScreen, { locations: this.props.locations, show: this.props.show }),
-	      React.createElement(LocationForm, null)
-	    );
-	  },
-	  componentDidMount: function () {
-	    // debugger;
-	  }
-	
-	});
-	
-	module.exports = FullPage;
+	// var React = require('react');
+	// var LocationStore = require('../stores/location');
+	// var LocationScreen = require('./location_screen');
+	// var LocationForm = require('./locationForm');
+	//
+	// var FullPage = React.createClass({
+	//   getInitialState: function () {
+	//     return ({
+	//       page: 1, locations: LocationStore.all(),
+	//       show: LocationStore.selectedLocation()
+	//     });
+	//   },
+	//
+	//   switchPage: function(page) {
+	//     // debugger;
+	//     this.setState({page: page});
+	//   },
+	//
+	//   render: function(){
+	//     return (
+	//       <div>
+	//         <LocationScreen locations={this.props.locations} show={this.props.show}/>
+	//         <LocationForm/>
+	//       </div>
+	//     );
+	//   },
+	//   componentDidMount: function() {
+	//     // debugger;
+	//   }
+	//
+	// });
+	//
+	// module.exports = FullPage;
 
 /***/ },
 /* 250 */

@@ -27,7 +27,6 @@ var Map = React.createClass({
 
   render: function() {
     return(
-
       <div className='map' ref='map'/>
     );
   },
@@ -39,14 +38,16 @@ var Map = React.createClass({
     if (self.markerIndex !== undefined && self.markerIndex[1] !== undefined && LocationStore.lastLocation() !== undefined) {
       self.markerIndex[LocationStore.lastLocation().id].setAnimation(null);
     }
-    if (self.markerIndex[LocationStore.selectedLocation().id] !== undefined) {
-      self.markerIndex[LocationStore.selectedLocation().id].
-        setAnimation(google.maps.Animation.BOUNCE);
-        //Stop animation after 2 seconds.
-        window.setTimeout(function(){
-          self.markerIndex[LocationStore.selectedLocation().id].
-            setAnimation(null);
-        }, 1475);
+    if (LocationStore.selectedLocation() !== null && LocationStore.selectedLocation() !== undefined) {
+      if (self.markerIndex[LocationStore.selectedLocation().id] !== undefined) {
+        self.markerIndex[LocationStore.selectedLocation().id].
+          setAnimation(google.maps.Animation.BOUNCE);
+          //Stop animation after 2 seconds.
+          window.setTimeout(function(){
+            self.markerIndex[LocationStore.selectedLocation().id].
+              setAnimation(null);
+          }, 1475);
+      }
     }
     self.markerUpdate();
     Map.theMap = self;
