@@ -30,16 +30,19 @@ var LocationForm = React.createClass({
 
   render: function() {
     // debugger;
+    // For some reason, adding a mdl-card className
+    //to LocationForm
+    //removes ALL CSS from the form.
     return(
-      <div className="LocationForm">
-        <h2 className="Add a location">Post your location!</h2>
-        <form className="LocationForm" onSubmit={this.submitLocation}>
+        <form id="LocationForm" onSubmit={this.submitLocation}>
 
+          <h2 className="Add a location">Post your location!</h2>
           <label>Title of Place<br/>
-          </label>
+
             <input type="text" className="title"
               valueLink={this.linkState("title")}
               />
+          </label>
 
           <div className="geo_input">
             <Geosuggest
@@ -63,7 +66,7 @@ var LocationForm = React.createClass({
           <br/>
           <label>How many people can stay at this location?
             <br/>
-            <select name="Max Occupancy"
+            <select name="Max Occupancy" className="maxOccupancy"
               valueLink={this.linkState("occupancy")}
             >
               {this.oneThroughTen()}
@@ -90,7 +93,6 @@ var LocationForm = React.createClass({
           </div>
           <br/><br/>
         </form>
-      </div>
     );
   },
 

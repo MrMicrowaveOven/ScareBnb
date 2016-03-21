@@ -59,6 +59,10 @@
   width: 100%;
 }
 
+.mui-tabs__bar.mui-tabs__bar--justified>li>a {
+  cursor: pointer;
+}
+
 #pane-justified-1 {
   width: 100%;
 }
@@ -98,17 +102,30 @@ justify-content: center;
    margin-right: auto;
  }
 
- .LocationForm {
+ #LocationForm {
   display: flex;
   flex-direction: column;
   /*flex-flow: column wrap;*/
   align-items: center;
-  padding: 50px 0px 0px 0px;
+  padding: 60px 0px 0px 0px;
+ }
+
+ .locationdescription,.upload,.CreateLocation, .maxOccupancy, .geo_input, .title {
+   color: black;
+ }
+
+ .uploadArea {
+
+ }
+
+ .maxOccupancy {
+
  }
 
  .locationdescription {
    width: 400px;
    height: 200px;
+
  }
 
 
@@ -129,7 +146,8 @@ justify-content: center;
 
 
 .mdl-card {
-  background: rgba(15, 5, 5, .8);;
+  background: rgba(5, 5, 8, .8);;
+  z-index: -1;
 }
 
 

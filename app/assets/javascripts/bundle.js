@@ -31567,95 +31567,94 @@
 	
 	  render: function () {
 	    // debugger;
+	    // For some reason, adding a mdl-card className
+	    //to LocationForm
+	    //removes ALL CSS from the form.
 	    return React.createElement(
-	      'div',
-	      { className: 'LocationForm' },
+	      'form',
+	      { id: 'LocationForm', onSubmit: this.submitLocation },
 	      React.createElement(
 	        'h2',
 	        { className: 'Add a location' },
 	        'Post your location!'
 	      ),
 	      React.createElement(
-	        'form',
-	        { className: 'LocationForm', onSubmit: this.submitLocation },
-	        React.createElement(
-	          'label',
-	          null,
-	          'Title of Place',
-	          React.createElement('br', null)
-	        ),
+	        'label',
+	        null,
+	        'Title of Place',
+	        React.createElement('br', null),
 	        React.createElement('input', { type: 'text', className: 'title',
 	          valueLink: this.linkState("title")
-	        }),
-	        React.createElement(
-	          'div',
-	          { className: 'geo_input' },
-	          React.createElement(Geosuggest, {
-	            location: this.defaultSFLocation,
-	            radius: '50',
-	            onSuggestSelect: this.onSuggestSelect,
-	            onChange: this.geoChange,
-	            valueLink: this.linkState("full_address")
-	          })
-	        ),
-	        React.createElement('div', { id: 'mapAddress', className: 'mapAddress', ref: 'mapAddress' }),
+	        })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'geo_input' },
+	        React.createElement(Geosuggest, {
+	          location: this.defaultSFLocation,
+	          radius: '50',
+	          onSuggestSelect: this.onSuggestSelect,
+	          onChange: this.geoChange,
+	          valueLink: this.linkState("full_address")
+	        })
+	      ),
+	      React.createElement('div', { id: 'mapAddress', className: 'mapAddress', ref: 'mapAddress' }),
+	      React.createElement('br', null),
+	      React.createElement('div', { id: 'addressDisplay' }),
+	      React.createElement(
+	        'label',
+	        null,
+	        'Describe your place: What is so haunted about it?',
 	        React.createElement('br', null),
-	        React.createElement('div', { id: 'addressDisplay' }),
-	        React.createElement(
-	          'label',
-	          null,
-	          'Describe your place: What is so haunted about it?',
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('textarea', { className: 'locationdescription',
-	            valueLink: this.linkState("description")
-	          })
-	        ),
 	        React.createElement('br', null),
-	        React.createElement(
-	          'label',
-	          null,
-	          'How many people can stay at this location?',
-	          React.createElement('br', null),
-	          React.createElement(
-	            'select',
-	            { name: 'Max Occupancy',
-	              valueLink: this.linkState("occupancy")
-	            },
-	            this.oneThroughTen()
-	          )
-	        ),
+	        React.createElement('textarea', { className: 'locationdescription',
+	          valueLink: this.linkState("description")
+	        })
+	      ),
+	      React.createElement('br', null),
+	      React.createElement(
+	        'label',
+	        null,
+	        'How many people can stay at this location?',
 	        React.createElement('br', null),
 	        React.createElement(
-	          'div',
-	          null,
-	          'Be sure to include a picture of your place!',
-	          React.createElement('br', null),
-	          React.createElement(
-	            'button',
-	            { className: 'upload', onClick: this.uploadImage },
-	            'Upload picture!'
-	          )
-	        ),
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            'h2',
-	            null,
-	            this.showImage()
-	          )
-	        ),
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement('input', { type: 'submit', className: 'CreateLocation',
-	            value: 'Post Location!', onClick: this.submitLocation
-	          })
-	        ),
+	          'select',
+	          { name: 'Max Occupancy', className: 'maxOccupancy',
+	            valueLink: this.linkState("occupancy")
+	          },
+	          this.oneThroughTen()
+	        )
+	      ),
+	      React.createElement('br', null),
+	      React.createElement(
+	        'div',
+	        null,
+	        'Be sure to include a picture of your place!',
 	        React.createElement('br', null),
-	        React.createElement('br', null)
-	      )
+	        React.createElement(
+	          'button',
+	          { className: 'upload', onClick: this.uploadImage },
+	          'Upload picture!'
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          'h2',
+	          null,
+	          this.showImage()
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        null,
+	        React.createElement('input', { type: 'submit', className: 'CreateLocation',
+	          value: 'Post Location!', onClick: this.submitLocation
+	        })
+	      ),
+	      React.createElement('br', null),
+	      React.createElement('br', null)
 	    );
 	  },
 	
