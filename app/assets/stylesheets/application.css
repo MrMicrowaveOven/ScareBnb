@@ -156,7 +156,7 @@ justify-content: center;
    display: flex;
    flex-direction: column;
    flex: 1;
-   z-index: -1;
+   z-index: 0;
    align-items: center;
    /*padding: 0px 30px;*/
    /*border: 20px;*/
@@ -227,7 +227,7 @@ justify-content: center;
  }
 
  #show_location {
-   z-index: -1;
+   z-index: 0;
    width: 100%;
  }
 

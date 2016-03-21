@@ -73,7 +73,7 @@ var LocationForm = React.createClass({
             </select>
           </label>
           <br/>
-          <div>
+          <div className="uploadArea">
             Be sure to include a picture of your place!
             <br/>
             <button className="upload" onClick={this.uploadImage}>

@@ -31628,7 +31628,7 @@
 	      React.createElement('br', null),
 	      React.createElement(
 	        'div',
-	        null,
+	        { className: 'uploadArea' },
 	        'Be sure to include a picture of your place!',
 	        React.createElement('br', null),
 	        React.createElement(
