@@ -71,7 +71,7 @@ var Show = React.createClass({
     if (image_string === "") {
       return("No image");
     }
-    var image_show = <img src={image_string}/>;
+    var image_show = <img className="show_pic" src={image_string}/>;
 
     // var pics = this.state.show.images.map(function(image, index) {
     //   return (<img src={image.image_url} key={index}/>);

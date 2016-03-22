@@ -31497,7 +31497,7 @@
 	    if (image_string === "") {
 	      return "No image";
 	    }
-	    var image_show = React.createElement('img', { src: image_string });
+	    var image_show = React.createElement('img', { className: 'show_pic', src: image_string });
 	
 	    // var pics = this.state.show.images.map(function(image, index) {
 	    //   return (<img src={image.image_url} key={index}/>);
@@ -31606,7 +31606,6 @@
 	        null,
 	        'Describe your place: What is so haunted about it?',
 	        React.createElement('br', null),
-	        React.createElement('br', null),
 	        React.createElement('textarea', { className: 'locationdescription',
 	          valueLink: this.linkState("description")
 	        })
@@ -31616,10 +31615,10 @@
 	        'label',
 	        { className: 'locOccupancy' },
 	        'How many people can stay at this location?',
-	        React.createElement('br', null),
 	        React.createElement(
 	          'select',
 	          { name: 'Max Occupancy',
+	            className: 'occupancy_select',
 	            valueLink: this.linkState("occupancy")
 	          },
 	          this.oneThroughTen()
@@ -31678,7 +31677,7 @@
 	    var list = oTT.map(function (num) {
 	      return React.createElement(
 	        'option',
-	        { value: num, key: num },
+	        { className: 'occ_select_nums', value: num, key: num },
 	        num
 	      );
 	    });

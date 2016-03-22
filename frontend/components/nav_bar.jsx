@@ -15,7 +15,7 @@ var NavBar = React.createClass({
           <ul className="nav_bar_link_container">
               <li className="logo">
                 <img className="nav_bar_link"
-                  
+
                   src="https://45.media.tumblr.com/2e79b852116c3e16b659b16685c5102f/tumblr_o3nm8rDQym1v497yzo4_250.gif"/>
               </li>
               <div className="non-logo_container">

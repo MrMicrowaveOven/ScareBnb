@@ -57,15 +57,15 @@ var LocationForm = React.createClass({
           <br/>
           <div id="addressDisplay" />
 
-          <label>Describe your place: What is so haunted about it?<br/><br/>
+          <label>Describe your place: What is so haunted about it?<br/>
             <textarea className="locationdescription"
               valueLink={this.linkState("description")}
             />
           </label>
           <br/>
           <label className="locOccupancy">How many people can stay at this location?
-            <br/>
             <select name="Max Occupancy"
+              className="occupancy_select"
               valueLink={this.linkState("occupancy")}
             >
               {this.oneThroughTen()}
@@ -107,7 +107,7 @@ var LocationForm = React.createClass({
     var oTT = [1,2,3,4,5,6,7,8,9,10];
     var list = oTT.map(function(num) {
       return(
-        <option value={num} key={num}>{num}</option>
+        <option className="occ_select_nums" value={num} key={num}>{num}</option>
       );
     });
     return list;
