@@ -31,11 +31,19 @@
   // transition: text-shadow 1s, color 1s;
 }
 
+.non-logo_container {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 50px;
+}
+
 
 .non-logo {
-  float: right;
-  font-size: 26px;
-  padding: 3px 18px;
+  // float: right;
+  font-size: 28px;
+  padding: 8px 22px;
 }
 
 
@@ -63,6 +71,7 @@ a:focus, a:hover, Link:focus, Link:hover {
   display: inline;
   color: white;
   text-align: center;
+  justify-content: center;
   // padding: 14px 16px;
   text-decoration: none;
 }

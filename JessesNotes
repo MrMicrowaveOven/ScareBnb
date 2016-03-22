@@ -1,0 +1,49 @@
+Auth:
+-Objective
+-signin/signup should look more like tabs.
+
+Map
+-Clickable
+-Hoverable: make it quicker?
+Index: Add a border when this is selected.
+
+
+Navbar:
+-Center links vertically.
+-Effect block around it on hover
+-Make Icon clickable
+-Indicate where you are, indicate where you're hovering.
+--Two different colors
+
+Form:
+-Center Labels to fields
+
+--Two days thus far
+
+Shoot for Wednesday morning.
+
+Readme:
+-Finish site first
+-Instead of listing bullets of functionality:
+--Subheading on user auth, list what was used for each bit (usermaps api, etc.)
+---Auth at bottom.
+
+-Upcoming features header, "own" what's not there
+
+Trapped:
+-End game when board is filled
+-BONUS: Video tutorial
+
+Readme:
+-Split up with headers.
+-Tagline, then screenshot/gif,  implementation under a different heading.
+--Include link to game.
+
+Chess:
+-At this point, may want to switch ruby intensive
+-build an LRU cache, heaps, module of abstract data types
+--Abstract Data Types Gem!
+
+Resume:
+-Get projects on there.
+-Implement changes he told me.

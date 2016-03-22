@@ -38,11 +38,10 @@ var LocationForm = React.createClass({
 
           <h2 className="Add a location">Post your location!</h2>
           <label>Title of Place<br/>
-
+          </label>
             <input type="text" className="title"
               valueLink={this.linkState("title")}
               />
-          </label>
 
           <div className="geo_input">
             <Geosuggest
@@ -64,9 +63,9 @@ var LocationForm = React.createClass({
             />
           </label>
           <br/>
-          <label>How many people can stay at this location?
+          <label className="locOccupancy">How many people can stay at this location?
             <br/>
-            <select name="Max Occupancy" className="maxOccupancy"
+            <select name="Max Occupancy"
               valueLink={this.linkState("occupancy")}
             >
               {this.oneThroughTen()}
@@ -74,10 +73,9 @@ var LocationForm = React.createClass({
           </label>
           <br/>
           <div className="uploadArea">
-            Be sure to include a picture of your place!
-            <br/>
             <button className="upload" onClick={this.uploadImage}>
               Upload picture!</button>
+            Be sure to include a picture of your place!
           </div>
 
           <div>

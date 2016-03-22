@@ -31582,11 +31582,11 @@
 	        'label',
 	        null,
 	        'Title of Place',
-	        React.createElement('br', null),
-	        React.createElement('input', { type: 'text', className: 'title',
-	          valueLink: this.linkState("title")
-	        })
+	        React.createElement('br', null)
 	      ),
+	      React.createElement('input', { type: 'text', className: 'title',
+	        valueLink: this.linkState("title")
+	      }),
 	      React.createElement(
 	        'div',
 	        { className: 'geo_input' },
@@ -31614,12 +31614,12 @@
 	      React.createElement('br', null),
 	      React.createElement(
 	        'label',
-	        null,
+	        { className: 'locOccupancy' },
 	        'How many people can stay at this location?',
 	        React.createElement('br', null),
 	        React.createElement(
 	          'select',
-	          { name: 'Max Occupancy', className: 'maxOccupancy',
+	          { name: 'Max Occupancy',
 	            valueLink: this.linkState("occupancy")
 	          },
 	          this.oneThroughTen()
@@ -31629,13 +31629,12 @@
 	      React.createElement(
 	        'div',
 	        { className: 'uploadArea' },
-	        'Be sure to include a picture of your place!',
-	        React.createElement('br', null),
 	        React.createElement(
 	          'button',
 	          { className: 'upload', onClick: this.uploadImage },
 	          'Upload picture!'
-	        )
+	        ),
+	        'Be sure to include a picture of your place!'
 	      ),
 	      React.createElement(
 	        'div',
@@ -32890,33 +32889,37 @@
 	          React.createElement('img', { className: 'nav_bar_link', src: 'https://45.media.tumblr.com/2e79b852116c3e16b659b16685c5102f/tumblr_o3nm8rDQym1v497yzo4_250.gif' })
 	        ),
 	        React.createElement(
-	          'li',
-	          { className: 'non-logo' },
+	          'div',
+	          { className: 'non-logo_container' },
 	          React.createElement(
-	            'a',
-	            { onClick: ApiUtil.signOut,
-	              className: 'nav_bar_link' },
-	            'Sign Out'
-	          )
-	        ),
-	        React.createElement(
-	          'li',
-	          { className: 'non-logo' },
+	            'li',
+	            { className: 'non-logo' },
+	            React.createElement(
+	              'a',
+	              { onClick: ApiUtil.signOut,
+	                className: 'nav_bar_link' },
+	              'Sign Out'
+	            )
+	          ),
 	          React.createElement(
-	            Link,
-	            { to: "locations/new",
-	              className: 'nav_bar_link' },
-	            'Add Your Haunt!'
-	          )
-	        ),
-	        React.createElement(
-	          'li',
-	          { className: 'non-logo' },
+	            'li',
+	            { className: 'non-logo' },
+	            React.createElement(
+	              Link,
+	              { to: "locations/new",
+	                className: 'nav_bar_link' },
+	              'Add Your Haunt!'
+	            )
+	          ),
 	          React.createElement(
-	            Link,
-	            { to: "location_screen",
-	              className: 'nav_bar_link' },
-	            'Map'
+	            'li',
+	            { className: 'non-logo' },
+	            React.createElement(
+	              Link,
+	              { to: "location_screen",
+	                className: 'nav_bar_link' },
+	              'Map'
+	            )
 	          )
 	        )
 	      )
