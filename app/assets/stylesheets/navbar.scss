@@ -1,11 +1,6 @@
-
-
 .nav_bar {
-  // background: black;
   width: 100%;
-  // top: 0px;
   position: fixed;
-  // min-height: 40px;
   z-index: 1;
   // box-shadow: 3px 0 10px 2px rgba(102,102,102, 0.95);
 }
@@ -23,12 +18,8 @@
 }
 
 .nav_bar_sub {
-  // text-decoration: none;
   color: red;
   font-size: 1.2em;
-  // margin-bottom: 8px;
-  // text-shadow: 1px 1px 1px rgba(210,210,210, 0.6);
-  // transition: text-shadow 1s, color 1s;
 }
 
 .non-logo_container {
@@ -36,7 +27,7 @@
   flex-direction: row-reverse;
   align-items: center;
   justify-content: flex-start;
-  min-height: 50px;
+  height: 50px;
 }
 
 
@@ -44,72 +35,38 @@
   // float: right;
   font-size: 28px;
   padding: 8px 22px;
+  height: 50px;
+  display: block;
 }
 
 
 .non-logo:focus, .non-logo:hover {
-    text-decoration: none;
+  background-color: rgba(25, 25, 25, 1);
 }
 
-a:focus, a:hover, Link:focus, Link:hover {
-  color: midnightblue;
-    text-decoration: none;
+.nav_bar_link:focus, .nav_bar_link:hover {
+  text-decoration: none;
+  background-color: inherit;
+  color: indigo;
 }
-// .non-logo:hover {
-//     background-color: #111;
-// }
 
-.nav_bar_link_container, .nav_bar_link {
+.nav_bar_link_container {
   background-color: black;
-
 }
-
-
-
 
 .nav_bar_link_container li {
   display: inline;
   color: white;
   text-align: center;
   justify-content: center;
-  // padding: 14px 16px;
   text-decoration: none;
 }
 
 .nav_bar_link {
+  min-width: 100%;
   cursor: pointer;
   display: block;
   max-height: 50px;
   color: indigo;
   text-decoration: none;
 }
-// .nav-bar-link {
-//   font-size: 0.75rem;
-//   float: right;
-//
-//   padding: 0px 16.8px 0px 16.8px;
-//   line-height: 36px;
-//   vertical-align: middle;
-//   box-sizing: border-box;
-//   color: #626A6B;
-// }
-
-// .nav-bar-link:visited {
-//   color: #626A6B;
-// }
-
-// .nav-bar-link:not(:last-child):before {
-//   position: relative;;
-//   content: "";
-//   display: inline-block;
-//   height: 1.25rem;
-//   border-left: 1px solid #cfd2d3;
-//   left: -16.8px;
-//   transform: translateY(25%);
-// }
-
-// .color-logo {
-//   height: 24px;
-//   width: auto;
-//   position: absolute;
-//   top: 20%;
