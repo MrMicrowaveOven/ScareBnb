@@ -31347,19 +31347,23 @@
 	      return React.createElement(
 	        'div',
 	        { key: location.id, className: 'index_location' },
-	        React.createElement('img', { src: location.image, key: location.id, className: 'index_image',
-	          onClick: self.onClick.bind(self, event, location) }),
 	        React.createElement(
 	          'div',
-	          { className: 'index_text' },
-	          location.title,
+	          { className: 'mdl-card--border' },
+	          React.createElement('img', { src: location.image, key: location.id, className: 'index_image',
+	            onClick: self.onClick.bind(self, event, location) }),
 	          React.createElement(
 	            'div',
-	            null,
-	            'Room for ',
-	            location.occupancy,
-	            ' people.',
-	            React.createElement('br', null)
+	            { className: 'index_text' },
+	            location.title,
+	            React.createElement(
+	              'div',
+	              null,
+	              'Room for ',
+	              location.occupancy,
+	              ' people.',
+	              React.createElement('br', null)
+	            )
 	          )
 	        )
 	      );

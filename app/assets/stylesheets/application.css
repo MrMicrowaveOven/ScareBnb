@@ -295,6 +295,15 @@ justify-content: center;
  }
 
 /*Just Index Stuff*/
+
+  .mdl-card--border {
+    background: rgba(75,0,130,.15);
+    opacity: .8;
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+  }
+
   .index_bit {
     display: flex;
     justify-content: center;

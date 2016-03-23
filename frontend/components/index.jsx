@@ -16,7 +16,7 @@ var Index = React.createClass({
     var locations = this.state.locations.map(function(location) {
       return (
       <div key={location.id} className="index_location">
-
+        <div className="mdl-card--border">
           <img src={location.image} key={location.id} className="index_image"
             onClick={self.onClick.bind(self, event, location)}/>
 
@@ -27,7 +27,7 @@ var Index = React.createClass({
                     <br/>
                 </div>
           </div>
-
+        </div>
       </div>);
     });
 
