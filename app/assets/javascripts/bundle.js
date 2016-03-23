@@ -31586,11 +31586,17 @@
 	          ),
 	          React.createElement(
 	            'div',
-	            { className: 'mui-textfield' },
+	            { className: 'mui-textfield mui-textfield--float-label' },
 	            React.createElement('input', { type: 'text', className: 'title',
-	              placeholder: 'Title of Place',
-	              valueLink: this.linkState("title")
-	            })
+	
+	              valueLink: this.linkState("title"),
+	              required: true
+	            }),
+	            React.createElement(
+	              'label',
+	              null,
+	              'Title of Place'
+	            )
 	          ),
 	          React.createElement(
 	            'div',
@@ -31603,7 +31609,8 @@
 	                radius: '50',
 	                onSuggestSelect: this.onSuggestSelect,
 	                onChange: this.geoChange,
-	                valueLink: this.linkState("full_address")
+	                valueLink: this.linkState("full_address"),
+	                required: true
 	              })
 	            )
 	          ),
@@ -31611,28 +31618,28 @@
 	          React.createElement('div', { id: 'addressDisplay' }),
 	          React.createElement(
 	            'div',
-	            { className: 'mui-textfield' },
+	            { className: 'mui-textfield mui-textfield--float-label', id: 'location_description_container' },
 	            React.createElement('textarea', { className: 'locationdescription',
-	              placeholder: 'Describe your place: What is so haunted about it?',
-	              valueLink: this.linkState("description")
-	            })
-	          ),
-	          React.createElement('br', null),
-	          React.createElement(
-	            'div',
-	            { className: 'mui-select' },
+	              valueLink: this.linkState("description"),
+	              required: true
+	            }),
 	            React.createElement(
 	              'label',
-	              { className: 'locOccupancy' },
-	              'How many people can stay at this location?',
-	              React.createElement(
-	                'select',
-	                { className: 'Max Occupancy',
-	                  className: 'occupancy_select',
-	                  valueLink: this.linkState("occupancy")
-	                },
-	                this.oneThroughTen()
-	              )
+	              { className: 'location_description_text' },
+	              'Describe your place: What is so haunted about it?'
+	            )
+	          ),
+	          React.createElement(
+	            'label',
+	            { className: 'locOccupancy' },
+	            'How many people can stay at this location?',
+	            React.createElement(
+	              'select',
+	              {
+	                className: 'occupancy_select',
+	                valueLink: this.linkState("occupancy")
+	              },
+	              this.oneThroughTen()
 	            )
 	          ),
 	          React.createElement('br', null),

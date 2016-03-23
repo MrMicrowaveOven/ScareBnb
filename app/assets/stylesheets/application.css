@@ -158,23 +158,34 @@ justify-content: center;
  }
 
  #LocationForm {
+
+  color: white;
   display: flex;
   flex-direction: column;
   /*flex-flow: column wrap;*/
   align-items: center;
-  padding: 60px 0px 0px 0px;
+  padding: 10px 0px 0px 0px;
   z-index: 0;
  }
 
-
+ .form_legend {
+   color: white;
+ }
 
  .mui-panel {
-   opacity: .5;
+   margin-top: 65px;
+   opacity: .7;
    width: 65%;
+   max-width: 460px;
+   background-color: rgba(5, 5, 8, .8);;
  }
  .mui-container-fluid {
    display: flex;
    justify-content: center;
+ }
+
+ .mui-textfield>input {
+   max-width: 400px;
  }
 
  .locationdescription,.upload,.CreateLocation, .maxOccupancy, .geo_input, .title {
@@ -200,17 +211,51 @@ justify-content: center;
    color: black;
  }
 
+ #location_description_container {
+   margin-top: 15px;
+ }
+
  .locationdescription {
    width: 400px;
-   height: 200px;
+   height: 110px;
 
+ }
+
+ .location_description_text {
+   color: black;
  }
 
 
 
 /*end of location form*/
 
+.mui-textfield>input, .mui-textfield>textarea {
+  border-bottom-color: white;
+}
 
+.mui-textfield--float-label>label {
+  color: white;
+}
+
+.mui-textfield--float-label>textarea:not(:focus).mui--is-not-empty~label {
+  color: white;
+}
+
+.mui-textfield>input:focus~label, .mui-textfield>textarea:focus~label {
+  color: white;
+}
+
+.mui-textfield--float-label>input:not(:focus).mui--is-not-empty~label {
+  color: white;
+}
+
+.mui-textfield>input, .mui-textfield>textarea {
+  color: white;
+}
+
+.mui-textfield>input:focus, .mui-textfield>textarea:focus {
+  border-color: white;
+}
 
 /*ALL the Location View things*/
 /*Containts (Map, Index), and Show */

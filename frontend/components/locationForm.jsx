@@ -40,11 +40,13 @@ var LocationForm = React.createClass({
 
 
           <legend className="form_legend">Post your location!</legend>
-          <div className="mui-textfield">
+          <div className="mui-textfield mui-textfield--float-label">
             <input type="text" className="title"
-              placeholder="Title of Place"
+
               valueLink={this.linkState("title")}
+              required
               />
+            <label>Title of Place</label>
           </div>
           <div className="mui-textfield">
             <div className="geo_input">
@@ -54,6 +56,7 @@ var LocationForm = React.createClass({
                 onSuggestSelect={this.onSuggestSelect}
                 onChange = {this.geoChange}
                 valueLink={this.linkState("full_address")}
+                required
               />
             </div>
           </div>
@@ -61,23 +64,21 @@ var LocationForm = React.createClass({
           <div id="mapAddress" className='mapAddress' ref='mapAddress'/>
           <div id="addressDisplay" />
 
-          <div className="mui-textfield">
+          <div className="mui-textfield mui-textfield--float-label" id="location_description_container">
             <textarea className="locationdescription"
-              placeholder="Describe your place: What is so haunted about it?"
               valueLink={this.linkState("description")}
+              required
             />
+          <label className="location_description_text">Describe your place: What is so haunted about it?</label>
           </div>
-          <br/>
-          <div className="mui-select">
             <label className="locOccupancy">How many people can stay at this location?
-              <select className="Max Occupancy"
-                className="occupancy_select"
-                valueLink={this.linkState("occupancy")}
-              >
-              {this.oneThroughTen()}
-            </select>
-          </label>
-          </div>
+                <select
+                  className="occupancy_select"
+                  valueLink={this.linkState("occupancy")}
+                >
+                  {this.oneThroughTen()}
+                </select>
+            </label>
           <br/>
           <div className="uploadArea">
             <button className="mui-btn mui-btn--raised" onClick={this.uploadImage}>
