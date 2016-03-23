@@ -166,6 +166,17 @@ justify-content: center;
   z-index: 0;
  }
 
+
+
+ .mui-panel {
+   opacity: .5;
+   width: 65%;
+ }
+ .mui-container-fluid {
+   display: flex;
+   justify-content: center;
+ }
+
  .locationdescription,.upload,.CreateLocation, .maxOccupancy, .geo_input, .title {
    color: black;
  }

@@ -1,6 +1,6 @@
 Auth:
--Objective
--signin/signup should look more like tabs.
+DONE: -Objective
+DONE: -signin/signup should look more like tabs.
 
 Map
 -Clickable
@@ -9,14 +9,14 @@ Index: Add a border when this is selected.
 
 
 Navbar:
--Center links vertically.
--Effect block around it on hover
+DONE: -Center links vertically.
+DONE: -Effect block around it on hover
 -Make Icon clickable
 -Indicate where you are, indicate where you're hovering.
 --Two different colors
 
 Form:
--Center Labels to fields
+DONE: -Center Labels to fields
 
 --Two days thus far
 

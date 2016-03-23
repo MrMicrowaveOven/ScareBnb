@@ -31571,88 +31571,101 @@
 	    //to LocationForm
 	    //removes ALL CSS from the form.
 	    return React.createElement(
-	      'form',
-	      { id: 'LocationForm', onSubmit: this.submitLocation },
-	      React.createElement(
-	        'h2',
-	        { className: 'Add a location' },
-	        'Post your location!'
-	      ),
-	      React.createElement(
-	        'label',
-	        null,
-	        'Title of Place',
-	        React.createElement('br', null)
-	      ),
-	      React.createElement('input', { type: 'text', className: 'title',
-	        valueLink: this.linkState("title")
-	      }),
+	      'div',
+	      { className: 'mui-container-fluid' },
 	      React.createElement(
 	        'div',
-	        { className: 'geo_input' },
-	        React.createElement(Geosuggest, {
-	          location: this.defaultSFLocation,
-	          radius: '50',
-	          onSuggestSelect: this.onSuggestSelect,
-	          onChange: this.geoChange,
-	          valueLink: this.linkState("full_address")
-	        })
-	      ),
-	      React.createElement('div', { id: 'mapAddress', className: 'mapAddress', ref: 'mapAddress' }),
-	      React.createElement('br', null),
-	      React.createElement('div', { id: 'addressDisplay' }),
-	      React.createElement(
-	        'label',
-	        null,
-	        'Describe your place: What is so haunted about it?',
-	        React.createElement('br', null),
-	        React.createElement('textarea', { className: 'locationdescription',
-	          valueLink: this.linkState("description")
-	        })
-	      ),
-	      React.createElement('br', null),
-	      React.createElement(
-	        'label',
-	        { className: 'locOccupancy' },
-	        'How many people can stay at this location?',
+	        { className: 'mui-panel' },
 	        React.createElement(
-	          'select',
-	          { name: 'Max Occupancy',
-	            className: 'occupancy_select',
-	            valueLink: this.linkState("occupancy")
-	          },
-	          this.oneThroughTen()
+	          'form',
+	          { id: 'LocationForm', onSubmit: this.submitLocation },
+	          React.createElement(
+	            'legend',
+	            { className: 'form_legend' },
+	            'Post your location!'
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'mui-textfield' },
+	            React.createElement('input', { type: 'text', className: 'title',
+	              placeholder: 'Title of Place',
+	              valueLink: this.linkState("title")
+	            })
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'mui-textfield' },
+	            React.createElement(
+	              'div',
+	              { className: 'geo_input' },
+	              React.createElement(Geosuggest, {
+	                location: this.defaultSFLocation,
+	                radius: '50',
+	                onSuggestSelect: this.onSuggestSelect,
+	                onChange: this.geoChange,
+	                valueLink: this.linkState("full_address")
+	              })
+	            )
+	          ),
+	          React.createElement('div', { id: 'mapAddress', className: 'mapAddress', ref: 'mapAddress' }),
+	          React.createElement('div', { id: 'addressDisplay' }),
+	          React.createElement(
+	            'div',
+	            { className: 'mui-textfield' },
+	            React.createElement('textarea', { className: 'locationdescription',
+	              placeholder: 'Describe your place: What is so haunted about it?',
+	              valueLink: this.linkState("description")
+	            })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'div',
+	            { className: 'mui-select' },
+	            React.createElement(
+	              'label',
+	              { className: 'locOccupancy' },
+	              'How many people can stay at this location?',
+	              React.createElement(
+	                'select',
+	                { className: 'Max Occupancy',
+	                  className: 'occupancy_select',
+	                  valueLink: this.linkState("occupancy")
+	                },
+	                this.oneThroughTen()
+	              )
+	            )
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'div',
+	            { className: 'uploadArea' },
+	            React.createElement(
+	              'button',
+	              { className: 'mui-btn mui-btn--raised', onClick: this.uploadImage },
+	              'Upload picture!'
+	            ),
+	            'Be sure to include a picture of your place!'
+	          ),
+	          React.createElement(
+	            'div',
+	            null,
+	            React.createElement(
+	              'h2',
+	              null,
+	              this.showImage()
+	            )
+	          ),
+	          React.createElement(
+	            'div',
+	            null,
+	            React.createElement('input', { type: 'submit', className: 'mui-btn mui-btn--raised',
+	              value: 'Post Location!', onClick: this.submitLocation
+	            })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement('br', null)
 	        )
-	      ),
-	      React.createElement('br', null),
-	      React.createElement(
-	        'div',
-	        { className: 'uploadArea' },
-	        React.createElement(
-	          'button',
-	          { className: 'upload', onClick: this.uploadImage },
-	          'Upload picture!'
-	        ),
-	        'Be sure to include a picture of your place!'
-	      ),
-	      React.createElement(
-	        'div',
-	        null,
-	        React.createElement(
-	          'h2',
-	          null,
-	          this.showImage()
-	        )
-	      ),
-	      React.createElement(
-	        'div',
-	        null,
-	        React.createElement('input', { type: 'submit', className: 'CreateLocation',
-	          value: 'Post Location!', onClick: this.submitLocation
-	        })
-	      ),
-	      React.createElement('br', null),
-	      React.createElement('br', null)
+	      )
 	    );
 	  },
 	

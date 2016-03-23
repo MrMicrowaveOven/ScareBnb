@@ -34,46 +34,53 @@ var LocationForm = React.createClass({
     //to LocationForm
     //removes ALL CSS from the form.
     return(
+      <div className="mui-container-fluid">
+      <div className="mui-panel">
         <form id="LocationForm" onSubmit={this.submitLocation}>
 
-          <h2 className="Add a location">Post your location!</h2>
-          <label>Title of Place<br/>
-          </label>
+
+          <legend className="form_legend">Post your location!</legend>
+          <div className="mui-textfield">
             <input type="text" className="title"
+              placeholder="Title of Place"
               valueLink={this.linkState("title")}
               />
-
-          <div className="geo_input">
-            <Geosuggest
-              location={this.defaultSFLocation}
-              radius = "50"
-              onSuggestSelect={this.onSuggestSelect}
-              onChange = {this.geoChange}
-              valueLink={this.linkState("full_address")}
-            />
+          </div>
+          <div className="mui-textfield">
+            <div className="geo_input">
+              <Geosuggest
+                location={this.defaultSFLocation}
+                radius = "50"
+                onSuggestSelect={this.onSuggestSelect}
+                onChange = {this.geoChange}
+                valueLink={this.linkState("full_address")}
+              />
+            </div>
           </div>
 
           <div id="mapAddress" className='mapAddress' ref='mapAddress'/>
-          <br/>
           <div id="addressDisplay" />
 
-          <label>Describe your place: What is so haunted about it?<br/>
+          <div className="mui-textfield">
             <textarea className="locationdescription"
+              placeholder="Describe your place: What is so haunted about it?"
               valueLink={this.linkState("description")}
             />
-          </label>
+          </div>
           <br/>
-          <label className="locOccupancy">How many people can stay at this location?
-            <select name="Max Occupancy"
-              className="occupancy_select"
-              valueLink={this.linkState("occupancy")}
-            >
+          <div className="mui-select">
+            <label className="locOccupancy">How many people can stay at this location?
+              <select className="Max Occupancy"
+                className="occupancy_select"
+                valueLink={this.linkState("occupancy")}
+              >
               {this.oneThroughTen()}
             </select>
           </label>
+          </div>
           <br/>
           <div className="uploadArea">
-            <button className="upload" onClick={this.uploadImage}>
+            <button className="mui-btn mui-btn--raised" onClick={this.uploadImage}>
               Upload picture!</button>
             Be sure to include a picture of your place!
           </div>
@@ -85,12 +92,14 @@ var LocationForm = React.createClass({
           </div>
 
           <div>
-            <input type="submit" className="CreateLocation"
+            <input type="submit" className="mui-btn mui-btn--raised"
               value="Post Location!" onClick={this.submitLocation}
             />
           </div>
           <br/><br/>
         </form>
+      </div>
+    </div>
     );
   },
 
