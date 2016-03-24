@@ -13,28 +13,29 @@ var NavBar = React.createClass({
       <div className="nav_bar">
 
           <ul className="nav_bar_link_container">
-              <li className="logo">
+              <Link to={"location_screen"} className="logo">
                 <img className="nav_bar_link"
 
                   src="https://45.media.tumblr.com/2e79b852116c3e16b659b16685c5102f/tumblr_o3nm8rDQym1v497yzo4_250.gif"/>
-              </li>
+              </Link>
               <div className="non-logo_container">
-                <li className="non-logo">
-                  <a onClick={ApiUtil.signOut}
-                    className = "nav_bar_link">Sign Out</a>
-                </li>
+                <Link to={"session/new"} onClick={ApiUtil.signOut} className="non-logo">
+                  <div className="nav_bar_link">
+                    Sign Out
+                  </div>
+                </Link>
 
-                <li className="non-logo">
-                  <Link to={"locations/new"}
+                <Link to={"locations/new"} className="non-logo">
+                  <div
                     className="nav_bar_link" >Add Your Haunt!
-                  </Link>
-                </li>
+                  </div>
+                </Link>
 
-                <li className="non-logo">
-                  <Link to={"location_screen"}
+                <Link to={"location_screen"} className="non-logo">
+                  <div
                     className="nav_bar_link">Map
-                  </Link>
-                </li>
+                  </div>
+                </Link>
               </div>
           </ul>
       </div>

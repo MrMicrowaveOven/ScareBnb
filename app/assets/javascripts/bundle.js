@@ -24671,6 +24671,8 @@
 	    this.map.mapTypes.set("scaremap", MapStyle);
 	    this.map.setMapTypeId("scaremap");
 	
+	    var self = this;
+	
 	    this.map.addListener('idle', this.onIdle);
 	  },
 	
@@ -32921,8 +32923,8 @@
 	        'ul',
 	        { className: 'nav_bar_link_container' },
 	        React.createElement(
-	          'li',
-	          { className: 'logo' },
+	          Link,
+	          { to: "location_screen", className: 'logo' },
 	          React.createElement('img', { className: 'nav_bar_link',
 	
 	            src: 'https://45.media.tumblr.com/2e79b852116c3e16b659b16685c5102f/tumblr_o3nm8rDQym1v497yzo4_250.gif' })
@@ -32931,31 +32933,30 @@
 	          'div',
 	          { className: 'non-logo_container' },
 	          React.createElement(
-	            'li',
-	            { className: 'non-logo' },
+	            Link,
+	            { to: "session/new", onClick: ApiUtil.signOut, className: 'non-logo' },
 	            React.createElement(
-	              'a',
-	              { onClick: ApiUtil.signOut,
-	                className: 'nav_bar_link' },
+	              'div',
+	              { className: 'nav_bar_link' },
 	              'Sign Out'
 	            )
 	          ),
 	          React.createElement(
-	            'li',
-	            { className: 'non-logo' },
+	            Link,
+	            { to: "locations/new", className: 'non-logo' },
 	            React.createElement(
-	              Link,
-	              { to: "locations/new",
+	              'div',
+	              {
 	                className: 'nav_bar_link' },
 	              'Add Your Haunt!'
 	            )
 	          ),
 	          React.createElement(
-	            'li',
-	            { className: 'non-logo' },
+	            Link,
+	            { to: "location_screen", className: 'non-logo' },
 	            React.createElement(
-	              Link,
-	              { to: "location_screen",
+	              'div',
+	              {
 	                className: 'nav_bar_link' },
 	              'Map'
 	            )

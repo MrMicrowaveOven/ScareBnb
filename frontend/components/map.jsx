@@ -184,6 +184,8 @@ var Map = React.createClass({
     this.map.mapTypes.set("scaremap", MapStyle);
     this.map.setMapTypeId("scaremap");
 
+    var self = this;
+
     this.map.addListener('idle', this.onIdle);
   },
 
