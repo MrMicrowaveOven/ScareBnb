@@ -1,9 +1,9 @@
 # SCAREBNB
-ScareBnb is a web application inspired by AirBnb, built using Ruby on Rails and React.js.  ScareBnb allows users to:
-* Create an account
-* Log in / Log out
-* Search available locations using the Maps api
-* Create locations, complete with map coordinates and image
+## Locations
+ScareBnb is a web application inspired by AirBnb, built using Ruby on Rails and React.js.  ScareBnb allows users to search available locations using the Google Maps Api, and view information about each location.  Users can also add locations to the map, which uses GeoLocation and GeoSuggestion for a smooth transition between user input and marker placement.
+
+## Authentication
+Authentication features include Sign In and Sign Up functionality, with password hashing through BCrypt.  A demo Sign In is provided for quick viewing access.
 
 # Implementation Timeline
 
@@ -52,9 +52,9 @@ ScareBnb is a web application inspired by AirBnb, built using Ruby on Rails and 
 ### Objective: Make it look like a site from 2014+:
 * Send to testers, get feedback
 * Refactor classes and class
-* Add cute shit
+* Add cute things
 
-Bonus Features
+# Upcoming Features
 * Search locations with text input
 * Allow users to see requests for their location
 * Set reminders on bookings/requests

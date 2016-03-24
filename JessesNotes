@@ -23,10 +23,10 @@ DONE: -Center Labels to fields
 Shoot for Wednesday morning.
 
 Readme:
--Finish site first
--Instead of listing bullets of functionality:
---Subheading on user auth, list what was used for each bit (googlemaps api, etc.)
----Auth at bottom.
+DONE-Finish site first
+DONE-Instead of listing bullets of functionality:
+DONE--Subheading on user auth, list what was used for each bit (googlemaps api, etc.)
+DONE---Auth at bottom.
 
 -Upcoming features header, "own" what's not there
 
