@@ -3,17 +3,17 @@ DONE: -Objective
 DONE: -signin/signup should look more like tabs.
 
 Map
--Clickable
--Hoverable: make it quicker?
-Index: Add a border when this is selected.
+DONE: -Clickable
+DONE: -Hoverable: make it quicker?
+DONE: Index: Add a border when this is selected.
 
 
 Navbar:
 DONE: -Center links vertically.
 DONE: -Effect block around it on hover
--Make Icon clickable
--Indicate where you are, indicate where you're hovering.
---Two different colors
+DONE: -Make Icon clickable
+DONE: -Indicate where you are, indicate where you're hovering.
+DONE: -Two different colors
 
 Form:
 DONE: -Center Labels to fields
@@ -25,7 +25,7 @@ Shoot for Wednesday morning.
 Readme:
 -Finish site first
 -Instead of listing bullets of functionality:
---Subheading on user auth, list what was used for each bit (usermaps api, etc.)
+--Subheading on user auth, list what was used for each bit (googlemaps api, etc.)
 ---Auth at bottom.
 
 -Upcoming features header, "own" what's not there

@@ -297,7 +297,9 @@ justify-content: center;
 /*Just Index Stuff*/
 
   #selected.mdl-card--border {
-    background: rgba(75,0,190,.25);
+    background: rgba(75,0,190,.4);
+    border-style: solid;
+    border-color: darkslategray;
     opacity: 1;
   }
 
@@ -307,7 +309,9 @@ justify-content: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 5px;
+    border-width: 1px;
+    border-color: black;
+    margin: 4px;
     cursor: pointer;
   }
 
