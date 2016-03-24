@@ -2,7 +2,6 @@ var AppDispatcher = require('../dispatcher/dispatcher');
 var LocationConstants = require('../constants/location_constants');
 var ApiActions = {
   receiveAll: function(locations){
-
     AppDispatcher.dispatch({
       actionType: LocationConstants.LOCATIONS_RECEIVED,
       locations: locations
@@ -21,9 +20,14 @@ var ApiActions = {
       actionType: LocationConstants.LOCATION_RECEIVED,
       location: location
     });
-  },
+  }
 
-
+  // setNavTab: function(nav){
+  //   AppDispatcher.dispatch({
+  //     actionType: "SET_NAV_TAB",
+  //     tab: nav
+  //   });
+  // }
 
 };
 

@@ -22,7 +22,7 @@ var App = React.createClass({
     render: function(){
       return (
           <div>
-            <div><NavBar/></div>
+            <div><NavBar selected="1"/></div>
             <header></header>
             {this.props.children}
           </div>

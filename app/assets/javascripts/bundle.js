@@ -73,7 +73,7 @@
 	      React.createElement(
 	        'div',
 	        null,
-	        React.createElement(NavBar, null)
+	        React.createElement(NavBar, { selected: '1' })
 	      ),
 	      React.createElement('header', null),
 	      this.props.children
@@ -24103,7 +24103,6 @@
 	var LocationConstants = __webpack_require__(212);
 	var ApiActions = {
 	  receiveAll: function (locations) {
-	
 	    AppDispatcher.dispatch({
 	      actionType: LocationConstants.LOCATIONS_RECEIVED,
 	      locations: locations
@@ -24123,6 +24122,13 @@
 	      location: location
 	    });
 	  }
+	
+	  // setNavTab: function(nav){
+	  //   AppDispatcher.dispatch({
+	  //     actionType: "SET_NAV_TAB",
+	  //     tab: nav
+	  //   });
+	  // }
 	
 	};
 	
@@ -32910,14 +32916,20 @@
 	var History = __webpack_require__(159).History;
 	var ApiUtil = __webpack_require__(206);
 	var FullPage = __webpack_require__(249);
+	var ApiActions = __webpack_require__(207);
 	
 	var NavBar = React.createClass({
 	  displayName: 'NavBar',
 	
 	  mixins: [History],
 	
+	  getInitialState: function () {
+	    return { selected: this.props.selected };
+	  },
+	
 	  render: function () {
 	    // debugger;
+	    var self = this;
 	    return React.createElement(
 	      'div',
 	      { className: 'nav_bar' },
@@ -32936,7 +32948,8 @@
 	          { className: 'non-logo_container' },
 	          React.createElement(
 	            Link,
-	            { to: "session/new", onClick: ApiUtil.signOut, className: 'non-logo' },
+	            { to: "session/new", onClick: ApiUtil.signOut,
+	              className: 'non-logo' },
 	            React.createElement(
 	              'div',
 	              { className: 'nav_bar_link' },
@@ -32945,27 +32958,38 @@
 	          ),
 	          React.createElement(
 	            Link,
-	            { to: "locations/new", id: 'form_link', className: 'non-logo' },
+	            { to: "locations/new",
+	              id: self.is_selected(2), className: 'non-logo' },
 	            React.createElement(
 	              'div',
-	              {
-	                className: 'nav_bar_link' },
+	              { className: 'nav_bar_link', onClick: ApiActions.setNavTab
+	              },
 	              'Add Your Haunt!'
 	            )
 	          ),
 	          React.createElement(
 	            Link,
-	            { to: "location_screen", id: 'location_screen_link', className: 'non-logo' },
+	            { to: "location_screen",
+	              id: self.is_selected(1), className: 'non-logo' },
 	            React.createElement(
 	              'div',
-	              {
-	                className: 'nav_bar_link' },
+	              { className: 'nav_bar_link', onClick: ApiActions.setNavTab
+	              },
 	              'Map'
 	            )
 	          )
 	        )
 	      )
 	    );
+	  },
+	
+	  is_selected: function (page) {
+	    // debugger;
+	    if (this.state.selected == page) {
+	      return "nav_selected";
+	    } else {
+	      return "nav_unselected";
+	    }
 	  }
 	
 	});
