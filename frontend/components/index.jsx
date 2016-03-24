@@ -19,13 +19,13 @@ var Index = React.createClass({
           <div className="mdl-card--border" id={self.isSelected(location.id)}>
             <img src={location.image} key={location.id} className="index_image"
               onClick={self.onClick.bind(self, event, location)}/>
-
-            <div className="index_text">
+            <div className="mdl-card__supporting-text">
+                <div className="index_text">
                   {location.title}
-                  <div>
-                      Room for {location.occupancy} people.
-                      <br/>
-                  </div>
+                </div>
+                <div className="index_text">
+                  Room for {location.occupancy} people.
+                </div>
             </div>
           </div>
         </div>);
@@ -33,7 +33,7 @@ var Index = React.createClass({
 
     return(
       <div className="index_bit">
-        <ul className="location_index" id="location_list">{locations}</ul>
+        <div className="location_index" id="location_list">{locations}</div>
       </div>
     );
   },

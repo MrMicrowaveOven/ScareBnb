@@ -31363,15 +31363,18 @@
 	            onClick: self.onClick.bind(self, event, location) }),
 	          React.createElement(
 	            'div',
-	            { className: 'index_text' },
-	            location.title,
+	            { className: 'mdl-card__supporting-text' },
 	            React.createElement(
 	              'div',
-	              null,
+	              { className: 'index_text' },
+	              location.title
+	            ),
+	            React.createElement(
+	              'div',
+	              { className: 'index_text' },
 	              'Room for ',
 	              location.occupancy,
-	              ' people.',
-	              React.createElement('br', null)
+	              ' people.'
 	            )
 	          )
 	        )
@@ -31382,7 +31385,7 @@
 	      'div',
 	      { className: 'index_bit' },
 	      React.createElement(
-	        'ul',
+	        'div',
 	        { className: 'location_index', id: 'location_list' },
 	        locations
 	      )
@@ -31505,7 +31508,7 @@
 	      'Click ',
 	      React.createElement(
 	        'a',
-	        { target: '_blank', href: link },
+	        { className: 'showLink', target: '_blank', href: link },
 	        'here'
 	      ),
 	      ' for more haunted location information.'
