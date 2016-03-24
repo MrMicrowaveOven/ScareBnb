@@ -27,20 +27,20 @@ var NavBar = React.createClass({
               <div className="non-logo_container">
                 <Link to={"session/new"} onClick={ApiUtil.signOut}
                   className="non-logo">
-                  <div className="nav_bar_link">
+                  <div className="nav_bar_link" id="sign_out_link_text">
                     Sign Out
                   </div>
                 </Link>
 
                 <Link to={"locations/new"}
                   id={self.is_selected(2)} className="non-logo">
-                  <div className="nav_bar_link" onClick={ApiActions.setNavTab}
+                  <div className="nav_bar_link" id="form_link_text" onClick={ApiActions.setNavTab}
                     >Add Your Haunt!</div>
                 </Link>
 
                 <Link to={"location_screen"}
                   id={self.is_selected(1)} className="non-logo">
-                  <div className="nav_bar_link" onClick={ApiActions.setNavTab}
+                  <div className="nav_bar_link" id="location_screen_link_text" onClick={ApiActions.setNavTab}
                     >Map</div>
                 </Link>
               </div>

@@ -32952,7 +32952,7 @@
 	              className: 'non-logo' },
 	            React.createElement(
 	              'div',
-	              { className: 'nav_bar_link' },
+	              { className: 'nav_bar_link', id: 'sign_out_link_text' },
 	              'Sign Out'
 	            )
 	          ),
@@ -32962,7 +32962,7 @@
 	              id: self.is_selected(2), className: 'non-logo' },
 	            React.createElement(
 	              'div',
-	              { className: 'nav_bar_link', onClick: ApiActions.setNavTab
+	              { className: 'nav_bar_link', id: 'form_link_text', onClick: ApiActions.setNavTab
 	              },
 	              'Add Your Haunt!'
 	            )
@@ -32973,7 +32973,7 @@
 	              id: self.is_selected(1), className: 'non-logo' },
 	            React.createElement(
 	              'div',
-	              { className: 'nav_bar_link', onClick: ApiActions.setNavTab
+	              { className: 'nav_bar_link', id: 'location_screen_link_text', onClick: ApiActions.setNavTab
 	              },
 	              'Map'
 	            )

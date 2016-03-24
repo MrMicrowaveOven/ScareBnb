@@ -12,7 +12,7 @@
   padding: 0;
   overflow: hidden;
 }
-// 
+//
 // #nav_selected {
 //   background-color: red;
 // }
@@ -40,8 +40,23 @@
   font-size: 28px;
   padding: 8px 22px;
   height: 50px;
-  display: block;
+  display: flex;
+  align-items: center;
+  // min-width: 100%;
 }
+
+// #location_screen_link_text {
+//   min-width: 55px;
+// }
+//
+// #sign_out_link_text {
+//   min-width: 115px;
+// }
+//
+// #form_link_text {
+//   min-width: 215px;
+//
+// }
 
 
 .non-logo:focus, .non-logo:hover {
