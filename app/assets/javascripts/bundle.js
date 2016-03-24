@@ -32923,10 +32923,6 @@
 	
 	  mixins: [History],
 	
-	  getInitialState: function () {
-	    return { selected: this.props.selected };
-	  },
-	
 	  render: function () {
 	    // debugger;
 	    var self = this;
@@ -32952,44 +32948,33 @@
 	              className: 'non-logo' },
 	            React.createElement(
 	              'div',
-	              { className: 'nav_bar_link', id: 'sign_out_link_text' },
+	              { className: 'nav_bar_link' },
 	              'Sign Out'
 	            )
 	          ),
 	          React.createElement(
 	            Link,
 	            { to: "locations/new",
-	              id: self.is_selected(2), className: 'non-logo' },
+	              className: 'non-logo', activeClassName: 'nav_selected' },
 	            React.createElement(
 	              'div',
-	              { className: 'nav_bar_link', id: 'form_link_text', onClick: ApiActions.setNavTab
-	              },
+	              { className: 'nav_bar_link' },
 	              'Add Your Haunt!'
 	            )
 	          ),
 	          React.createElement(
 	            Link,
 	            { to: "location_screen",
-	              id: self.is_selected(1), className: 'non-logo' },
+	              className: 'non-logo', activeClassName: 'nav_selected' },
 	            React.createElement(
 	              'div',
-	              { className: 'nav_bar_link', id: 'location_screen_link_text', onClick: ApiActions.setNavTab
-	              },
+	              { className: 'nav_bar_link' },
 	              'Map'
 	            )
 	          )
 	        )
 	      )
 	    );
-	  },
-	
-	  is_selected: function (page) {
-	    // debugger;
-	    if (this.state.selected == page) {
-	      return "nav_selected";
-	    } else {
-	      return "nav_unselected";
-	    }
 	  }
 	
 	});

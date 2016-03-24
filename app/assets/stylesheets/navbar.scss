@@ -13,9 +13,9 @@
   overflow: hidden;
 }
 //
-// #nav_selected {
-//   background-color: red;
-// }
+.nav_selected {
+  background-color: rgba(25, 25, 25, .5);
+}
 
 .logo {
   float: left;
@@ -57,9 +57,11 @@
 //   min-width: 215px;
 //
 // }
+.non-logo:focus {
+  text-decoration: none;
+}
 
-
-.non-logo:focus, .non-logo:hover {
+.non-logo:hover {
   background-color: rgba(25, 25, 25, 1);
   text-decoration: none;
 }

@@ -8,10 +8,6 @@ var ApiActions = require('../actions/api_actions');
 var NavBar = React.createClass({
   mixins: [History],
 
-  getInitialState: function() {
-    return {selected: this.props.selected};
-  },
-
   render: function () {
     // debugger;
     var self = this;
@@ -27,35 +23,24 @@ var NavBar = React.createClass({
               <div className="non-logo_container">
                 <Link to={"session/new"} onClick={ApiUtil.signOut}
                   className="non-logo">
-                  <div className="nav_bar_link" id="sign_out_link_text">
+                  <div className="nav_bar_link">
                     Sign Out
                   </div>
                 </Link>
 
                 <Link to={"locations/new"}
-                  id={self.is_selected(2)} className="non-logo">
-                  <div className="nav_bar_link" id="form_link_text" onClick={ApiActions.setNavTab}
-                    >Add Your Haunt!</div>
+                  className="non-logo" activeClassName="nav_selected">
+                  <div className="nav_bar_link">Add Your Haunt!</div>
                 </Link>
 
                 <Link to={"location_screen"}
-                  id={self.is_selected(1)} className="non-logo">
-                  <div className="nav_bar_link" id="location_screen_link_text" onClick={ApiActions.setNavTab}
-                    >Map</div>
+                  className="non-logo" activeClassName="nav_selected">
+                  <div className="nav_bar_link">Map</div>
                 </Link>
               </div>
           </ul>
       </div>
     );
-  },
-
-  is_selected: function(page) {
-    // debugger;
-    if (this.state.selected == page) {
-      return "nav_selected";
-    } else {
-      return "nav_unselected";
-    }
   }
 
 });
