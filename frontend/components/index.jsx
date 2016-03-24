@@ -16,11 +16,10 @@ var Index = React.createClass({
     var locations = this.state.locations.map(function(location) {
       return (
         <div key={location.id} className="index_location">
-          <div className="mdl-card--border" id={self.isSelected(location.id)}>
-            <img src={location.image} key={location.id} className="index_image"
-              onClick={self.onClick.bind(self, event, location)}/>
+          <div className="mdl-card--border" onClick={self.onClick.bind(self, event, location)} id={self.isSelected(location.id)}>
+            <img src={location.image} key={location.id} className="index_image"/>
             <div className="mdl-card__supporting-text">
-                <div className="index_text">
+                <div className="index_title">
                   {location.title}
                 </div>
                 <div className="index_text">

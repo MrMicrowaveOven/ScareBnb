@@ -25,13 +25,13 @@ var NavBar = React.createClass({
                   </div>
                 </Link>
 
-                <Link to={"locations/new"} className="non-logo">
+                <Link to={"locations/new"} id="form_link" className="non-logo">
                   <div
-                    className="nav_bar_link" >Add Your Haunt!
+                    className="nav_bar_link">Add Your Haunt!
                   </div>
                 </Link>
 
-                <Link to={"location_screen"} className="non-logo">
+                <Link to={"location_screen"} id="location_screen_link" className="non-logo">
                   <div
                     className="nav_bar_link">Map
                   </div>

@@ -31358,15 +31358,14 @@
 	        { key: location.id, className: 'index_location' },
 	        React.createElement(
 	          'div',
-	          { className: 'mdl-card--border', id: self.isSelected(location.id) },
-	          React.createElement('img', { src: location.image, key: location.id, className: 'index_image',
-	            onClick: self.onClick.bind(self, event, location) }),
+	          { className: 'mdl-card--border', onClick: self.onClick.bind(self, event, location), id: self.isSelected(location.id) },
+	          React.createElement('img', { src: location.image, key: location.id, className: 'index_image' }),
 	          React.createElement(
 	            'div',
 	            { className: 'mdl-card__supporting-text' },
 	            React.createElement(
 	              'div',
-	              { className: 'index_text' },
+	              { className: 'index_title' },
 	              location.title
 	            ),
 	            React.createElement(
@@ -32946,7 +32945,7 @@
 	          ),
 	          React.createElement(
 	            Link,
-	            { to: "locations/new", className: 'non-logo' },
+	            { to: "locations/new", id: 'form_link', className: 'non-logo' },
 	            React.createElement(
 	              'div',
 	              {
@@ -32956,7 +32955,7 @@
 	          ),
 	          React.createElement(
 	            Link,
-	            { to: "location_screen", className: 'non-logo' },
+	            { to: "location_screen", id: 'location_screen_link', className: 'non-logo' },
 	            React.createElement(
 	              'div',
 	              {

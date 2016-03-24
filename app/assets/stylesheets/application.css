@@ -308,6 +308,7 @@ justify-content: center;
     flex-direction: column;
     align-items: center;
     margin: 5px;
+    cursor: pointer;
   }
 
   .index_bit {
@@ -331,11 +332,10 @@ justify-content: center;
   }
 
   .index_image {
-    cursor: pointer;
     width: 225px;
     height: 175px;
     resize: vertical;
-    padding: 8px;
+    padding: 8px 8px 0px 8px;
     float: left;
     font-size: 11px;
   }
@@ -345,12 +345,21 @@ justify-content: center;
     height: auto;
   }*/
 
-  .index_text {
+  .index_title {
     font-size: 15px;
+  }
+
+  .index_text, .index_title {
     color: white;
-    max-width: 200px;
-    justify-content: center;
+    height: 35px;
+    max-width: 185px;
+    /*display: flex;*/
+    /*justify-content: center;*/
     /*text-justify: inter-word;*/
+  }
+
+  .index_text {
+    font-size: 12px;
   }
 
   .mdl-card__supporting-text {
@@ -358,6 +367,8 @@ justify-content: center;
     flex-direction: column;
     align-items: center;
     max-width: 100%;
+    padding: 8px;
+    text-align: center;
   }
 /*Just show, right-half*/
 
@@ -374,6 +385,7 @@ justify-content: center;
  #show_location {
    z-index: 0;
    width: 100%;
+
  }
 
  .showLink {
@@ -387,12 +399,14 @@ justify-content: center;
  .show_image {
    display: flex;
    align-items: center;
+   text-align: justify;
    justify-content: center;
-   width: 100%;
+   width: 95%;
  }
 
  .show_title {
    margin: 10px;
+   text-align: center;
  }
 
  .show_description {
