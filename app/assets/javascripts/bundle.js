@@ -24531,6 +24531,7 @@
 	  onChange: function () {
 	    var self = this;
 	
+	    //Bounce animation
 	    if (self.markerIndex !== undefined && self.markerIndex[1] !== undefined && LocationStore.lastLocation() !== undefined) {
 	      self.markerIndex[LocationStore.lastLocation().id].setAnimation(null);
 	    }
@@ -24543,6 +24544,8 @@
 	        }, 1475);
 	      }
 	    }
+	    //End Bounce animation
+	
 	    self.markerUpdate();
 	    Map.theMap = self;
 	    this.refreshBandM();
@@ -24565,6 +24568,10 @@
 	      title: location.title,
 	      icon: image,
 	      opacity: 0.5
+	    });
+	    //Clicking a marker changes the Show
+	    marker.addListener('click', function () {
+	      ApiActions.receiveLocation(location);
 	    });
 	    self.newMarkerIndex[location.id] = marker;
 	    return marker;
@@ -31349,7 +31356,7 @@
 	        { key: location.id, className: 'index_location' },
 	        React.createElement(
 	          'div',
-	          { className: 'mdl-card--border' },
+	          { className: 'mdl-card--border', id: self.isSelected(location.id) },
 	          React.createElement('img', { src: location.image, key: location.id, className: 'index_image',
 	            onClick: self.onClick.bind(self, event, location) }),
 	          React.createElement(
@@ -31380,9 +31387,16 @@
 	    );
 	  },
 	
+	  isSelected: function (id) {
+	    if (id === this.state.show.id) {
+	      return "selected";
+	    } else {
+	      return "notSelected";
+	    }
+	  },
+	
 	  onClick: function (event, location) {
 	    event.preventDefault();
-	    // debugger;
 	    ApiActions.receiveLocation(location);
 	  },
 	

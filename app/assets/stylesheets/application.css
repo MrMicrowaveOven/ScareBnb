@@ -296,6 +296,10 @@ justify-content: center;
 
 /*Just Index Stuff*/
 
+  #selected.mdl-card--border {
+    background: red;
+  }
+
   .mdl-card--border {
     background: rgba(75,0,130,.15);
     opacity: .8;

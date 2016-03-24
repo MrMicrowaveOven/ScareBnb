@@ -35,6 +35,7 @@ var Map = React.createClass({
   onChange: function(){
     var self = this;
 
+    //Bounce animation
     if (self.markerIndex !== undefined && self.markerIndex[1] !== undefined && LocationStore.lastLocation() !== undefined) {
       self.markerIndex[LocationStore.lastLocation().id].setAnimation(null);
     }
@@ -49,6 +50,8 @@ var Map = React.createClass({
           }, 1475);
       }
     }
+    //End Bounce animation
+
     self.markerUpdate();
     Map.theMap = self;
     this.refreshBandM();
@@ -76,6 +79,10 @@ var Map = React.createClass({
         opacity: 0.5
       }
     );
+    //Clicking a marker changes the Show
+    marker.addListener('click', function() {
+      ApiActions.receiveLocation(location);
+    });
     self.newMarkerIndex[location.id] = marker;
     return marker;
   },

@@ -15,20 +15,20 @@ var Index = React.createClass({
     var self = this;
     var locations = this.state.locations.map(function(location) {
       return (
-      <div key={location.id} className="index_location">
-        <div className="mdl-card--border">
-          <img src={location.image} key={location.id} className="index_image"
-            onClick={self.onClick.bind(self, event, location)}/>
+        <div key={location.id} className="index_location">
+          <div className="mdl-card--border" id={self.isSelected(location.id)}>
+            <img src={location.image} key={location.id} className="index_image"
+              onClick={self.onClick.bind(self, event, location)}/>
 
-          <div className="index_text">
-                {location.title}
-                <div>
-                    Room for {location.occupancy} people.
-                    <br/>
-                </div>
+            <div className="index_text">
+                  {location.title}
+                  <div>
+                      Room for {location.occupancy} people.
+                      <br/>
+                  </div>
+            </div>
           </div>
-        </div>
-      </div>);
+        </div>);
     });
 
     return(
@@ -38,9 +38,16 @@ var Index = React.createClass({
     );
   },
 
+  isSelected: function(id) {
+    if (id === this.state.show.id) {
+      return ("selected");
+    } else {
+    return ("notSelected");
+    }
+  },
+
   onClick: function(event, location) {
     event.preventDefault();
-    // debugger;
     ApiActions.receiveLocation(location);
   },
 
