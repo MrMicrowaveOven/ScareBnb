@@ -1,58 +1,17 @@
 # SCAREBNB
+![alt text](PageScreenShot.png "ScareBnb")
 ## Locations
-ScareBnb is a web application inspired by AirBnb, built using Ruby on Rails and React.js.  ScareBnb allows users to search available locations using the Google Maps Api, and view information about each location.  Users can also add locations to the map, which uses GeoLocation and GeoSuggestion for a smooth transition between user input and marker placement.
+ScareBnb is a web application inspired by AirBnb, built using Ruby on Rails and React.js.  ScareBnb allows users to search available locations using the Google Maps API, and view information about each location.  Users can also add locations to the map, which uses GeoLocation and GeoSuggestion for a smooth transition between user input and marker placement.
 
 ## Authentication
 Authentication features include Sign In and Sign Up functionality, with password hashing through BCrypt.  A demo Sign In is provided for quick viewing access.
 
-# Implementation Timeline
+## API Integration
+A lot of people have been asking about how I put together the ScareMap, with the dark styling and the ghosts.  I actually ended up using the Google Maps API Styled Map Wizard (google it) to set everything up, then copied the CSS directly.  The "name" option labels the map on the top-left.  Changing the markers on the map to ghosts was as simple as changing the "icon" property of the marker upon creation.  You do need to do this each time a marker is made however, as I haven't found a way to set the icon globally on the map (let me know if you do).
 
-## Phase 1: Backend setup and User Authentication (0.5 days)
-### Objective: Functioning rails project with Authentication:
-* Create new project
-* Create User model (Email, password_digest, session_token)
-* Authentication
-* User signup/signin pages
-* Blank landing page after signin
+For the map on the Location Form I used Geosuggest to allow the user to input their address.  This also allows you to choose a "center" of the location search, so it'll focus on the Bay Area before suggesting other areas.
 
-## Phase 2: Locations Model, API, and basic APIUtil (1.5 days)
-### Objective: Locations can be found through the Search function:
-* Create Location model (description, location, price, photo)
-* Seed the database with test locations
-* LocationsController
-* jBuilder views for locations
-* Setup Webpack & Flux scaffold
-* Setup APIUtil to interact with the API
-* Test out API interaction in the console
-
-## Phase 3: Flux Architecture and Router (1.5 days)
-### Objective: Locations can be created, read, edited, and destroyed with the user interface:
-* Setup the flux loop with skeleton files
-* Setup React Router
-~Implement each Location component, building out the flux loop as needed
-* LocationsIndex
-* LocationIndexItem
-* LocationForm
-* Save Location to the DB when submitted.
-
-## Phase 4: Start Styling (0.5 days)
-### Objective: Existing pages (including signup/signin) will look good:
-* Create a basic style guide
-* Position elements on the page
-* Add basic colors & styles
-
-## Phase 5: User Locations (1.5 days)
-### Objective: Users can list their space as a location:
-* Construct form for creating location
-* Require Location, Description, AboutThisHaunt, Price, and Photo
-* Place on Map?
-* Add location to database and list on site
-
-## Phase 6: Styling Cleanup and Seeding (1 day)
-### Objective: Make it look like a site from 2014+:
-* Send to testers, get feedback
-* Refactor classes and class
-* Add cute things
+All in all it was fairly straightforward process, and the documentation given by Google is very thorough.  Working with this API has given me a million creative ways to implement it pretty much anywhere, simply because of how easily adaptable it is.  I would highly suggest integrating the Google Maps API into any project, if only to see for yourself what you can do with it.
 
 # Upcoming Features
 * Search locations with text input

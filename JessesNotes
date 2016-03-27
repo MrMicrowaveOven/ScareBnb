@@ -10,8 +10,8 @@ Make a recenter button
 More seed information spread out a bit more throughout
 
 Index:
-  Selecting a location changes the size of the card slightly.
-  -Make a border for all of them.
+DONE:  Selecting a location changes the size of the card slightly.
+DONE:  -Make a border for all of them.
 
 
 Navbar:
@@ -30,12 +30,12 @@ DONE-Instead of listing bullets of functionality:
 DONE--Subheading on user auth, list what was used for each bit (googlemaps api, etc.)
 DONE---Auth at bottom.
 
-Either get rid of the implementation timeline, or put it in a different file.
--Keep upcoming features
-Code snippets/screenshots
--Example of API integration
--"Here's how I did the ghosts"
--Screenshot of map page
+DONE: Either get rid of the implementation timeline, or put it in a different file.
+DONE: -Keep upcoming features
+DONE: Code snippets/screenshots
+DONE: -Example of API integration
+DONE: -"Here's how I did the ghosts"
+DONE: -Screenshot of map page
 
 DONE-Upcoming features header, "own" what's not there
 
