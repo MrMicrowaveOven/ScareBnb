@@ -6,6 +6,12 @@ Map
 DONE: -Clickable
 DONE: -Hoverable: make it quicker?
 DONE: Index: Add a border when this is selected.
+Make a recenter button
+More seed information spread out a bit more throughout
+
+Index:
+  Selecting a location changes the size of the card slightly.
+  -Make a border for all of them.
 
 
 Navbar:
@@ -18,26 +24,31 @@ DONE: -Two different colors
 Form:
 DONE: -Center Labels to fields
 
---Two days thus far
-
-Shoot for Wednesday morning.
-
 Readme:
 DONE-Finish site first
 DONE-Instead of listing bullets of functionality:
 DONE--Subheading on user auth, list what was used for each bit (googlemaps api, etc.)
 DONE---Auth at bottom.
 
--Upcoming features header, "own" what's not there
+Either get rid of the implementation timeline, or put it in a different file.
+-Keep upcoming features
+Code snippets/screenshots
+-Example of API integration
+-"Here's how I did the ghosts"
+-Screenshot of map page
+
+DONE-Upcoming features header, "own" what's not there
+
+WEEKEND: Readmes, ruby intensive, navbar
 
 Trapped:
 -End game when board is filled
 -BONUS: Video tutorial
 
 Readme:
--Split up with headers.
--Tagline, then screenshot/gif,  implementation under a different heading.
---Include link to game.
+DONE-Split up with headers.
+DONE-Tagline, then screenshot/gif,  implementation under a different heading.
+DONE--Include link to game.
 
 Chess:
 -At this point, may want to switch ruby intensive
