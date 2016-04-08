@@ -31628,7 +31628,7 @@
 	          ),
 	          React.createElement(
 	            'div',
-	            { className: 'mui-textfield' },
+	            { className: 'mui-textfield', id: 'geo_locator_field' },
 	            React.createElement(
 	              'div',
 	              { className: 'geo_input' },
@@ -31660,7 +31660,11 @@
 	          React.createElement(
 	            'label',
 	            { className: 'locOccupancy' },
-	            'How many people can stay at this location?',
+	            React.createElement(
+	              'div',
+	              { className: 'form_text' },
+	              'How many people can stay at this location?'
+	            ),
 	            React.createElement(
 	              'select',
 	              {
@@ -31679,7 +31683,11 @@
 	              { className: 'mui-btn mui-btn--raised', onClick: this.uploadImage },
 	              'Upload picture!'
 	            ),
-	            'Be sure to include a picture of your place!'
+	            React.createElement(
+	              'div',
+	              { className: 'form_text' },
+	              'Be sure to include a picture of your place!'
+	            )
 	          ),
 	          React.createElement(
 	            'div',
@@ -31713,7 +31721,7 @@
 	    // debugger;
 	    return React.createElement(
 	      'div',
-	      null,
+	      { className: 'form_text' },
 	      'Here is your image: ',
 	      React.createElement('br', null),
 	      imageShow

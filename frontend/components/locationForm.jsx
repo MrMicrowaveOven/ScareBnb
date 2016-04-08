@@ -48,7 +48,7 @@ var LocationForm = React.createClass({
               />
             <label>Title of Place</label>
           </div>
-          <div className="mui-textfield">
+          <div className="mui-textfield" id="geo_locator_field">
             <div className="geo_input">
               <Geosuggest
                 location={this.defaultSFLocation}
@@ -71,7 +71,10 @@ var LocationForm = React.createClass({
             />
           <label className="location_description_text">Describe your place: What is so haunted about it?</label>
           </div>
-            <label className="locOccupancy">How many people can stay at this location?
+            <label className="locOccupancy">
+                <div className="form_text">
+                  How many people can stay at this location?
+                </div>
                 <select
                   className="occupancy_select"
                   valueLink={this.linkState("occupancy")}
@@ -83,7 +86,7 @@ var LocationForm = React.createClass({
           <div className="uploadArea">
             <button className="mui-btn mui-btn--raised" onClick={this.uploadImage}>
               Upload picture!</button>
-            Be sure to include a picture of your place!
+            <div className="form_text">Be sure to include a picture of your place!</div>
           </div>
 
           <div>
@@ -110,7 +113,7 @@ var LocationForm = React.createClass({
     if (image === "") {return;}
     var imageShow = <img src={image.secure_url}/>;
     // debugger;
-    return (<div>Here is your image: <br/>{imageShow}</div>);
+    return (<div className="form_text">Here is your image: <br/>{imageShow}</div>);
   },
 
   oneThroughTen: function() {

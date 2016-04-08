@@ -168,6 +168,15 @@ justify-content: center;
   z-index: 0;
  }
 
+ .form_text {
+   font-size: 16px;
+ }
+#geo_locator_field{
+  padding-top: 0px;
+}
+ /*.image_display {
+ }*/
+
  .form_legend {
    color: white;
  }
@@ -390,7 +399,7 @@ justify-content: center;
  #show_location {
    z-index: 0;
    width: 100%;
-
+   align-items: center;
  }
 
  .showLink {

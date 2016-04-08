@@ -24,7 +24,7 @@ san_francisco_art_institute = Location.create({
   neptune_society_columbarium = Location.create({
     lat: 37.780615,
     lng: -122.45707700000003,
-    image: "http://res.cloudinary.com/dazguin0y/image/upload/c_crop,h_400,w_600/v1457216600/r3jq9gdu7dp0iylockxg.jpg",
+    image: "http://res.cloudinary.com/dazguin0y/image/upload/v1460091377/UserImages/NeptuneSocietyColumbarium_szoyln.jpg",
     title: "Neptune Society Columbarium",
     description: "Originally part of the Odd Fellows Cemetery. Room 410 at the Queen Anne Hotel is said to be haunted by the namesake of the Miss Mary Lake's School for Girls.",
     occupancy: 6,

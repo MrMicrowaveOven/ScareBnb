@@ -49,12 +49,3 @@ Readme:
 DONE-Split up with headers.
 DONE-Tagline, then screenshot/gif,  implementation under a different heading.
 DONE--Include link to game.
-
-Chess:
--At this point, may want to switch ruby intensive
--build an LRU cache, heaps, module of abstract data types
---Abstract Data Types Gem!
-
-Resume:
--Get projects on there.
--Implement changes he told me.
