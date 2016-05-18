@@ -9,10 +9,6 @@
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  occupancy    :integer          not null
-#  address      :string
-#  city         :string
-#  state        :string
-#  zip_code     :string
 #  full_address :string           not null
 #  title        :string           not null
 #  image        :string           not null

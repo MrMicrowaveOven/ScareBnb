@@ -21,14 +21,6 @@ var ApiActions = {
       location: location
     });
   }
-
-  // setNavTab: function(nav){
-  //   AppDispatcher.dispatch({
-  //     actionType: "SET_NAV_TAB",
-  //     tab: nav
-  //   });
-  // }
-
 };
 
 module.exports = ApiActions;
