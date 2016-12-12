@@ -4,7 +4,7 @@
 ScareBnb is a web application inspired by AirBnb, built using Ruby on Rails and React.js.  ScareBnb allows users to search available locations using the Google Maps API, and view information about each location.  Users can also add locations to the map, which uses GeoLocation and GeoSuggestion for a smooth transition between user input and marker placement.
 
 ## Authentication
-Authentication features include Sign In and Sign Up functionality, with password hashing through BCrypt.  A demo Sign In is provided for quick viewing access.
+Authentication was made entirely from scratch using Rails.  Features include Sign In and Sign Up functionality, with password hashing through BCrypt.  A demo Sign In is provided for quick viewing access.
 
 ## API Integration
 A lot of people have been asking about how I put together the ScareMap, with the dark styling and the ghosts.  I actually ended up using the Google Maps API Styled Map Wizard (google it) to set everything up, then copied the CSS directly.  The "name" option labels the map on the top-left.  Changing the markers on the map to ghosts was as simple as changing the "icon" property of the marker upon creation.  You do need to do this each time a marker is made however, as I haven't found a way to set the icon globally on the map (let me know if you do).
